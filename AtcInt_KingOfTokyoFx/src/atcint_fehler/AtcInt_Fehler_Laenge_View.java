@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class AtcInt_Fehler_Länge_View {
+public class AtcInt_Fehler_Laenge_View {
 
 	public  void start(){
 		try	{

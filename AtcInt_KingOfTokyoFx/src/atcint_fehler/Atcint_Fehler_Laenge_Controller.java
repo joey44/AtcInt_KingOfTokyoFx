@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  *
  */
 
-public class Atcint_Fehler_Länge_Controller {
+public class Atcint_Fehler_Laenge_Controller {
 
 	@FXML
 	private Button closeButton;

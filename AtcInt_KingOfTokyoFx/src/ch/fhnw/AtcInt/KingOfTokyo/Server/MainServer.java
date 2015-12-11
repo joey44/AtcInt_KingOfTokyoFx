@@ -16,7 +16,7 @@ public class MainServer extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		Parent root = FXMLLoader.load(getClass().getResource("ServerGUI.fxml"));
 		primaryStage.setTitle("ServerGUI");
-		primaryStage.setScene(new Scene(root, 555, 450));
+		primaryStage.setScene(new Scene(root, 340, 400));
 		primaryStage.show();
 		
 
