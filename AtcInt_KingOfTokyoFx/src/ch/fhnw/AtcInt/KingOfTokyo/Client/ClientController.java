@@ -1,10 +1,13 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
+//import AtcIntClientGUI.ClientServerVerbindung;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
-import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
+//import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -19,22 +22,39 @@ public class ClientController {
 	private int clientID;
 	private Stage stage;
 
-	public ClientController(ClientView view, Stage stage) {
+	private String server;
+	private int port;
+	private String name;
+
+
+	public ClientController(ClientView view, Stage stage, String server, int port, String name) {
 
 		this.view = view;
 		this.stage = stage;
+		this.server = server;
+		this.port = port;
+		this.name = name;
 
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent event) {
 				clientServerVerbindung.disconnect();
+				
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Spiel wird beendet");
+				alert.setHeaderText("Spiel wird beendet");
+				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
+
+				alert.showAndWait();
 
 			}
 		});
 
-		clientServerVerbindung = new ClientServerVerbindung(this, view);
+		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name);
 
+	
+		
 		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
 
 		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
@@ -64,6 +84,8 @@ public class ClientController {
 		view.getBtnVerbinden().setDefaultButton(true);
 
 		view.getBtnSenden().setDisable(true);
+		
+		verbindenMitServer();
 
 	}
 
@@ -232,6 +254,16 @@ public class ClientController {
 
 		// updateClientGUI(getDatenAustausch(), getClientID());
 
+	}
+	
+	public void verbindenMitServer(){
+		clientServerVerbindung.connect();
+
+		view.getBtnVerbinden().setDisable(true);
+
+		// view.getLbModeration().setText("warten auf Spiel start");
+		view.setModeration("warten auf Spiel start");
+		view.getBtnSenden().setDisable(false);
 	}
 
 	public void wurfelAuswahl(int w) {
@@ -432,13 +464,7 @@ public class ClientController {
 
 			System.out.println("verbindenEventHandler");
 
-			clientServerVerbindung.connect();
-
-			view.getBtnVerbinden().setDisable(true);
-
-			// view.getLbModeration().setText("warten auf Spiel start");
-			view.setModeration("warten auf Spiel start");
-			view.getBtnSenden().setDisable(false);
+			verbindenMitServer();
 
 		}
 

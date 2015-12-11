@@ -222,7 +222,9 @@ public class ClientView {
 		fpWurfel.getChildren().add(btnWuerfel6);
 
 		// Buttons unter Wurfel
-		fpWurfel.getChildren().addAll(btnVerbinden);
+		
+		//wird nicht mehr benötigt
+		//fpWurfel.getChildren().addAll(btnVerbinden);
 //		fpWurfel.setAlignment(Pos.CENTER);
 		// Die ausgewÃ¤hlten Spieler werden angezeigt
 

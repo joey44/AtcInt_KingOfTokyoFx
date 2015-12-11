@@ -6,6 +6,9 @@ import java.net.Socket;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class ClientServerVerbindung extends Thread {
 
@@ -23,11 +26,20 @@ public class ClientServerVerbindung extends Thread {
 	private volatile boolean stopThread = false;
 
 	private int clientID;
+	
+	private String server;
+	private int port;
+	private String name;
 
-	public ClientServerVerbindung(ClientController controller, ClientView cview) {
+	public ClientServerVerbindung(ClientController controller, ClientView cview, String server, int port, String name) {
 
 		this.cview = cview;
 		this.controller = controller;
+		
+		this.server = server;
+		this.port = port;
+		this.name = name;
+
 
 		// this.datenAustausch = DatenAustausch.getInstanz();
 
@@ -39,7 +51,7 @@ public class ClientServerVerbindung extends Thread {
 
 	public void connect() {
 		try {
-			this.clientSocket = new Socket("localhost", 44444);
+			this.clientSocket = new Socket(server, port);
 			this.oos = new ObjectOutputStream(clientSocket.getOutputStream());
 			this.ois = new ObjectInputStream(clientSocket.getInputStream());
 
@@ -53,6 +65,23 @@ public class ClientServerVerbindung extends Thread {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			
+			Stage stage = (Stage) cview.getScene().getWindow();
+
+			
+
+			System.out.println("Login failed");
+			
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Login failed");
+			alert.setHeaderText("Server nicht gefunden");
+			alert.setContentText("Serveradresse oder Port falsch \n App wir geschlossen");
+
+			alert.showAndWait();
+			
+			// close the program
+			stage.close();
+			
 		}
 	}
 
@@ -109,7 +138,7 @@ public class ClientServerVerbindung extends Thread {
 				@Override
 				public void run() {
 					// entsprechende UI Komponente updaten
-					cview.getLbTitel().setText("King of Tokyo - Spieler Nr: " + getClientID());
+					cview.getLbTitel().setText("King of Tokyo - Spieler Nr: " + getClientID() + " Hallo " + name);
 					// cview.getLbModeration().setText(
 					// "client " + getClientID() + "verbunden");
 					cview.setModeration("client " + getClientID() + "verbunden");
