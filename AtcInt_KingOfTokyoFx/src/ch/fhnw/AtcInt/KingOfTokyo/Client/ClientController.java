@@ -44,7 +44,7 @@ public class ClientController {
 				alert.setHeaderText("Spiel wird beendet");
 				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
 				
-				//getDatenAustausch().getSpielerByID(clientID).setSpielerAktiv(false);
+				//Spieler inaktiv setzten
 				
 
 				alert.showAndWait();
@@ -110,22 +110,30 @@ public class ClientController {
 
 		// view.getLbModeration().setText("gewürfelt Client:" + clientID);
 		// view.setModeration("gewürfelt Client:" + clientID);
+		
+		
+		
+		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler0().setText(ClientSpielLogik.spielerName(d, 0));
 		view.getLbLeben0().setText(ClientSpielLogik.lebenAnzeigen(d, 0));
 		view.getLbPunkte0().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 0));
-
+		
+		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler1().setText(ClientSpielLogik.spielerName(d, 1));
 		view.getLbLeben1().setText(ClientSpielLogik.lebenAnzeigen(d, 1));
 		view.getLbPunkte1().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 1));
 
+		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler2().setText(ClientSpielLogik.spielerName(d, 2));
 		view.getLbLeben2().setText(ClientSpielLogik.lebenAnzeigen(d, 2));
 		view.getLbPunkte2().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 2));
 
+		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler3().setText(ClientSpielLogik.spielerName(d, 3));
 		view.getLbLeben3().setText(ClientSpielLogik.lebenAnzeigen(d, 3));
 		view.getLbPunkte3().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 3));
 
+		
 		// view.getLbModeration().setText(ClientSpielLogik.spielModerieren(d));
 		view.setModeration(ClientSpielLogik.spielModerieren(d));
 		view.getLbTokyo().setText(ClientSpielLogik.standortAnzeigen(d));
