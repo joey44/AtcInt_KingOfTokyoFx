@@ -1,6 +1,8 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
 //import AtcIntClientGUI.ClientServerVerbindung;
+import org.omg.CosNaming.IstringHelper;
+
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 //import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
@@ -180,7 +182,8 @@ public class ClientController {
 
 		// Möglichkeiten wenn Tokyo verlassen werden kan:
 		if (getClientID() == d.getSpielerAufTokyo().getSpielerID()
-				// && d.wurdeIchAngegrifen()
+				&& !d.isTokyoVerlassen()
+				&& d.wurdeIchAngegrifen()
 				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()
 				&& getClientID() != d.getSpielerAmZug().getSpielerID()) {
 			view.getBtnTokyoVerlassen().setDisable(false);
