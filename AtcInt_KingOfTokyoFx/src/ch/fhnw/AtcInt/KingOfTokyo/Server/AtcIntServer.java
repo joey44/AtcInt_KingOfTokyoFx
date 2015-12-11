@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
+import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 import ch.fhnw.AtcInt.KingOfTokyo.Server.AtcIntServerClientThread;
 
 public class AtcIntServer {
@@ -18,6 +19,8 @@ public class AtcIntServer {
 	private ServerSocket serverSocket;
 	private boolean stopServer = false;
 	private DatenAustausch datenAustausch;
+	
+	private int spielerCounter = 0;
 
 	public AtcIntServer(int port) {
 		this.port = port;
@@ -37,7 +40,8 @@ public class AtcIntServer {
 		while (clientlist.size() <= 3) { // vier Threads sind möglich
 			Socket socket = serverSocket.accept();
 			this.Threadname = "Spieler " + Threadcounter;
-			AtcIntServerClientThread clientThread = new AtcIntServerClientThread(this, socket, Threadname);
+			AtcIntServerClientThread clientThread = new AtcIntServerClientThread(
+					this, socket, Threadname);
 			clientThread.start();
 			clientlist.add(clientThread);
 
@@ -91,8 +95,9 @@ public class AtcIntServer {
 
 		DatenAustausch.setInstanz(w); // wird auf dem Server gespeichert
 
-		if (w.getwCounter()%3 == 0 && !w.isTokyoVerlassen() ){
-			ServerSpielLogik.werteListeEvaluieren(w.getSpielerByID(w.getClientID()));
+		if (w.getwCounter() % 3 == 0 && !w.isTokyoVerlassen()) {
+			ServerSpielLogik.werteListeEvaluieren(w.getSpielerByID(w
+					.getClientID()));
 		}
 	}
 
@@ -127,13 +132,13 @@ public class AtcIntServer {
 	}
 
 	public void broadcastChat(Chat c) { // alle Chat Objekte, welche vom
-													// Client
+										// Client
 		// kommen, werden an alle
 		// verbundenen Clients verteilt
 		for (AtcIntServerClientThread client : clientlist) {
 
 			try {
-				
+
 				client.sendChatObjekctToClient(c);
 
 			} catch (Exception e) {
@@ -142,6 +147,18 @@ public class AtcIntServer {
 
 		}
 
+	}
+
+	//Name des Spielers wird gesetzt
+	public void nameClientSpieler(String s, int clientID) {
+
+		Spieler p = this.datenAustausch.getSpielerByID(clientID);
+
+		p.setSpielerName(s);
+
+		this.datenAustausch.setSpielerByID(clientID, p);
+		
+	//	spielerCounter++;
 	}
 
 	public int getPort() {
@@ -191,7 +208,5 @@ public class AtcIntServer {
 	public void setStopServer(boolean stopServer) {
 		this.stopServer = stopServer;
 	}
-
-
 
 }

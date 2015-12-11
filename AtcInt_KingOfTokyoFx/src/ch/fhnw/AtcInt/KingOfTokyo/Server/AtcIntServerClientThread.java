@@ -14,6 +14,7 @@ public class AtcIntServerClientThread extends Thread {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private AtcIntServer server;
+	private int clientID;
 
 
 	public AtcIntServerClientThread(AtcIntServer server, Socket socket, String Threadname) throws Exception {
@@ -45,6 +46,7 @@ public class AtcIntServerClientThread extends Thread {
 	public void listen() {
 		DatenAustausch w;
 		Chat c;
+		String s;
 		Object x;
 	
 		
@@ -73,6 +75,20 @@ public class AtcIntServerClientThread extends Thread {
 
 				
 				}
+				
+				
+				//Name des Spielers wird kommt als String zum Server
+				else if(x instanceof String){	
+					
+					s = (String) x;
+						
+						
+						server.nameClientSpieler(s,clientID);
+
+
+					
+					}
+				
 			}
 
 		} catch (Exception e) {
@@ -120,6 +136,8 @@ public class AtcIntServerClientThread extends Thread {
 	public void sendIDToClient(int clientID) {
 		
 		try {
+			
+			this.clientID = clientID;
 			
 			this.out.writeObject(clientID);
 			out.flush();

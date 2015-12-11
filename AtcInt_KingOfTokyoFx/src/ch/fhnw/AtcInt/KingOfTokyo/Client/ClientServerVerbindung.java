@@ -121,6 +121,20 @@ public class ClientServerVerbindung extends Thread {
 		}
 
 	}
+	
+	
+	//Spieler Name auf Server setzten
+	public void sendStringToServer(String s) {
+
+		try {
+
+			oos.writeObject(s);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
 
 	public void run() {
 		listen();
@@ -138,7 +152,7 @@ public class ClientServerVerbindung extends Thread {
 				@Override
 				public void run() {
 					// entsprechende UI Komponente updaten
-					cview.getLbTitel().setText("King of Tokyo - Spieler Nr: " + getClientID() + " Hallo " + name);
+					cview.getLbTitel().setText("King of Tokyo - Spieler Name: " + name);
 					// cview.getLbModeration().setText(
 					// "client " + getClientID() + "verbunden");
 					cview.setModeration("client " + getClientID() + "verbunden");

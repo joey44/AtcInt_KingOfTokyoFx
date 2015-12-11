@@ -1,11 +1,7 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
-//import AtcIntClientGUI.ClientServerVerbindung;
-import org.omg.CosNaming.IstringHelper;
-
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
-//import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -47,6 +43,9 @@ public class ClientController {
 				alert.setTitle("Spiel wird beendet");
 				alert.setHeaderText("Spiel wird beendet");
 				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
+				
+				//getDatenAustausch().getSpielerByID(clientID).setSpielerAktiv(false);
+				
 
 				alert.showAndWait();
 
@@ -88,6 +87,9 @@ public class ClientController {
 		view.getBtnSenden().setDisable(true);
 		
 		verbindenMitServer();
+		
+		//Name Server mitteilen
+		clientServerVerbindung.sendStringToServer(name);
 
 	}
 
