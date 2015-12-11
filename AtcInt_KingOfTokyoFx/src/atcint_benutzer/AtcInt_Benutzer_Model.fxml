@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="255.0" prefWidth="467.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atcint_benutzer.AtcInt_Benutzer_Controller">
+<AnchorPane prefHeight="255.0" prefWidth="467.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="atcint_benutzer.AtcInt_Benutzer_Controller">
    <children>
        <AnchorPane layoutX="-33.0" layoutY="-22.0" prefHeight="270.0" prefWidth="550.0">
          <children>
@@ -19,12 +19,12 @@
             <Label layoutX="73.0" layoutY="82.0" text="Spielername" />
             <Label layoutX="73.0" layoutY="123.0" text="Passwort" />
             <Label layoutX="73.0" layoutY="162.0" text="Passwort wiederholen" />
+            <TextField fx:id="Spieler" layoutX="201.0" layoutY="78.0" />
             <PasswordField fx:id="Passwort1" layoutX="201.0" layoutY="119.0" />
             <PasswordField fx:id="Passwort2" layoutX="201.0" layoutY="158.0" />
-            <TextField fx:id="Spieler" layoutX="201.0" layoutY="78.0" />
             <ImageView fitHeight="138.0" fitWidth="185.0" layoutX="358.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@..\..\..\Lobby.png" />
+                  <Image url="@../ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png" />
                </image>
             </ImageView>
          </children>
