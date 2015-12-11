@@ -1,0 +1,30 @@
+.root {
+	-fx-background-color: #FFFFFF;
+	-fx-font: 14px "impact";
+	-fx-font-weight: lighter;
+}
+
+.Titel {
+	-fx-font: 16px "impact";
+	-fx-font-weight: lighter;
+}
+
+.wurfel {
+	-fx-border-width: 3;
+	-fx-border-color: white;
+}
+
+.wurfelFocused {
+	-fx-border-width: 3;
+	-fx-border-color: #32CD32;
+}
+
+.custom-button {
+    -fx-background-color:
+        linear-gradient(#ffb732, #ffb732),
+        radial-gradient(center 50% -40%, radius 200%, #ffb732 45%, #ffa500 50%);
+    -fx-background-radius: 4, 3;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: white;
+}
