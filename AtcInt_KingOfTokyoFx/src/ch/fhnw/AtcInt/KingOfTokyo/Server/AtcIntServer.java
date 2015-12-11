@@ -91,7 +91,7 @@ public class AtcIntServer {
 
 		DatenAustausch.setInstanz(w); // wird auf dem Server gespeichert
 
-		if (w.getwCounter()%3 == 0){
+		if (w.getwCounter()%3 == 0 && !w.isTokyoVerlassen() ){
 			ServerSpielLogik.werteListeEvaluieren(w.getSpielerByID(w.getClientID()));
 		}
 	}
