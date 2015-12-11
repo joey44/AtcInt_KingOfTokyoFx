@@ -192,8 +192,6 @@ public class AtcIntServer {
 		this.stopServer = stopServer;
 	}
 
-	public static void main(String[] args) throws Exception {
-		new AtcIntServer(44444).start();
-	}
+
 
 }
