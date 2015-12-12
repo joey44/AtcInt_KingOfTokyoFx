@@ -366,7 +366,7 @@ public class ClientController {
 		getDatenAustausch().getSpielerByID(
 				getDatenAustausch().getSpielerAngriffID()).setAufTokyo(true);
 
-		System.out.println("Spieler " + getClientID() + "Tokyo verlassen");
+		System.out.println(getDatenAustausch().getSpielerByID(getClientID()).getSpielerName() + "Tokyo verlassen");
 
 		getDatenAustausch().setTokyoVerlassen(true);
 

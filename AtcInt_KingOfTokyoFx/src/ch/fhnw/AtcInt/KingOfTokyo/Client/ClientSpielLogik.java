@@ -53,7 +53,7 @@ public class ClientSpielLogik {
 			return "kein Spieler ist auf Tokyo";
 		}
 
-		return " Spieler " + s.getSpielerID() + " ist auf Tokyo";
+		return s.getSpielerName() + " ist auf Tokyo";
 
 	}
 
