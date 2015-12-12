@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -58,8 +59,49 @@ public class ClientController {
 		clientServerVerbindung = new ClientServerVerbindung(this, view, server,
 				port, name);
 
-		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
+		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnWurfeln().getStyleClass().remove("custom-button");
+				view.getBtnWurfeln().getStyleClass().add("custom-button-enter");
+			}
+		});
+
+		view.getBtnWurfeln().setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnWurfeln().getStyleClass()
+						.remove("custom-button-enter");
+				view.getBtnWurfeln().getStyleClass().add("custom-button");
+			}
+		});
+
+		view.getBtnTokyoVerlassen().setOnMouseEntered(
+				new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent t) {
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.remove("custom-button");
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.add("custom-button-enter");
+					}
+				});
+
+		view.getBtnTokyoVerlassen().setOnMouseExited(
+				new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent t) {
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.remove("custom-button-enter");
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.add("custom-button");
+					}
+				});
+		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
 		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
 		view.getBtnWuerfel2().setOnAction(new wurfeln2AuswahlEventHandler());
 		view.getBtnWuerfel3().setOnAction(new wurfeln3AuswahlEventHandler());
@@ -98,11 +140,6 @@ public class ClientController {
 	public void objectFromServerSetDatenaustausch(DatenAustausch d) {
 
 		this.datenAustausch = d;
-
-		// DatenAustausch.setInstanz(d);
-
-		// view.getLbModeration().setText(d.getWurfel().toString());
-		// updateClientGUI();
 
 	}
 

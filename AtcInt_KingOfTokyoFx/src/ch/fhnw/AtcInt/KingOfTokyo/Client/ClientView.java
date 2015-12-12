@@ -162,6 +162,7 @@ public class ClientView {
 
 		btnVerbinden = new Button("Verbinden");
 		btnVerbinden.getStyleClass().add("custom-button");
+		btnVerbinden.getStyleClass().add("custom-button-enter");
 		btnVerbinden.setMinWidth(100);
 		lbTokyo = new Label("Wer ist auf Tokyo?");
 
@@ -245,18 +246,22 @@ public class ClientView {
 				.getResourceAsStream(
 						"/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"),
 				120, 120, true, true));
+
+		image8.setEffect(ds);
 		HBox hb5 = new HBox();
 		hb5.setPadding(new Insets(0, 0, 5, 0));
 		hb5.setSpacing(8);
 		ImageView image9 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.png"), 25, 25,
+				true, true));
 		lbLeben0 = new Label();
 		ImageView image10 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.png"), 18,
+				18, true, true));
+
+		
 		lbPunkte0 = new Label();
 		hb5.setMinWidth(130);
 		hb5.setMaxWidth(130);
@@ -273,18 +278,19 @@ public class ClientView {
 				.getResourceAsStream(
 						"/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"),
 				120, 120, true, true));
+		image11.setEffect(ds);
 		HBox hb6 = new HBox();
 		hb6.setPadding(new Insets(0, 0, 5, 0));
 		hb6.setSpacing(8);
 		ImageView image12 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.png"), 25, 25,
+				true, true));
 		lbLeben1 = new Label();
 		ImageView image13 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.png"), 18,
+				18, true, true));
 		lbPunkte1 = new Label();
 		hb6.setMinWidth(130);
 		hb6.setMaxWidth(130);
@@ -301,18 +307,19 @@ public class ClientView {
 				.getResourceAsStream(
 						"/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"),
 				120, 120, true, true));
+		imgMakaDragon.setEffect(ds);
 		HBox hb7 = new HBox();
 		hb7.setPadding(new Insets(0, 0, 5, 0));
 		hb7.setSpacing(8);
 		ImageView image15 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.png"), 25, 25,
+				true, true));
 		lbLeben2 = new Label();
 		ImageView image16 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.png"), 18,
+				18, true, true));
 		lbPunkte2 = new Label();
 		hb7.getChildren().addAll(image15, lbLeben2, image16, lbPunkte2);
 		hb7.setAlignment(Pos.CENTER);
@@ -329,18 +336,19 @@ public class ClientView {
 				.getResourceAsStream(
 						"/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 120,
 				120, true, true));
+		imgTheKing.setEffect(ds);
 		HBox hb8 = new HBox();
 		hb8.setPadding(new Insets(0, 0, 5, 0));
 		hb8.setSpacing(8);
 		ImageView image18 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.png"), 25, 25,
+				true, true));
 		lbLeben3 = new Label();
 		ImageView image19 = new ImageView(new Image(getClass()
 				.getResourceAsStream(
-						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
-				30, true, true));
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.png"), 18,
+				18, true, true));
 		lbPunkte3 = new Label();
 		hb8.getChildren().addAll(image18, lbLeben3, image19, lbPunkte3);
 		hb8.setAlignment(Pos.CENTER);
