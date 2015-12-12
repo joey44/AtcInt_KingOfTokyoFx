@@ -58,7 +58,7 @@ public class ServerSpielLogik {
 					DatenAustausch.getInstanz().setSpielerAngriffID(angrSpieler.getSpielerID());
 
 					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
-							+ (spieler.getSpielerName() + " wurden " + punkte + " Punkte abgezogen"));
+							+ (spieler.getSpielerName() + " wurden " + punkte + " Leben abgezogen"));
 
 				}
 				if (!angrSpieler.isAufTokyo() && spieler.isAufTokyo()) {
@@ -73,7 +73,7 @@ public class ServerSpielLogik {
 					DatenAustausch.getInstanz().setSpielerAngriffID(angrSpieler.getSpielerID());
 
 					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
-							+ (spieler.getSpielerName() + " wurden " + punkte + " Punkte abgezogen"));
+							+ (spieler.getSpielerName() + " wurden " + punkte + " Leben abgezogen"));
 				}
 
 				// Spieler ist tot
@@ -105,19 +105,22 @@ public class ServerSpielLogik {
 
 					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setSpielerAktiv(false);
 
-					if (spieler.isAufTokyo()) {
-						DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(false);
-						DatenAustausch.getInstanz().getSpielerByID(angrSpieler.getSpielerID()).setAufTokyo(true);
-						isErsteRundeTokyo = true;
-						break;
-
-					}
+					
 
 					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
 							+ (spieler.getSpielerName() + " wurde getötet"));
 
 					// checken ob Spieler gewonnen hat
 					siegerKueren(angrSpieler);
+					
+					if (spieler.isAufTokyo()) {
+						DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(false);
+						DatenAustausch.getInstanz().getSpielerByID(angrSpieler.getSpielerID()).setAufTokyo(true);
+						DatenAustausch.getInstanz().setSpielerAufTokyoGestroben(true);
+						isErsteRundeTokyo = true;
+						break;
+
+					}
 				}
 			}
 

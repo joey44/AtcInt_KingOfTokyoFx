@@ -18,6 +18,7 @@ public class DatenAustausch implements Serializable {
 	private int clientID;
 	private boolean isTokyoVerlassen;
 	private boolean isSpielerAufTokyoAngegrifen;
+	private boolean isSpielerAufTokyoGestroben;
 	private int totSpielerCounter = 0;
 	private boolean isSpielEnde;
 	
@@ -247,6 +248,14 @@ public class DatenAustausch implements Serializable {
 
 	public void setSpielEnde(boolean isSpielEnde) {
 		this.isSpielEnde = isSpielEnde;
+	}
+
+	public boolean isSpielerAufTokyoGestroben() {
+		return isSpielerAufTokyoGestroben;
+	}
+
+	public void setSpielerAufTokyoGestroben(boolean isSpielerAufTokyoGestroben) {
+		this.isSpielerAufTokyoGestroben = isSpielerAufTokyoGestroben;
 	}
 	
 	

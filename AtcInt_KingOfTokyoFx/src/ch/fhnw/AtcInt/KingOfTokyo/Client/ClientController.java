@@ -28,8 +28,7 @@ public class ClientController {
 	private int port;
 	private String name;
 
-	public ClientController(ClientView view, Stage stage, String server,
-			int port, String name) {
+	public ClientController(ClientView view, Stage stage, String server, int port, String name) {
 
 		this.view = view;
 		this.stage = stage;
@@ -46,8 +45,7 @@ public class ClientController {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Spiel wird beendet");
 				alert.setHeaderText("Spiel wird beendet");
-				alert.setContentText("Spieler " + name
-						+ " wird inaktiv gesetzt");
+				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
 
 				// Spieler inaktiv setzten
 
@@ -56,8 +54,7 @@ public class ClientController {
 			}
 		});
 
-		clientServerVerbindung = new ClientServerVerbindung(this, view, server,
-				port, name);
+		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name);
 
 		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -72,35 +69,28 @@ public class ClientController {
 
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass()
-						.remove("custom-button-enter");
+				view.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
 				view.getBtnWurfeln().getStyleClass().add("custom-button");
 			}
 		});
 
-		view.getBtnTokyoVerlassen().setOnMouseEntered(
-				new EventHandler<MouseEvent>() {
+		view.getBtnTokyoVerlassen().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
-					@Override
-					public void handle(MouseEvent t) {
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.remove("custom-button");
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.add("custom-button-enter");
-					}
-				});
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button");
+				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
+			}
+		});
 
-		view.getBtnTokyoVerlassen().setOnMouseExited(
-				new EventHandler<MouseEvent>() {
+		view.getBtnTokyoVerlassen().setOnMouseExited(new EventHandler<MouseEvent>() {
 
-					@Override
-					public void handle(MouseEvent t) {
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.remove("custom-button-enter");
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.add("custom-button");
-					}
-				});
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
+				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button");
+			}
+		});
 		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
 		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
 		view.getBtnWuerfel2().setOnAction(new wurfeln2AuswahlEventHandler());
@@ -111,8 +101,7 @@ public class ClientController {
 
 		view.getBtnSenden().setOnAction(new nachrichtSendenEventHandler());
 
-		view.getBtnTokyoVerlassen().setOnAction(
-				new tokyoVerlassenEventHandler());
+		view.getBtnTokyoVerlassen().setOnAction(new tokyoVerlassenEventHandler());
 		view.getBtnVerbinden().setOnAction(new verbindenEventHandler());
 
 		view.getBtnWurfeln().setDisable(true);
@@ -223,18 +212,12 @@ public class ClientController {
 		view.getBtnWuerfel5().setSelected(d.getWurfelIsAusgewahlt(4));
 		view.getBtnWuerfel6().setSelected(d.getWurfelIsAusgewahlt(5));
 
-		view.getBtnWuerfel1().setGraphic(
-				new ImageView(view.getWurfelImage(d.getWurfel().getWert(0))));
-		view.getBtnWuerfel2().setGraphic(
-				new ImageView(view.getWurfelImage(d.getWurfel().getWert(1))));
-		view.getBtnWuerfel3().setGraphic(
-				new ImageView(view.getWurfelImage(d.getWurfel().getWert(2))));
-		view.getBtnWuerfel4().setGraphic(
-				new ImageView(view.getWurfelImage(d.getWurfel().getWert(3))));
-		view.getBtnWuerfel5().setGraphic(
-				new ImageView(view.getWurfelImage(d.getWurfel().getWert(4))));
-		view.getBtnWuerfel6().setGraphic(
-				new ImageView(view.getWurfelImage(d.getWurfel().getWert(5))));
+		view.getBtnWuerfel1().setGraphic(new ImageView(view.getWurfelImage(d.getWurfel().getWert(0))));
+		view.getBtnWuerfel2().setGraphic(new ImageView(view.getWurfelImage(d.getWurfel().getWert(1))));
+		view.getBtnWuerfel3().setGraphic(new ImageView(view.getWurfelImage(d.getWurfel().getWert(2))));
+		view.getBtnWuerfel4().setGraphic(new ImageView(view.getWurfelImage(d.getWurfel().getWert(3))));
+		view.getBtnWuerfel5().setGraphic(new ImageView(view.getWurfelImage(d.getWurfel().getWert(4))));
+		view.getBtnWuerfel6().setGraphic(new ImageView(view.getWurfelImage(d.getWurfel().getWert(5))));
 
 		// view.getBtnWuerfel2().setText(d.getWurfel().getWert(1) + "");
 		// view.getBtnWuerfel3().setText(d.getWurfel().getWert(2) + "");
@@ -245,8 +228,7 @@ public class ClientController {
 		if (getClientID() == d.getSpielerAmZug().getSpielerID()) {
 			view.getBtnWurfeln().setDisable(false);
 
-			if (d.getWurfel().getwCounter() % 3 == 1
-					|| d.getWurfel().getwCounter() % 3 == 2) {
+			if (d.getWurfel().getwCounter() % 3 == 1 || d.getWurfel().getwCounter() % 3 == 2) {
 				view.getBtnWuerfel1().setDisable(false);
 				view.getBtnWuerfel2().setDisable(false);
 				view.getBtnWuerfel3().setDisable(false);
@@ -259,11 +241,13 @@ public class ClientController {
 		}
 
 		// Möglichkeiten wenn Tokyo verlassen werden kan:
-		if (d.getSpielerAufTokyo() != null && getClientID() == d.getSpielerAufTokyo().getSpielerID()
-				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen()
-				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()){
-				//&& getClientID() != d.getSpielerAmZug().getSpielerID()) 
-				
+		if (d.getSpielerAufTokyo() != null 
+				&& getClientID() == d.getSpielerAufTokyo().getSpielerID()
+				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen() 
+				&& d.getwCounter() % 3 == 0
+				&& d.isSpielerAufTokyoAngegrifen() 
+				&& !d.isSpielerAufTokyoGestroben()) {
+
 			view.getBtnTokyoVerlassen().setDisable(false);
 
 		}
@@ -297,8 +281,7 @@ public class ClientController {
 
 	public void updateChat(Chat c) {
 
-		view.getTaChat().appendText(
-				c.getAbsender() + ": " + c.getChatNachricht() + "\n");
+		view.getTaChat().appendText(c.getAbsender() + ": " + c.getChatNachricht() + "\n");
 
 	}
 
@@ -329,6 +312,7 @@ public class ClientController {
 
 		d.setTokyoVerlassen(false);
 		d.setSpielerAufTokyoAngegrifen(false);
+		d.setSpielerAufTokyoGestroben(false);
 
 		clientServerVerbindung.sendDatenAustauschToServer(d);
 
@@ -356,15 +340,15 @@ public class ClientController {
 
 		getDatenAustausch().tokyoVerlassenById(getClientID());
 
-		getDatenAustausch().setModeration(
-				getDatenAustausch().getSpielerByID(getClientID()).getSpielerName()
-						+ " hat Tokyo verlassen und Spieler: "
-						+ getDatenAustausch().getSpielerByID(getDatenAustausch().getSpielerAngriffID()).getSpielerName()
-						+ " rückt nach!");
+		getDatenAustausch()
+				.setModeration(
+						getDatenAustausch().getSpielerByID(getClientID()).getSpielerName()
+								+ " hat Tokyo verlassen und Spieler: " + getDatenAustausch()
+										.getSpielerByID(getDatenAustausch().getSpielerAngriffID()).getSpielerName()
+								+ " rückt nach!");
 
 		// Spieler der Angreift rückt nach auf Tokyo
-		getDatenAustausch().getSpielerByID(
-				getDatenAustausch().getSpielerAngriffID()).setAufTokyo(true);
+		getDatenAustausch().getSpielerByID(getDatenAustausch().getSpielerAngriffID()).setAufTokyo(true);
 
 		System.out.println(getDatenAustausch().getSpielerByID(getClientID()).getSpielerName() + "Tokyo verlassen");
 
