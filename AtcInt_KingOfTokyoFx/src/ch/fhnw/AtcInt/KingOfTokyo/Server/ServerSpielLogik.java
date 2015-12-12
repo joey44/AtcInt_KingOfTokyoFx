@@ -127,19 +127,6 @@ public class ServerSpielLogik {
 								.getSpielerByID((a + IDcounter) % 4)
 								.setAmZug(true);
 
-						// DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz()
-						// .getModeration() + ("Spieler Nr " + a + " wurde
-						// getötet"));
-
-						// if (totCounter >= 2) {
-						// // wenn mehrere Spieler in einem Zug getötet werden
-						// DatenAustausch
-						// .getInstanz()
-						// .setModeration(
-						// (DatenAustausch.getInstanz()
-						// .getModeration())
-						// + (" und Spieler Nr " + a + " wurde getötet"));
-						// }
 					}
 					DatenAustausch.getInstanz()
 							.getSpielerByID(spieler.getSpielerID())
@@ -157,6 +144,7 @@ public class ServerSpielLogik {
 								.getSpielerByID(angrSpieler.getSpielerID())
 								.setAufTokyo(true);
 						isErsteRundeTokyo = true;
+						break;
 
 					}
 
