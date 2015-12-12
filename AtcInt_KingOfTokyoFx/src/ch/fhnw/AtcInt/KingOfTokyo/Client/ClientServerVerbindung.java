@@ -155,7 +155,7 @@ public class ClientServerVerbindung extends Thread {
 					cview.getLbTitel().setText("King of Tokyo - Spieler Name: " + name);
 					// cview.getLbModeration().setText(
 					// "client " + getClientID() + "verbunden");
-					cview.setModeration("client " + getClientID() + "verbunden");
+				//	cview.setModeration("client " + getClientID() + "verbunden");
 				}
 			});
 

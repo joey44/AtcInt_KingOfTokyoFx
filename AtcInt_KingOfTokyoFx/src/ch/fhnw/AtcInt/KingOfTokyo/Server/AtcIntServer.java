@@ -56,11 +56,7 @@ public class AtcIntServer {
 
 		}
 
-		if (getClientlist().size() == 4) { // Wenn 4 Clients verbunden sind,
-											// kann das Spiel gestartet werden
-
-			spielStarten(this.datenAustausch);
-		}
+	
 	}
 
 	public void stopListening() {
@@ -158,7 +154,13 @@ public class AtcIntServer {
 
 		this.datenAustausch.setSpielerByID(clientID, p);
 		
-	//	spielerCounter++;
+		spielerCounter++;
+		
+		if (spielerCounter == 4) { // Wenn 4 Clients verbunden sind und mit Namen registriert,
+									// kann das Spiel gestartet werden
+
+				spielStarten(this.datenAustausch);
+}
 	}
 
 	public int getPort() {

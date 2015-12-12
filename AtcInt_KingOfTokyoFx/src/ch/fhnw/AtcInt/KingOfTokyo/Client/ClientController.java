@@ -261,8 +261,9 @@ public class ClientController {
 		// Möglichkeiten wenn Tokyo verlassen werden kan:
 		if (getClientID() == d.getSpielerAufTokyo().getSpielerID()
 				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen()
-				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()
-				&& getClientID() != d.getSpielerAmZug().getSpielerID()) {
+				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()){
+				//&& getClientID() != d.getSpielerAmZug().getSpielerID()) 
+				
 			view.getBtnTokyoVerlassen().setDisable(false);
 
 		}
