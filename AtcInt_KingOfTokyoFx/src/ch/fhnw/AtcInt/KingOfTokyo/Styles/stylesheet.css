@@ -27,3 +27,11 @@
 	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
 	-fx-text-fill: white;
 }
+.custom-button-enter {
+	-fx-background-color: linear-gradient(#ffd384, #ffd384),
+		radial-gradient(center 50% -40%, radius 200%, #ffd384 45%, #ffc04c 50%);
+	-fx-background-radius: 4, 3;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: white;
+}
