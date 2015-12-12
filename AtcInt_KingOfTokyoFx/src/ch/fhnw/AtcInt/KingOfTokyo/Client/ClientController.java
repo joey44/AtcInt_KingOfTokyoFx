@@ -259,7 +259,7 @@ public class ClientController {
 		}
 
 		// Möglichkeiten wenn Tokyo verlassen werden kan:
-		if (getClientID() == d.getSpielerAufTokyo().getSpielerID()
+		if (d.getSpielerAufTokyo() != null && getClientID() == d.getSpielerAufTokyo().getSpielerID()
 				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen()
 				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()){
 				//&& getClientID() != d.getSpielerAmZug().getSpielerID()) 
@@ -357,9 +357,9 @@ public class ClientController {
 		getDatenAustausch().tokyoVerlassenById(getClientID());
 
 		getDatenAustausch().setModeration(
-				"Spieler " + getClientID()
+				getDatenAustausch().getSpielerByID(getClientID()).getSpielerName()
 						+ " hat Tokyo verlassen und Spieler: "
-						+ getDatenAustausch().getSpielerAngriffID()
+						+ getDatenAustausch().getSpielerByID(getDatenAustausch().getSpielerAngriffID()).getSpielerName()
 						+ " rückt nach!");
 
 		// Spieler der Angreift rückt nach auf Tokyo
