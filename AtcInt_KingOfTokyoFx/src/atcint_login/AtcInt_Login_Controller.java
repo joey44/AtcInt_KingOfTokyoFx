@@ -58,7 +58,7 @@ public class AtcInt_Login_Controller {
 
 			ClientController c = new ClientController(view, stage,server, port, name);
 			
-			view.show(stage);
+			//view.show(stage);
 		
 		}
 		

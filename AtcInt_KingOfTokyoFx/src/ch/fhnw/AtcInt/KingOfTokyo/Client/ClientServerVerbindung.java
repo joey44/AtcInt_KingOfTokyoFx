@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
+import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -20,6 +21,7 @@ public class ClientServerVerbindung extends Thread {
 	private ClientSpielLogik clientSpielLogik;
 	private ClientView cview;
 	private Chat c;
+	private LobbyDaten l;
 
 	private DatenAustausch datenAustausch;
 
@@ -122,6 +124,18 @@ public class ClientServerVerbindung extends Thread {
 
 	}
 	
+	public void sendLobbyDatenToServer(LobbyDaten l) {
+
+		try {
+
+			oos.writeObject(l);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	//Spieler Name auf Server setzten
 	public void sendStringToServer(String s) {
@@ -146,6 +160,7 @@ public class ClientServerVerbindung extends Thread {
 		try {
 			this.clientID = (int) ois.readObject();
 
+			setClientID(clientID);
 			
 			// UI updaten
 			Platform.runLater(new Runnable() {
@@ -153,6 +168,7 @@ public class ClientServerVerbindung extends Thread {
 				public void run() {
 					// entsprechende UI Komponente updaten
 					cview.getLbTitel().setText("King of Tokyo - Spieler Name: " + name);
+					controller.setClientID(getClientID());
 					// cview.getLbModeration().setText(
 					// "client " + getClientID() + "verbunden");
 				//	cview.setModeration("client " + getClientID() + "verbunden");
@@ -170,7 +186,7 @@ public class ClientServerVerbindung extends Thread {
 		
 		Chat c;
 		Object x;
-
+		LobbyDaten l;
 		try {
 			while ((x = ois.readObject()) != null) { // waiting
 
@@ -183,7 +199,7 @@ public class ClientServerVerbindung extends Thread {
 					// setDatenAustausch(this.datenAustausch);
 
 					int a = this.datenAustausch.getSpielerListe().size();
-					System.out.println(a);
+					//System.out.println(a);
 
 					// UI updaten
 					Platform.runLater(new Runnable() {
@@ -191,7 +207,7 @@ public class ClientServerVerbindung extends Thread {
 						public void run() {
 							// entsprechende UI Komponente updaten
 
-							System.out.println("runlater" + getClientID());
+							//System.out.println("runlater" + getClientID());
 							controller.updateClientGUI(getDatenAustausch(), getClientID());
 						}
 					});
@@ -215,8 +231,28 @@ public class ClientServerVerbindung extends Thread {
 						public void run() {
 							// entsprechende UI Komponente updaten
 
-							System.out.println("runlater Chat");
+							//System.out.println("runlater Chat");
 							controller.updateChat(getC());
+						}
+					});
+
+				}
+				
+				else if (x instanceof LobbyDaten) {
+
+					l = (LobbyDaten) x;
+					
+					setL(l);
+					
+					System.out.println(getL());
+
+					// UI updaten
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							// entsprechende UI Komponente updaten
+
+							controller.updateLobbyGUI(getL());
 						}
 					});
 
@@ -261,5 +297,15 @@ public class ClientServerVerbindung extends Thread {
 	public void setC(Chat c) {
 		this.c = c;
 	}
+
+	public LobbyDaten getL() {
+		return l;
+	}
+
+	public void setL(LobbyDaten l) {
+		this.l = l;
+	}
+	
+	
 
 }

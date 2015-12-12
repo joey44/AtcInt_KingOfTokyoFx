@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
+import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 import ch.fhnw.AtcInt.KingOfTokyo.Server.AtcIntServerClientThread;
 
@@ -144,6 +145,22 @@ public class AtcIntServer {
 		}
 
 	}
+	
+	public void broadcastLobbyDaten(LobbyDaten l) {
+		
+		for (AtcIntServerClientThread client : clientlist) {
+
+			try {
+
+				client.sendLobbyDatenObjekctToClient(l);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+	}
 
 	//Name des Spielers wird gesetzt
 	public void nameClientSpieler(String s, int clientID) {
@@ -158,7 +175,8 @@ public class AtcIntServer {
 		
 		if (spielerCounter == 4) { // Wenn 4 Clients verbunden sind und mit Namen registriert,
 									// kann das Spiel gestartet werden
-
+				
+				this.datenAustausch.setSpielStart(true);
 				spielStarten(this.datenAustausch);
 }
 	}
@@ -210,5 +228,7 @@ public class AtcIntServer {
 	public void setStopServer(boolean stopServer) {
 		this.stopServer = stopServer;
 	}
+
+	
 
 }

@@ -21,6 +21,7 @@ public class DatenAustausch implements Serializable {
 	private boolean isSpielerAufTokyoGestroben;
 	private int totSpielerCounter = 0;
 	private boolean isSpielEnde;
+	private boolean isSpielStart;
 	
 	public static final int CONSTANT_TATZE = 5;
 	
@@ -256,6 +257,14 @@ public class DatenAustausch implements Serializable {
 
 	public void setSpielerAufTokyoGestroben(boolean isSpielerAufTokyoGestroben) {
 		this.isSpielerAufTokyoGestroben = isSpielerAufTokyoGestroben;
+	}
+
+	public boolean isSpielStart() {
+		return isSpielStart;
+	}
+
+	public void setSpielStart(boolean isSpielStart) {
+		this.isSpielStart = isSpielStart;
 	}
 	
 	
