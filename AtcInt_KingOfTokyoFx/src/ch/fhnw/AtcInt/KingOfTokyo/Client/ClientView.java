@@ -1,5 +1,8 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import javax.naming.LinkRef;
 
 import javafx.event.EventHandler;
@@ -24,6 +27,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -50,6 +54,10 @@ public class ClientView {
 	private Label lbLeben0;
 	private Label lbLeben3;
 
+	private VBox vbSpieler0;
+	private VBox vbSpieler1;
+	private VBox vbSpieler2;
+	private VBox vbSpieler3;
 	// Chat
 	private Button btnSenden;
 	private TextArea taChat;
@@ -124,7 +132,6 @@ public class ClientView {
 		lbTitel = new Label("King of Tokyo");
 		lbTitel.getStyleClass().add("Titel");
 
-	
 		linkRegeln.setMaxHeight(6);
 		linkRegeln.setMaxWidth(70);
 		linkRegeln.setBorder(Border.EMPTY);
@@ -138,8 +145,9 @@ public class ClientView {
 		menu.setSpacing(3);
 		VBox spiel = new VBox();
 		ImageView image = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/KingOfTokyo1.jpg"), 510, 510,
-				true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/KingOfTokyo1.jpg"),
+				510, 510, true, true));
 
 		DropShadow ds = new DropShadow();
 		ds.setOffsetY(3.0);
@@ -221,16 +229,7 @@ public class ClientView {
 		btnWuerfel6.getStyleClass().add("wurfel");
 		fpWurfel.getChildren().add(btnWuerfel6);
 
-		// Buttons unter Wurfel
-		
-		//wird nicht mehr benötigt
-		//fpWurfel.getChildren().addAll(btnVerbinden);
-//		fpWurfel.setAlignment(Pos.CENTER);
-		// Die ausgewÃ¤hlten Spieler werden angezeigt
-
 		VBox vbAlleSpielerLayout = new VBox();
-//		vbAlleSpielerLayout.setPadding(new Insets(5, 10, 5, 10));
-		
 
 		HBox hbAlleSpieler = new HBox();
 		hbAlleSpieler.setPadding(new Insets(5, 5, 5, 5));
@@ -240,107 +239,131 @@ public class ClientView {
 
 		// Spieler 1
 
-		VBox vbSpieler1 = new VBox();
-		vbSpieler1.setMinWidth(150);
+		vbSpieler0 = new VBox();
+		vbSpieler0.setMinWidth(150);
 		ImageView image8 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"), 120, 120, true,
-				true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"),
+				120, 120, true, true));
 		HBox hb5 = new HBox();
 		hb5.setPadding(new Insets(0, 0, 5, 0));
-		hb5.setSpacing(12);
+		hb5.setSpacing(8);
 		ImageView image9 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
+				30, true, true));
 		lbLeben0 = new Label();
 		ImageView image10 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
+				30, true, true));
 		lbPunkte0 = new Label();
 		hb5.setMinWidth(130);
 		hb5.setMaxWidth(130);
 		hb5.getChildren().addAll(image9, lbLeben0, image10, lbPunkte0);
+		hb5.setAlignment(Pos.CENTER);
 		lbSpieler0 = new Label("SpielerName");
-		vbSpieler1.getChildren().addAll(lbSpieler0, image8, hb5);
+		vbSpieler0.getChildren().addAll(lbSpieler0, image8, hb5);
 
 		// Spieler 2
 
-		VBox vbSpieler2 = new VBox();
-		vbSpieler2.setMinWidth(150);
+		vbSpieler1 = new VBox();
+		vbSpieler1.setMinWidth(150);
 		ImageView image11 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"), 120, 120, true,
-				true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"),
+				120, 120, true, true));
 		HBox hb6 = new HBox();
 		hb6.setPadding(new Insets(0, 0, 5, 0));
-		hb6.setSpacing(12);
+		hb6.setSpacing(8);
 		ImageView image12 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
+				30, true, true));
 		lbLeben1 = new Label();
 		ImageView image13 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
+				30, true, true));
 		lbPunkte1 = new Label();
 		hb6.setMinWidth(130);
 		hb6.setMaxWidth(130);
 		hb6.getChildren().addAll(image12, lbLeben1, image13, lbPunkte1);
+		hb6.setAlignment(Pos.CENTER);
 		lbSpieler1 = new Label("SpielerName");
-		vbSpieler2.getChildren().addAll(lbSpieler1, image11, hb6);
+		vbSpieler1.getChildren().addAll(lbSpieler1, image11, hb6);
 
 		// Spieler 3
 
-		VBox vbSpieler3 = new VBox();
-		vbSpieler3.setMinWidth(150);
+		vbSpieler2 = new VBox();
+		vbSpieler2.setMinWidth(150);
 		ImageView imgMakaDragon = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"), 120, 120, true,
-				true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"),
+				120, 120, true, true));
 		HBox hb7 = new HBox();
 		hb7.setPadding(new Insets(0, 0, 5, 0));
-		hb7.setSpacing(12);
+		hb7.setSpacing(8);
 		ImageView image15 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
+				30, true, true));
 		lbLeben2 = new Label();
 		ImageView image16 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
+				30, true, true));
 		lbPunkte2 = new Label();
 		hb7.getChildren().addAll(image15, lbLeben2, image16, lbPunkte2);
+		hb7.setAlignment(Pos.CENTER);
 		hb7.setMinWidth(130);
 		hb7.setMaxWidth(130);
 		lbSpieler2 = new Label("SpielerName");
-		vbSpieler3.getChildren().addAll(lbSpieler2, imgMakaDragon, hb7);
+		vbSpieler2.getChildren().addAll(lbSpieler2, imgMakaDragon, hb7);
 
 		// Spieler 4
 
-		VBox vbSpieler4 = new VBox();
-		vbSpieler4.setMinWidth(150);
+		vbSpieler3 = new VBox();
+		vbSpieler3.setMinWidth(150);
 		ImageView imgTheKing = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 120, 120, true,
-				true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 120,
+				120, true, true));
 		HBox hb8 = new HBox();
 		hb8.setPadding(new Insets(0, 0, 5, 0));
-		hb8.setSpacing(12);
+		hb8.setSpacing(8);
 		ImageView image18 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Herz.jpeg"), 30,
+				30, true, true));
 		lbLeben3 = new Label();
 		ImageView image19 = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30, 30, true, true));
+				.getResourceAsStream(
+						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.jpg"), 30,
+				30, true, true));
 		lbPunkte3 = new Label();
 		hb8.getChildren().addAll(image18, lbLeben3, image19, lbPunkte3);
+		hb8.setAlignment(Pos.CENTER);
 		hb8.setMinWidth(130);
 		hb8.setMaxWidth(130);
 		lbSpieler3 = new Label("SpielerName");
-		vbSpieler4.getChildren().addAll(lbSpieler3, imgTheKing, hb8);
+		vbSpieler3.getChildren().addAll(lbSpieler3, imgTheKing, hb8);
 
-		hbAlleSpieler.getChildren().addAll(vbSpieler1, vbSpieler2, vbSpieler3,
-				vbSpieler4);
+		hbAlleSpieler.getChildren().addAll(vbSpieler0, vbSpieler1, vbSpieler2,
+				vbSpieler3);
 		hbAlleSpieler.setPadding(new Insets(0, 0, 0, 0));
-		vbAlleSpielerLayout.getChildren().addAll(horizSeparatorSpieler,hbAlleSpieler);
-//		vbAlleSpielerLayout.getChildren().add(horizSeparatorSpieler);
-		vbAlleSpielerLayout.setPadding(new Insets(-1, 0, 0, 10));
+		vbAlleSpielerLayout.getChildren().addAll(horizSeparatorSpieler,
+				hbAlleSpieler);
+		// vbAlleSpielerLayout.getChildren().add(horizSeparatorSpieler);
+		vbAlleSpielerLayout.setPadding(new Insets(-1, 10, 0, 10));
 		vbAlleSpielerLayout.setSpacing(10);
 		HBox hbChatLayout = new HBox();
-
 		// Chat --> Rechts ausgerichtet
 		VBox vbChat = new VBox();
-//		txChat = new Text("Chat");
-Label lbChat = new Label("Chat");
-//		txChat.setFont(Font.font("Arial", FontWeight.NORMAL,
-//				FontPosture.REGULAR, 14));
+		// txChat = new Text("Chat");
+		Label lbChat = new Label("Chat");
+		// txChat.setFont(Font.font("Arial", FontWeight.NORMAL,
+		// FontPosture.REGULAR, 14));
 		vbChat.setPadding(new Insets(10, 10, 0, 10));
 		spiel.setSpacing(20);
 		taChat = new TextArea();
@@ -360,7 +383,8 @@ Label lbChat = new Label("Chat");
 		hbChatLayout.getChildren().addAll(vertSeparatorChat, vbChat);
 		scene = new Scene(root, 950, 650, Color.WHITE);
 
-		scene.getStylesheets().add("/ch/fhnw/AtcInt/KingOfTokyo/Styles/stylesheet.css");
+		scene.getStylesheets().add(
+				"/ch/fhnw/AtcInt/KingOfTokyo/Styles/stylesheet.css");
 
 		root.setTop(menu);
 		root.setLeft(spiel);
@@ -368,6 +392,22 @@ Label lbChat = new Label("Chat");
 		root.setBottom(vbAlleSpielerLayout);
 		root.setRight(hbChatLayout);
 
+	}
+
+	public VBox getVbSpieler0() {
+		return vbSpieler0;
+	}
+
+	public VBox getVbSpieler1() {
+		return vbSpieler1;
+	}
+
+	public VBox getVbSpieler2() {
+		return vbSpieler2;
+	}
+
+	public VBox getVbSpieler3() {
+		return vbSpieler3;
 	}
 
 	public void setModeration(String modText) {
@@ -387,12 +427,82 @@ Label lbChat = new Label("Chat");
 		stage.setTitle("King of Tokyo");
 		stage.setScene(scene);
 		stage.show();
-		stage.getIcons().add(new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
+		stage.getIcons().add(
+				new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
 		// primaryStage.setTitle("King of Tokyo");
 		// primaryStage.setScene(scene);
 		stage.setResizable(false);
 
 		// primaryStage.show();
+
+	}
+
+	public void setSpielerStandard(int clientID) {
+
+		switch (clientID) {
+		case 0:
+
+			getLbSpieler0().setTextFill(Color.BLACK);
+			break;
+		case 1:
+
+			getLbSpieler1().setTextFill(Color.BLACK);
+			break;
+		case 2:
+
+			getLbSpieler2().setTextFill(Color.BLACK);
+			break;
+		case 3:
+
+			getLbSpieler3().setTextFill(Color.BLACK);
+			break;
+		}
+	}
+
+	public void setSpielerAmZug(int clientID) {
+
+		switch (clientID) {
+		case 0:
+			getLbSpieler0().setTextFill(Color.BLUE);
+			break;
+		case 1:
+			getLbSpieler1().setTextFill(Color.BLUE);
+			break;
+		case 2:
+			getLbSpieler2().setTextFill(Color.BLUE);
+			break;
+
+		case 3:
+			getLbSpieler3().setTextFill(Color.BLUE);
+			break;
+		}
+
+	}
+
+	public void setSpielerInaktiv(int clientID) {
+
+		switch (clientID) {
+		case 0:
+
+			getLbSpieler0().setTextFill(Color.RED);
+			// getVbSpieler0().setDisable(true);
+			break;
+		case 1:
+
+			getLbSpieler1().setTextFill(Color.RED);
+			// getVbSpieler1().setDisable(true);
+			break;
+		case 2:
+
+			getLbSpieler2().setTextFill(Color.RED);
+			// getVbSpieler2().setDisable(true);
+			break;
+		case 3:
+
+			getLbSpieler3().setTextFill(Color.RED);
+			// getVbSpieler3().setDisable(true);
+			break;
+		}
 
 	}
 

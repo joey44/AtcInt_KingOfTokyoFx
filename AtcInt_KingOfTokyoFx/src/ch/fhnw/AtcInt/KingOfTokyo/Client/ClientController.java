@@ -1,5 +1,8 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import javafx.event.ActionEvent;
@@ -24,8 +27,8 @@ public class ClientController {
 	private int port;
 	private String name;
 
-
-	public ClientController(ClientView view, Stage stage, String server, int port, String name) {
+	public ClientController(ClientView view, Stage stage, String server,
+			int port, String name) {
 
 		this.view = view;
 		this.stage = stage;
@@ -38,24 +41,23 @@ public class ClientController {
 			@Override
 			public void handle(WindowEvent event) {
 				clientServerVerbindung.disconnect();
-				
+
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Spiel wird beendet");
 				alert.setHeaderText("Spiel wird beendet");
-				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
-				
-				//Spieler inaktiv setzten
-				
+				alert.setContentText("Spieler " + name
+						+ " wird inaktiv gesetzt");
+
+				// Spieler inaktiv setzten
 
 				alert.showAndWait();
 
 			}
 		});
 
-		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name);
+		clientServerVerbindung = new ClientServerVerbindung(this, view, server,
+				port, name);
 
-	
-		
 		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
 
 		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
@@ -85,10 +87,10 @@ public class ClientController {
 		view.getBtnVerbinden().setDefaultButton(true);
 
 		view.getBtnSenden().setDisable(true);
-		
+
 		verbindenMitServer();
-		
-		//Name Server mitteilen
+
+		// Name Server mitteilen
 		clientServerVerbindung.sendStringToServer(name);
 
 	}
@@ -110,30 +112,59 @@ public class ClientController {
 
 		// view.getLbModeration().setText("gewürfelt Client:" + clientID);
 		// view.setModeration("gewürfelt Client:" + clientID);
-		
-		
-		
-		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
+
+		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
+
 		view.getLbSpieler0().setText(ClientSpielLogik.spielerName(d, 0));
 		view.getLbLeben0().setText(ClientSpielLogik.lebenAnzeigen(d, 0));
 		view.getLbPunkte0().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 0));
-		
-		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
+
+		view.setSpielerStandard(0);
+		view.setSpielerStandard(1);
+		view.setSpielerStandard(2);
+		view.setSpielerStandard(3);
+
+		if (!(d.getSpielerByID(0).isSpielerAktiv())) {
+			view.setSpielerInaktiv(0);
+		}
+
+		else if (d.getSpielerByID(0).isAmZug()) {
+			view.setSpielerAmZug(0);
+		}
+
+		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler1().setText(ClientSpielLogik.spielerName(d, 1));
 		view.getLbLeben1().setText(ClientSpielLogik.lebenAnzeigen(d, 1));
 		view.getLbPunkte1().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 1));
 
-		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
+		if (!(d.getSpielerByID(1).isSpielerAktiv())) {
+			view.setSpielerInaktiv(1);
+		} else if (d.getSpielerByID(1).isAmZug()) {
+			view.setSpielerAmZug(1);
+		}
+
+		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler2().setText(ClientSpielLogik.spielerName(d, 2));
 		view.getLbLeben2().setText(ClientSpielLogik.lebenAnzeigen(d, 2));
 		view.getLbPunkte2().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 2));
 
-		//Farben setzten inaktiv/tot, am Zug, warten auf Zug
+		if (!(d.getSpielerByID(2).isSpielerAktiv())) {
+			view.setSpielerInaktiv(2);
+		} else if (d.getSpielerByID(2).isAmZug()) {
+			view.setSpielerAmZug(2);
+		}
+
+		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
 		view.getLbSpieler3().setText(ClientSpielLogik.spielerName(d, 3));
 		view.getLbLeben3().setText(ClientSpielLogik.lebenAnzeigen(d, 3));
 		view.getLbPunkte3().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 3));
 
-		
+		if (!(d.getSpielerByID(3).isSpielerAktiv())) {
+			view.setSpielerInaktiv(3);
+		} else if (d.getSpielerByID(3).isAmZug()) {
+			view.setSpielerAmZug(3);
+		}
+
 		// view.getLbModeration().setText(ClientSpielLogik.spielModerieren(d));
 		view.setModeration(ClientSpielLogik.spielModerieren(d));
 		view.getLbTokyo().setText(ClientSpielLogik.standortAnzeigen(d));
@@ -192,8 +223,7 @@ public class ClientController {
 
 		// Möglichkeiten wenn Tokyo verlassen werden kan:
 		if (getClientID() == d.getSpielerAufTokyo().getSpielerID()
-				&& !d.isTokyoVerlassen()
-				&& d.wurdeIchAngegrifen()
+				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen()
 				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()
 				&& getClientID() != d.getSpielerAmZug().getSpielerID()) {
 			view.getBtnTokyoVerlassen().setDisable(false);
@@ -217,8 +247,7 @@ public class ClientController {
 			view.getBtnWuerfel4().setDisable(true);
 			view.getBtnWuerfel5().setDisable(true);
 			view.getBtnWuerfel6().setDisable(true);
-			
-			
+
 			System.out.println("Spiel fertig");
 
 			// zurück in die Lobby
@@ -268,8 +297,8 @@ public class ClientController {
 		// updateClientGUI(getDatenAustausch(), getClientID());
 
 	}
-	
-	public void verbindenMitServer(){
+
+	public void verbindenMitServer() {
 		clientServerVerbindung.connect();
 
 		view.getBtnVerbinden().setDisable(true);

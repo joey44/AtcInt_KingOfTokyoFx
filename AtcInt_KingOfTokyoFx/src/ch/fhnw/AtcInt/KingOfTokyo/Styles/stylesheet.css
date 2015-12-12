@@ -20,11 +20,10 @@
 }
 
 .custom-button {
-    -fx-background-color:
-        linear-gradient(#ffb732, #ffb732),
-        radial-gradient(center 50% -40%, radius 200%, #ffb732 45%, #ffa500 50%);
-    -fx-background-radius: 4, 3;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: white;
+	-fx-background-color: linear-gradient(#ffb732, #ffb732),
+		radial-gradient(center 50% -40%, radius 200%, #ffb732 45%, #ffa500 50%);
+	-fx-background-radius: 4, 3;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: white;
 }
