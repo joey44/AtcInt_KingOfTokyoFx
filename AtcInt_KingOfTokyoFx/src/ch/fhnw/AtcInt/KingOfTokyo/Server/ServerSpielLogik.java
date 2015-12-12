@@ -18,8 +18,7 @@ public class ServerSpielLogik {
 		// Spieler angreift
 		int totCounter = 0;
 
-		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz()
-				.getSpielerListe();
+		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz().getSpielerListe();
 
 		for (Spieler spieler : spielerListe) {
 
@@ -27,20 +26,14 @@ public class ServerSpielLogik {
 				if (DatenAustausch.getInstanz().getSpielerAufTokyo() == null
 
 				&& spieler.equals(angrSpieler)) {
-					DatenAustausch.getInstanz()
-							.getSpielerByID(spieler.getSpielerID())
-							.setAufTokyo(true);
+					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(true);
 
-					DatenAustausch
-							.getInstanz()
-							.setModeration(
-									DatenAustausch.getInstanz().getModeration()
-											+ "\n"
-											+ (spieler.getSpielerName() + " geht auf Tokyo"));
+					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+							+ (spieler.getSpielerName() + " geht auf Tokyo"));
 
 					ruhmpunkteBerechnen(1, spieler);
 					isErsteRundeTokyo = false;
-					return;
+					// return; 
 				}
 			}
 		}
@@ -48,8 +41,7 @@ public class ServerSpielLogik {
 		if (angrSpieler.isAufTokyo() && !isErsteRundeTokyo) {
 
 			DatenAustausch.getInstanz().setModeration(
-					DatenAustausch.getInstanz().getModeration() + "\n"
-							+ ("eine Runde auf Tokyo überlebt"));
+					DatenAustausch.getInstanz().getModeration() + "\n" + ("eine Runde auf Tokyo überlebt"));
 
 			// Wenn mind. eine Runde auf Tokyo überlebt hat
 			ruhmpunkteBerechnen(2, angrSpieler);
@@ -60,50 +52,35 @@ public class ServerSpielLogik {
 
 				if (angrSpieler.isAufTokyo() && !spieler.isAufTokyo()) {
 
-					DatenAustausch.getInstanz()
-							.getSpielerByID(spieler.getSpielerID())
+					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID())
 							.setAnzahlLeben(spieler.getAnzahlLeben() - punkte);
 
-					DatenAustausch.getInstanz().setSpielerAngriffID(
-							angrSpieler.getSpielerID());
-					
-					DatenAustausch.getInstanz().setModeration(
-							DatenAustausch.getInstanz().getModeration()
-									+ "\n"
-									+ (spieler.getSpielerName() + " wurden "
-											+ punkte + " Punkte abgezogen"));
+					DatenAustausch.getInstanz().setSpielerAngriffID(angrSpieler.getSpielerID());
+
+					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+							+ (spieler.getSpielerName() + " wurden " + punkte + " Punkte abgezogen"));
 
 				}
 				if (!angrSpieler.isAufTokyo() && spieler.isAufTokyo()) {
 
-					DatenAustausch.getInstanz().setSpielerAufTokyoAngegrifen(
-							true);
+					DatenAustausch.getInstanz().setSpielerAufTokyoAngegrifen(true);
 
-					DatenAustausch.getInstanz()
-							.getSpielerByID(spieler.getSpielerID())
+					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID())
 							.setAnzahlLeben(spieler.getAnzahlLeben() - punkte);
 
 					// SpielerID setzen des Angreiffers, für das Nachrücken auf
 					// Tokyo
-					DatenAustausch.getInstanz().setSpielerAngriffID(
-							angrSpieler.getSpielerID());
-					
-					DatenAustausch.getInstanz().setModeration(
-							DatenAustausch.getInstanz().getModeration()
-									+ "\n"
-									+ (spieler.getSpielerName() + " wurden "
-											+ punkte + " Punkte abgezogen"));
-				}
+					DatenAustausch.getInstanz().setSpielerAngriffID(angrSpieler.getSpielerID());
 
-				
+					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+							+ (spieler.getSpielerName() + " wurden " + punkte + " Punkte abgezogen"));
+				}
 
 				// Spieler ist tot
 				if (spieler.getAnzahlLeben() <= 0) {
 
 					DatenAustausch.getInstanz()
-							.setTotSpielerCounter(
-									DatenAustausch.getInstanz()
-											.getTotSpielerCounter() + 1);
+							.setTotSpielerCounter(DatenAustausch.getInstanz().getTotSpielerCounter() + 1);
 
 					totCounter++;
 					// && spieler.isAufTokyo()) {
@@ -113,47 +90,31 @@ public class ServerSpielLogik {
 
 						int a = spieler.getSpielerID();
 
-						DatenAustausch.getInstanz().getSpielerAmZug()
-								.setAmZug(false);
+						DatenAustausch.getInstanz().getSpielerAmZug().setAmZug(false);
 
-						while (!(DatenAustausch.getInstanz().getSpielerByID(
-								(a + IDcounter) % 4).isSpielerAktiv())) {
+						while (!(DatenAustausch.getInstanz().getSpielerByID((a + IDcounter) % 4).isSpielerAktiv())) {
 							IDcounter++;
 							if (IDcounter == 3) {
 								break;
 							}
 						}
-						DatenAustausch.getInstanz()
-								.getSpielerByID((a + IDcounter) % 4)
-								.setAmZug(true);
+						DatenAustausch.getInstanz().getSpielerByID((a + IDcounter) % 4).setAmZug(true);
 
 					}
-					DatenAustausch.getInstanz()
-							.getSpielerByID(spieler.getSpielerID())
-							.setAnzahlLeben(0);
+					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAnzahlLeben(0);
 
-					DatenAustausch.getInstanz()
-							.getSpielerByID(spieler.getSpielerID())
-							.setSpielerAktiv(false);
+					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setSpielerAktiv(false);
 
 					if (spieler.isAufTokyo()) {
-						DatenAustausch.getInstanz()
-								.getSpielerByID(spieler.getSpielerID())
-								.setAufTokyo(false);
-						DatenAustausch.getInstanz()
-								.getSpielerByID(angrSpieler.getSpielerID())
-								.setAufTokyo(true);
+						DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(false);
+						DatenAustausch.getInstanz().getSpielerByID(angrSpieler.getSpielerID()).setAufTokyo(true);
 						isErsteRundeTokyo = true;
 						break;
 
 					}
 
-					DatenAustausch
-							.getInstanz()
-							.setModeration(
-									DatenAustausch.getInstanz().getModeration()
-											+ "\n"
-											+ (spieler.getSpielerName() + " wurde getötet"));
+					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+							+ (spieler.getSpielerName() + " wurde getötet"));
 
 					// checken ob Spieler gewonnen hat
 					siegerKueren(angrSpieler);
@@ -165,15 +126,12 @@ public class ServerSpielLogik {
 
 	public void aufTokyoGehen(Spieler spielerAufTokyo) {
 		// Methode setzt Spieler auf Tokyo
-		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz()
-				.getSpielerListe();
+		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz().getSpielerListe();
 		for (Spieler spieler : spielerListe) {
 
 			if (spieler.equals(spielerAufTokyo)) {
 
-				DatenAustausch.getInstanz()
-						.getSpielerByID(spieler.getSpielerID())
-						.setAufTokyo(true);
+				DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(true);
 				isErsteRundeTokyo = true;
 
 			}
@@ -183,36 +141,25 @@ public class ServerSpielLogik {
 
 	private static void lebenBerechnen(int punkte, Spieler spielerAmZug) {
 		// Addiert dem Spieler Leben
-		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz()
-				.getSpielerListe();
+		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz().getSpielerListe();
 
 		// Ein Monster kann nie mehr als 10 haben
 
 		for (Spieler spieler : spielerListe) {
 
 			if (spieler.equals(spielerAmZug)) {
-				DatenAustausch.getInstanz()
-						.getSpielerByID(spieler.getSpielerID())
+				DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID())
 						.setAnzahlLeben(spieler.getAnzahlLeben() + punkte);
 
-				DatenAustausch.getInstanz().setModeration(
-						DatenAustausch.getInstanz().getModeration()
-								+ "\n"
-								+ (spieler.getSpielerName() + " bekommt "
-										+ punkte + " Leben"));
+				DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+						+ (spieler.getSpielerName() + " bekommt " + punkte + " Leben"));
 
 				// nicht mehr als 10 PUnkte möglich
 				if (spieler.getAnzahlLeben() > 10) {
-					DatenAustausch.getInstanz()
-							.getSpielerByID(spieler.getSpielerID())
-							.setAnzahlLeben(10);
+					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAnzahlLeben(10);
 
-					DatenAustausch
-							.getInstanz()
-							.setModeration(
-									DatenAustausch.getInstanz().getModeration()
-											+ "\n"
-											+ ("Es sind aber maximal 10 Leben möglich"));
+					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+							+ ("Es sind aber maximal 10 Leben möglich"));
 
 				}
 			}
@@ -221,28 +168,19 @@ public class ServerSpielLogik {
 
 	private static void ruhmpunkteBerechnen(int punkte, Spieler spielerAmZug) {
 		// Ruhmpunkte werden dem Spieler addiert und gewinner festgestellt
-		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz()
-				.getSpielerListe();
+		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz().getSpielerListe();
 
 		for (Spieler spieler : spielerListe) {
 
 			if (spieler.equals(spielerAmZug)) {
-				DatenAustausch
-						.getInstanz()
-						.getSpielerByID(spieler.getSpielerID())
-						.setAnzahlRuhmpunkte(
-								spieler.getAnzahlRuhmpunkte() + punkte);
+				DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID())
+						.setAnzahlRuhmpunkte(spieler.getAnzahlRuhmpunkte() + punkte);
 
-				DatenAustausch.getInstanz().setModeration(
-						DatenAustausch.getInstanz().getModeration()
-								+ "\n"
-								+ (spieler.getSpielerName() + " bekommt "
-										+ punkte + " Ruhmpunkte"));
+				DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
+						+ (spieler.getSpielerName() + " bekommt " + punkte + " Ruhmpunkte"));
 
 				// checken ob Spieler gewonnen hat
-				if (DatenAustausch.getInstanz()
-						.getSpielerByID(spieler.getSpielerID())
-						.getAnzahlRuhmpunkte() >= 20) {
+				if (DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).getAnzahlRuhmpunkte() >= 20) {
 					siegerKueren(spieler);
 				}
 
@@ -253,12 +191,10 @@ public class ServerSpielLogik {
 
 	private static void siegerKueren(Spieler spieler) {
 
-		if (spieler.getAnzahlRuhmpunkte() >= 20
-				|| DatenAustausch.getInstanz().getTotSpielerCounter() == 3) {
+		if (spieler.getAnzahlRuhmpunkte() >= 20 || DatenAustausch.getInstanz().getTotSpielerCounter() == 3) {
 
 			DatenAustausch.getInstanz().setModeration(
-					DatenAustausch.getInstanz().getModeration() + "\n"
-							+ spieler.getSpielerName() + " hat gewonnen");
+					DatenAustausch.getInstanz().getModeration() + "\n" + spieler.getSpielerName() + " hat gewonnen");
 
 			DatenAustausch.getInstanz().setSpielEnde(true);
 			// spielBeenden( );

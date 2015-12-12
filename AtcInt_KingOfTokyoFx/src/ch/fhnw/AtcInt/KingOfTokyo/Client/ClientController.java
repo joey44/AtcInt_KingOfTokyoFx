@@ -559,7 +559,7 @@ public class ClientController {
 			Chat c = new Chat("", "");
 
 			c.setChatNachricht(view.getTf2Chat().getText());
-			c.setAbsender("S " + getClientID());
+			c.setAbsender(name);
 
 			clientServerVerbindung.sendChatToServer(c);
 
