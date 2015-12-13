@@ -2,6 +2,7 @@
 	-fx-background-color: #FFFFFF;
 	-fx-font: 14px "impact";
 	-fx-font-weight: lighter;
+
 }
 
 .Titel {
@@ -12,11 +13,16 @@
 .wurfel {
 	-fx-border-width: 3;
 	-fx-border-color: white;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
 }
 
 .wurfelFocused {
 	-fx-border-width: 3;
 	-fx-border-color: #32CD32;
+	-fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+	
 }
 
 .custom-button {
@@ -35,7 +41,14 @@
 	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
 	-fx-text-fill: white;
 }
-
+.custom-button-pressed {
+	-fx-background-color: linear-gradient(#CC8600, #CC8600),
+		radial-gradient(center 50% -40%, radius 200%, #CC8600 45%, #CC8600 50%);
+	-fx-background-radius: 4, 3;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: white;
+}
 
 .VBox {
 	-fx-border-color: black;

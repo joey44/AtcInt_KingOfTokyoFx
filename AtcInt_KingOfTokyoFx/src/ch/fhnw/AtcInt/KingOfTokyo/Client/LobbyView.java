@@ -98,21 +98,25 @@ public class LobbyView {
 		Image monster1 = new Image(getClass().getResourceAsStream(
 				"/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"), 150, 150, true, true);
 		btnCyberBunny.setGraphic(new ImageView(monster1));
+		btnCyberBunny.setPadding(Insets.EMPTY);
 
 		btnGigaZaur = new Button();
 		Image monster2 = new Image(getClass().getResourceAsStream(
 				"/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"), 150, 150, true, true);
 		btnGigaZaur.setGraphic(new ImageView(monster2));
-
+		btnGigaZaur.setPadding(Insets.EMPTY);
+		
 		btnMekaDragon = new Button();
 		Image monster3 = new Image(getClass().getResourceAsStream(
 				"/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"), 150, 150, true, true);
 		btnMekaDragon.setGraphic(new ImageView(monster3));
-
+		btnMekaDragon.setPadding(Insets.EMPTY);
+		
 		btnTheKing = new Button();
 		Image monster4 = new Image(getClass()
 				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 150, 150, true, true);
 		btnTheKing.setGraphic(new ImageView(monster4));
+		btnTheKing.setPadding(Insets.EMPTY);
 
 		VBox monster12 = new VBox(btnCyberBunny, btnGigaZaur);
 		monster12.setPadding(new Insets(5));

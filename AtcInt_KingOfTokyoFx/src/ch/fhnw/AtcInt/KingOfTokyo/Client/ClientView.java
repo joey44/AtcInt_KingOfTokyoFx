@@ -6,9 +6,11 @@ import java.lang.reflect.Method;
 import javax.naming.LinkRef;
 
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -162,7 +164,6 @@ public class ClientView {
 
 		btnVerbinden = new Button("Verbinden");
 		btnVerbinden.getStyleClass().add("custom-button");
-		btnVerbinden.getStyleClass().add("custom-button-enter");
 		btnVerbinden.setMinWidth(100);
 		lbTokyo = new Label("Wer ist auf Tokyo?");
 
@@ -198,8 +199,8 @@ public class ClientView {
 		btnWurfeln = new Button("Würfeln");
 		btnWurfeln.setMinWidth(100);
 		btnWurfeln.getStyleClass().add("custom-button");
-
 		fpWurfel.getChildren().add(btnWurfeln);
+
 		btnWuerfel1 = new ToggleButton();
 		btnWuerfel1.setPadding(Insets.EMPTY);
 		btnWuerfel1.getStyleClass().add("wurfel");
@@ -229,6 +230,9 @@ public class ClientView {
 		btnWuerfel6.setPadding(Insets.EMPTY);
 		btnWuerfel6.getStyleClass().add("wurfel");
 		fpWurfel.getChildren().add(btnWuerfel6);
+
+		fpWurfel.setColumnHalignment(HPos.CENTER);
+		// fpWurfel.borderProperty(
 
 		VBox vbAlleSpielerLayout = new VBox();
 
@@ -261,7 +265,6 @@ public class ClientView {
 						"/ch/fhnw/AtcInt/KingOfTokyo/Images/Stern.png"), 18,
 				18, true, true));
 
-		
 		lbPunkte0 = new Label();
 		hb5.setMinWidth(130);
 		hb5.setMaxWidth(130);
@@ -386,6 +389,7 @@ public class ClientView {
 		tf2Chat.setFocusTraversable(true);
 		btnSenden = new Button();
 		btnSenden.setText("Senden");
+		btnSenden.getStyleClass().add("custom-button");
 		vbChat.getChildren().addAll(lbChat, taChat, tf2Chat, btnSenden);
 
 		hbChatLayout.getChildren().addAll(vertSeparatorChat, vbChat);

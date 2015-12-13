@@ -1,5 +1,7 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
+import java.security.Key;
+
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
@@ -8,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -28,7 +32,7 @@ public class ClientController {
 	private String server;
 	private int port;
 	private String name;
-	
+
 	private boolean isMonsterAusgeahlt;
 
 	public ClientController(ClientView view, Stage stage, String server,
@@ -46,11 +50,12 @@ public class ClientController {
 		this.name = name;
 
 		this.lobbyView = lobbyView;
-		
+
 		lobbyView.show(stage);
-		
-		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind");
-	
+
+		lobbyView.getLbTitel().setText(
+				"King of Tokyo - Warten bis 4 Spieler angemeldet sind");
+
 		lobbyView.getBtnCyberBunny().setDisable(true);
 		lobbyView.getBtnGigaZaur().setDisable(true);
 		lobbyView.getBtnMekaDragon().setDisable(true);
@@ -83,8 +88,6 @@ public class ClientController {
 				// Spieler inaktiv setzten
 
 				alert.showAndWait();
-				
-			
 
 			}
 		});
@@ -92,6 +95,7 @@ public class ClientController {
 		clientServerVerbindung = new ClientServerVerbindung(this, view, server,
 				port, name);
 
+		// Maus Events für Buttons
 		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -102,7 +106,6 @@ public class ClientController {
 		});
 
 		view.getBtnWurfeln().setOnMouseExited(new EventHandler<MouseEvent>() {
-
 			@Override
 			public void handle(MouseEvent t) {
 				view.getBtnWurfeln().getStyleClass()
@@ -111,9 +114,28 @@ public class ClientController {
 			}
 		});
 
+		view.getBtnWurfeln().setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnWurfeln().getStyleClass()
+						.remove("custom-button-enter");
+				view.getBtnWurfeln().getStyleClass()
+						.add("custom-button-pressed");
+			}
+		});
+
+		view.getBtnWurfeln().setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnWurfeln().getStyleClass()
+						.remove("custom-button-pressed");
+				view.getBtnWurfeln().getStyleClass().add("custom-button-enter");
+			}
+		});
+		// Maus Events Button Tokyo verlassen
+
 		view.getBtnTokyoVerlassen().setOnMouseEntered(
 				new EventHandler<MouseEvent>() {
-
 					@Override
 					public void handle(MouseEvent t) {
 						view.getBtnTokyoVerlassen().getStyleClass()
@@ -125,7 +147,6 @@ public class ClientController {
 
 		view.getBtnTokyoVerlassen().setOnMouseExited(
 				new EventHandler<MouseEvent>() {
-
 					@Override
 					public void handle(MouseEvent t) {
 						view.getBtnTokyoVerlassen().getStyleClass()
@@ -134,6 +155,79 @@ public class ClientController {
 								.add("custom-button");
 					}
 				});
+
+		view.getBtnTokyoVerlassen().setOnMousePressed(
+				new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent t) {
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.remove("custom-button-enter");
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.add("custom-button-pressed");
+					}
+				});
+
+		view.getBtnTokyoVerlassen().setOnMouseReleased(
+				new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent t) {
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.remove("custom-button-pressed");
+						view.getBtnTokyoVerlassen().getStyleClass()
+								.add("custom-button-enter");
+					}
+				});
+
+		// Maus events button chat
+		view.getBtnSenden().setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnSenden().getStyleClass().remove("custom-button");
+				view.getBtnSenden().getStyleClass().add("custom-button-enter");
+			}
+		});
+
+		view.getBtnSenden().setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnSenden().getStyleClass()
+						.remove("custom-button-enter");
+				view.getBtnSenden().getStyleClass().add("custom-button");
+			}
+		});
+
+		view.getBtnSenden().setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnSenden().getStyleClass()
+						.remove("custom-button-enter");
+				view.getBtnSenden().getStyleClass()
+						.add("custom-button-pressed");
+			}
+		});
+
+		view.getBtnSenden().setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnSenden().getStyleClass()
+						.remove("custom-button-pressed");
+				view.getBtnSenden().getStyleClass().add("custom-button-enter");
+			}
+		});
+
+		view.getTf2Chat().setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				// TODO Auto-generated method stub
+				if (event.getCode() == KeyCode.ENTER) {
+					nachrichtSenden();
+				}
+
+			}
+
+		});
+
 		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
 		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
 		view.getBtnWuerfel2().setOnAction(new wurfeln2AuswahlEventHandler());
@@ -175,80 +269,75 @@ public class ClientController {
 		this.datenAustausch = d;
 
 	}
-	
-	public void lobbyMonsterWahl(){
-		
+
+	public void lobbyMonsterWahl() {
+
 		lobbyView.getLbTitel().setText("King of Tokyo - Monster auswählen");
-		
-		
+
 		lobbyView.getBtnCyberBunny().setDisable(false);
 		lobbyView.getBtnGigaZaur().setDisable(false);
 		lobbyView.getBtnMekaDragon().setDisable(false);
-		lobbyView.getBtnTheKing().setDisable(false);	
-		
-		lobbyView.getLbSpielerName1().setText(getDatenAustausch().getSpielerByID(0).getSpielerName());
-		lobbyView.getLbSpielerName2().setText(getDatenAustausch().getSpielerByID(1).getSpielerName());
-		lobbyView.getLbSpielerName3().setText(getDatenAustausch().getSpielerByID(2).getSpielerName());
-		lobbyView.getLbSpielerName4().setText(getDatenAustausch().getSpielerByID(3).getSpielerName());
+		lobbyView.getBtnTheKing().setDisable(false);
+
+		lobbyView.getLbSpielerName1().setText(
+				getDatenAustausch().getSpielerByID(0).getSpielerName());
+		lobbyView.getLbSpielerName2().setText(
+				getDatenAustausch().getSpielerByID(1).getSpielerName());
+		lobbyView.getLbSpielerName3().setText(
+				getDatenAustausch().getSpielerByID(2).getSpielerName());
+		lobbyView.getLbSpielerName4().setText(
+				getDatenAustausch().getSpielerByID(3).getSpielerName());
 
 	}
 
-
 	public void updateLobbyGUI(LobbyDaten l) {
-		
-		if (l.isSpielStart()){
-			
+
+		if (l.isSpielStart()) {
+
 			clientSpielView.show(stage);
-		
+
 		}
-		
+
 		setL(l);
 
-		if (l.getMonsterWahlCounter() == 4 && getDatenAustausch().isSpielStart()) {
-			
+		if (l.getMonsterWahlCounter() == 4
+				&& getDatenAustausch().isSpielStart()) {
+
 			lobbyView.getBtnSpielstarten().setDisable(false);
 
-			
 		}
 
-		//System.out.println(clientID);
-		//System.out.println(l.getSpielerID());
-		
+		// System.out.println(clientID);
+		// System.out.println(l.getSpielerID());
+
 		if (clientID == l.getSpielerID() && !isMonsterAusgeahlt) {
 			lobbyView.getBtnCyberBunny().setDisable(true);
 			lobbyView.getBtnGigaZaur().setDisable(true);
 			lobbyView.getBtnMekaDragon().setDisable(true);
 			lobbyView.getBtnTheKing().setDisable(true);
-			
-			isMonsterAusgeahlt =true;
+
+			isMonsterAusgeahlt = true;
 		}
-		
-		
-		if (l.getMonsterID() == 0){
-			lobbyView.getBtnCyberBunny().setDisable(true);	
-		}
-		else if (l.getMonsterID() == 1){
+
+		if (l.getMonsterID() == 0) {
+			lobbyView.getBtnCyberBunny().setDisable(true);
+		} else if (l.getMonsterID() == 1) {
 			lobbyView.getBtnGigaZaur().setDisable(true);
-		}
-		else if (l.getMonsterID() == 2){
+		} else if (l.getMonsterID() == 2) {
 			lobbyView.getBtnMekaDragon().setDisable(true);
-		}
-		else if (l.getMonsterID() == 3){
+		} else if (l.getMonsterID() == 3) {
 			lobbyView.getBtnTheKing().setDisable(true);
 		}
-		
-		lobbyView.getTaMonsterAuswahl().appendText("\n" + l.getLobbyModeration());
-		
-		
-		
-		
-		
+
+		lobbyView.getTaMonsterAuswahl().appendText(
+				"\n" + l.getLobbyModeration());
 
 	}
 
 	public void updateClientGUI(DatenAustausch d, int clientID) {
-		
-		//Wenn alle 4 Spieler angemldet sind, können die Monster ausgewählt werden
+
+		// Wenn alle 4 Spieler angemldet sind, können die Monster ausgewählt
+		// werden
 		lobbyMonsterWahl();
 
 		// DatenAustausch d = this.datenAustausch;
@@ -419,19 +508,18 @@ public class ClientController {
 			clientSpielView.getBtnWuerfel6().setDisable(true);
 
 			System.out.println("Spiel fertig");
-			
+
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Spiel fertig");
 			alert.setHeaderText(null);
 			alert.setContentText("King of Tokyo wird beendet");
 
 			alert.showAndWait();
-			
+
 			Stage stage = (Stage) clientSpielView.getScene().getWindow();
 
 			stage.close();
 
-			
 			// Ende
 
 		}
@@ -721,11 +809,9 @@ public class ClientController {
 
 	}
 
-	// Chat
-	class nachrichtSendenEventHandler implements EventHandler<ActionEvent> {
+	public void nachrichtSenden() {
 
-		@Override
-		public void handle(ActionEvent event) {
+		if (clientSpielView.getTf2Chat().getText() != "") {
 
 			Chat c = new Chat("", "");
 
@@ -735,6 +821,16 @@ public class ClientController {
 			clientServerVerbindung.sendChatToServer(c);
 
 			clientSpielView.getTf2Chat().clear();
+		}
+	}
+
+	// Chat
+	class nachrichtSendenEventHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent event) {
+
+			nachrichtSenden();
 
 		}
 
@@ -759,13 +855,11 @@ public class ClientController {
 			getL().setMonsterWahlCounter(l.getMonsterWahlCounter() + 1);
 			getL().setMonsterID(0);
 			getL().setSpielerID(getClientID());
-			
+
 			getL().setLobbyModeration(name + " hat Cyber Bunny augewählt");
-			
 
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
-	
 		}
 
 	}
@@ -777,17 +871,15 @@ public class ClientController {
 		public void handle(ActionEvent ae) {
 
 			System.out.println("Monster 1");
-			
+
 			getL().setMonsterWahlCounter(l.getMonsterWahlCounter() + 1);
 			getL().setMonsterID(1);
 			getL().setSpielerID(getClientID());
-			
+
 			getL().setLobbyModeration(name + " hat Giga Zaur augewählt");
-			
 
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
-	
 		}
 
 	}
@@ -805,10 +897,9 @@ public class ClientController {
 			getL().setSpielerID(getClientID());
 
 			getL().setLobbyModeration(name + " hat Meka Dragon augewählt");
-			
+
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
-		
 		}
 
 	}
@@ -825,13 +916,9 @@ public class ClientController {
 			getL().setMonsterID(3);
 			getL().setSpielerID(getClientID());
 
-		
 			getL().setLobbyModeration(name + " hat The King augewählt");
-			
-			clientServerVerbindung.sendLobbyDatenToServer(getL());
-			
 
-	
+			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
 		}
 
@@ -843,23 +930,15 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 			System.out.println("Spiel wird gestartet...");
 
-			
 			getL().setSpielStart(true);
 
-		
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
-			
 
-			
-			//clientSpielView.show(stage);
-			
-			
-			
+			// clientSpielView.show(stage);
 
 		}
 	}
 
-	
 	public void setClientID(int clientID) {
 		this.clientID = clientID;
 	}
@@ -871,6 +950,5 @@ public class ClientController {
 	public void setL(LobbyDaten l) {
 		this.l = l;
 	}
-	
 
 }
