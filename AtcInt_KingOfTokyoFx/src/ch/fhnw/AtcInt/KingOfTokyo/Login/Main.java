@@ -1,4 +1,4 @@
-package atcint_MainClient;
+package ch.fhnw.AtcInt.KingOfTokyo.Login;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -20,7 +20,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {	
-			Parent root = FXMLLoader.load(atcint_login.AtcInt_Login_View.class.getResource("AtcInt_Login_Model.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("AtcInt_Login_Model.fxml"));
 			primaryStage.setTitle("AtcInt Login");
 			primaryStage.setScene(new Scene(root));
 			primaryStage.show();

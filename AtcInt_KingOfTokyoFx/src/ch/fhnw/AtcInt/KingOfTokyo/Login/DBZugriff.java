@@ -1,4 +1,4 @@
-package atcint_db;
+package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,13 +10,13 @@ import java.sql.Statement;
  *
  */
 
-public class Benutzer {
+public class DBZugriff {
 	
 	private static final String DB_NAME = "atcint";
 
 	private static final String DB_USER = "root";
 
-	private static final String DB_PASSWORD = "";
+	private static final String DB_PASSWORD = "1234";
 
 	private static final String DB_SERVER = "127.0.0.1";
 	private static final String DB_PORT = "3306";
@@ -54,8 +54,8 @@ public class Benutzer {
 	 * are long enough. In case of an error, there will be an exception and a message on the console.
 	 */
 
-	public static Benutzer AddBenutzer(String username, String password) throws Exception{
-		Benutzer benutzer = null;	
+	public static DBZugriff AddBenutzer(String username, String password) throws Exception{
+		DBZugriff benutzer = null;	
 		
 		if(username.length()<3)
 			throw new Exception("Username muss mindestens 3 Zeichen haben");
@@ -70,7 +70,7 @@ public class Benutzer {
 		      stm.execute("INSERT INTO atcint_spieler(SpielerName,SpielerPasswort) VALUES('"+username+"','"+ password +"');");
 		      stm.close();
 		      
-		      benutzer = new Benutzer();
+		      benutzer = new DBZugriff();
 		      benutzer.m_SpielerName = username;
 		      benutzer.m_SpielerPasswort = password;
 		    }
@@ -87,14 +87,14 @@ public class Benutzer {
 	 * If it finds something within the database it creates a new instance of Benutzer and puts the value SpielerName
 	 * to it. If the statement doesn't find any result, an exception is thrown and its text is showed on the console.
 	 */
-	public static Benutzer Find(String username, String password){
+	public static DBZugriff Find(String username, String password){
 		   try {
 		      Class.forName("com.mysql.jdbc.Driver").newInstance();
 		      java.sql.Connection c = DriverManager.getConnection(DBSTRING);
 		      Statement stm = c.createStatement();
 		      ResultSet rs = stm.executeQuery("SELECT * FROM atcint_spieler WHERE SpielerName = '"+username+"' AND SpielerPasswort = '"+ password +"'");
 		      while (rs.next()) {
-		    	  Benutzer benutzer = new Benutzer();
+		    	  DBZugriff benutzer = new DBZugriff();
 		    	  benutzer.m_SpielerName = rs.getString("SpielerName");
 		    	  return benutzer;
 		      }

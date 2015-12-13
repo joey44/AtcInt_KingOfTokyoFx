@@ -1,4 +1,4 @@
-package atcint_login;
+package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import ch.fhnw.AtcInt.KingOfTokyo.Client.ClientController;
 import ch.fhnw.AtcInt.KingOfTokyo.Client.ClientView;
@@ -39,7 +39,7 @@ public class AtcInt_Login_Controller {
 		System.out.println("Spieler: " + Spieler.getText());
 		System.out.println("Passwort: " + Passwort.getText());
 		
-		atcint_db.Benutzer benutzer = atcint_db.Benutzer.Find(Spieler.getText(), Passwort.getText());
+		DBZugriff benutzer = DBZugriff.Find(Spieler.getText(), Passwort.getText());
 		if(benutzer!=null){
 			System.out.println("Benutzer ist in der Datenbank, Hallo " + benutzer.SpielerName());	
 		
@@ -63,7 +63,7 @@ public class AtcInt_Login_Controller {
 		}
 		
 		else {
-			atcint_fehler.AtcInt_Fehler_Passwort_View view = new atcint_fehler.AtcInt_Fehler_Passwort_View();
+			AtcInt_Fehler_Passwort_View view = new AtcInt_Fehler_Passwort_View();
 			view.start();
 			System.out.println("Benutzer ist nicht in der Datenbank oder Passwort falsch");
 		}	
@@ -71,7 +71,7 @@ public class AtcInt_Login_Controller {
 	
 	@FXML
 	private void newUser(ActionEvent event){
-		atcint_benutzer.Atcint_Benutzer_View view = new atcint_benutzer.Atcint_Benutzer_View();
+		Atcint_Benutzer_View view = new Atcint_Benutzer_View();
 		view.start();		
 	}
 	

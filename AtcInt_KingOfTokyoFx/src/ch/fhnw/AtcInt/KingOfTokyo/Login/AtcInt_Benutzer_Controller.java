@@ -1,4 +1,4 @@
-package atcint_benutzer;
+package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,9 +27,9 @@ public class AtcInt_Benutzer_Controller {
 		System.out.println("Passwort wiederholen: " + Passwort2.getText());
 		
 		try {
-			if(atcint_db.Benutzer.SpielernameAvailable(Spieler.getText())) {
+			if(DBZugriff.SpielernameAvailable(Spieler.getText())) {
 				try {
-					atcint_db.Benutzer benutzer = atcint_db.Benutzer.AddBenutzer(Spieler.getText(), Passwort1.getText());
+					DBZugriff benutzer = DBZugriff.AddBenutzer(Spieler.getText(), Passwort1.getText());
 					if(benutzer!=null) {
 						System.out.println("Spieler '"+benutzer.SpielerName()+"' wurde erstellt");
 						}

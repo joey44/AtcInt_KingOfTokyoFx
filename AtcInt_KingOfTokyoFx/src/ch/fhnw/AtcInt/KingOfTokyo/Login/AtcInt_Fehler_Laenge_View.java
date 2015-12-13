@@ -1,4 +1,4 @@
-package atcint_fehler;
+package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;

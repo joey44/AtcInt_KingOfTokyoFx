@@ -1,4 +1,4 @@
-package atcint_fehler;
+package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import javafx.stage.Stage;
 import javafx.scene.control.*;
@@ -33,7 +33,7 @@ public class AtcInt_Fehler_Passwort_Controller {
 	
 	@FXML
 	private void newUser(ActionEvent event){
-		atcint_benutzer.Atcint_Benutzer_View view = new atcint_benutzer.Atcint_Benutzer_View();
+		Atcint_Benutzer_View view = new Atcint_Benutzer_View();
 		view.start();		
 	}
 	
