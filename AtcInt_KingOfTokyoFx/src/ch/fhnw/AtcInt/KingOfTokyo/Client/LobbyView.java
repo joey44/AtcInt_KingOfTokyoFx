@@ -96,22 +96,22 @@ public class LobbyView {
 		// Monster-Buttons inkl. Fotos
 		btnCyberBunny = new Button();
 		Image monster1 = new Image(getClass().getResourceAsStream(
-				"CyberBunny.jpg"), 150, 150, true, true);
+				"/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"), 150, 150, true, true);
 		btnCyberBunny.setGraphic(new ImageView(monster1));
 
 		btnGigaZaur = new Button();
 		Image monster2 = new Image(getClass().getResourceAsStream(
-				"GigaZaur.jpg"), 150, 150, true, true);
+				"/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"), 150, 150, true, true);
 		btnGigaZaur.setGraphic(new ImageView(monster2));
 
 		btnMekaDragon = new Button();
 		Image monster3 = new Image(getClass().getResourceAsStream(
-				"MekaDragon.jpg"), 150, 150, true, true);
+				"/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"), 150, 150, true, true);
 		btnMekaDragon.setGraphic(new ImageView(monster3));
 
 		btnTheKing = new Button();
 		Image monster4 = new Image(getClass()
-				.getResourceAsStream("TheKing.jpg"), 150, 150, true, true);
+				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 150, 150, true, true);
 		btnTheKing.setGraphic(new ImageView(monster4));
 
 		VBox monster12 = new VBox(btnCyberBunny, btnGigaZaur);
@@ -136,7 +136,7 @@ public class LobbyView {
 		// Logo King of Tokyo
 
 		ImageView Logo = new ImageView(new Image(getClass()
-				.getResourceAsStream("logo.png"), 200, 200, true, true));
+				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"), 200, 200, true, true));
 
 		// HighScoreListe erstellen
 		HighScoreSpieler1 = new Label("HighScoreS1 Punkte");
