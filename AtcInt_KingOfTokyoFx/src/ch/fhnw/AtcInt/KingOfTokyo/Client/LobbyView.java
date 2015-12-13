@@ -172,7 +172,8 @@ public class LobbyView {
 		root.setRight(rechts);
 		scene = new Scene(root, 1200, 670);
 		
-	//	scene.getStylesheets().add("style/stylesheet.css");
+		scene.getStylesheets().add(
+				"/ch/fhnw/AtcInt/KingOfTokyo/Styles/stylesheet.css");
 
 	}
 
