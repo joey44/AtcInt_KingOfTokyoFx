@@ -35,3 +35,13 @@
 	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
 	-fx-text-fill: white;
 }
+
+.root {
+	-fx-background-color: #FFFFFF;
+}
+
+#links1 {
+	
+	border-color: Black;
+	border-width: 2;
+}
