@@ -266,9 +266,15 @@ public class ClientController {
 
 		if (l.isSpielStart()) {
 
+			
+			//richtiges Monster wird richtigem Spieler zugewiesen
+			
+			
 			for (int i = 0; i < 4; i++) {
 				clientSpielView.setImageSpieler(i, getL().getMonsterList(i));
 			}
+			
+			
 					
 			clientSpielView.getVbSpieler0().getChildren().addAll(clientSpielView.getLbSpieler0(), clientSpielView.getImageSpieler(0), clientSpielView.getHb5());
 			clientSpielView.getVbSpieler1().getChildren().addAll(clientSpielView.getLbSpieler1(), clientSpielView.getImageSpieler(1), clientSpielView.getHb6());
