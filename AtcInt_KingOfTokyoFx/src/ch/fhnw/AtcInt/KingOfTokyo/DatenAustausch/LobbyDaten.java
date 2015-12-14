@@ -1,6 +1,7 @@
 package ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 
 /**
@@ -15,6 +16,7 @@ public class LobbyDaten implements Serializable {
 	private int monsterID;
 	private int monsterWahlCounter;
 	private String lobbyModeration;
+	private int[] monsterList = new int[4];
 
 	public LobbyDaten() {
 
@@ -63,12 +65,23 @@ public class LobbyDaten implements Serializable {
 		this.monsterWahlCounter = monsterWahlCounter;
 	}
 
+	public int getMonsterList(int clientID) {
+		return monsterList[clientID];
+	}
+
+	public void setMonsterList(int spielerID, int monsterID) {
+		this.monsterList[spielerID] = monsterID;
+	}
+
 	@Override
 	public String toString() {
-		return "LobbyDaten [isSpielStart=" + isSpielStart + ", spielerID="
-				+ spielerID + ", monsterID=" + monsterID
-				+ ", monsterWahlCounter=" + monsterWahlCounter
-				+ ", lobbyModeration=" + lobbyModeration + "]";
+		return "LobbyDaten [isSpielStart=" + isSpielStart + ", spielerID=" + spielerID + ", monsterID=" + monsterID
+				+ ", monsterWahlCounter=" + monsterWahlCounter + ", lobbyModeration=" + lobbyModeration
+				+ ", monsterList=" + Arrays.toString(monsterList) + "]";
 	}
+	
+	
+
+	
 
 }

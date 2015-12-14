@@ -100,6 +100,20 @@ public class ClientView {
 	private Image imgWurfel3;
 	private Image imgWurfel4;
 	private Image imgWurfel5;
+	
+	private ImageView imageSpieler0;
+	private ImageView imageSpieler1;
+	private ImageView imageSpieler2;
+	private ImageView imageSpieler3;
+	
+	private ImageView[] imageSpieler = new ImageView[4];
+	
+	private HBox hb5;
+	private HBox hb6;
+	private HBox hb7;
+	private HBox hb8;
+	
+	
 
 	public Image getWurfelImage(int i) {
 		if (i == 1)
@@ -115,7 +129,8 @@ public class ClientView {
 	}
 
 	public ClientView() {
-
+		
+	
 		imgWurfel1 = new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/1.jpg");
 		imgWurfel2 = new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/2.jpg");
 		imgWurfel3 = new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/3.jpg");
@@ -253,12 +268,12 @@ public class ClientView {
 
 		vbSpieler0 = new VBox();
 		vbSpieler0.setMinWidth(150);
-		ImageView image8 = new ImageView(
+		imageSpieler0 = new ImageView(
 				new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"), 120, 120,
 						true, true));
 
-		image8.setEffect(ds);
-		HBox hb5 = new HBox();
+		imageSpieler0.setEffect(ds);
+		hb5 = new HBox();
 		hb5.setPadding(new Insets(0, 0, 5, 0));
 		hb5.setSpacing(8);
 		ImageView image9 = new ImageView(new Image(
@@ -273,17 +288,22 @@ public class ClientView {
 		hb5.getChildren().addAll(image9, lbLeben0, image10, lbPunkte0);
 		hb5.setAlignment(Pos.CENTER);
 		lbSpieler0 = new Label("SpielerName");
-		vbSpieler0.getChildren().addAll(lbSpieler0, image8, hb5);
+		
+		imageSpieler[0]= imageSpieler0;
+		
+	//	vbSpieler0.getChildren().addAll(lbSpieler0, imageSpieler[0], hb5);
+		
+
 
 		// Spieler 2
 
 		vbSpieler1 = new VBox();
 		vbSpieler1.setMinWidth(150);
-		ImageView image11 = new ImageView(
+		imageSpieler1 = new ImageView(
 				new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"), 120, 120,
 						true, true));
-		image11.setEffect(ds);
-		HBox hb6 = new HBox();
+		imageSpieler1.setEffect(ds);
+		hb6 = new HBox();
 		hb6.setPadding(new Insets(0, 0, 5, 0));
 		hb6.setSpacing(8);
 		ImageView image12 = new ImageView(new Image(
@@ -297,17 +317,22 @@ public class ClientView {
 		hb6.getChildren().addAll(image12, lbLeben1, image13, lbPunkte1);
 		hb6.setAlignment(Pos.CENTER);
 		lbSpieler1 = new Label("SpielerName");
-		vbSpieler1.getChildren().addAll(lbSpieler1, image11, hb6);
+		
+		
+		imageSpieler[1]= imageSpieler1;
+		
+		
+	//	vbSpieler1.getChildren().addAll(lbSpieler1, imageSpieler[1], hb6);
 
 		// Spieler 3
 
 		vbSpieler2 = new VBox();
 		vbSpieler2.setMinWidth(150);
-		ImageView imgMakaDragon = new ImageView(
+		imageSpieler2 = new ImageView(
 				new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"), 120, 120,
 						true, true));
-		imgMakaDragon.setEffect(ds);
-		HBox hb7 = new HBox();
+		imageSpieler2.setEffect(ds);
+		hb7 = new HBox();
 		hb7.setPadding(new Insets(0, 0, 5, 0));
 		hb7.setSpacing(8);
 		ImageView image15 = new ImageView(new Image(
@@ -321,17 +346,21 @@ public class ClientView {
 		hb7.setMinWidth(130);
 		hb7.setMaxWidth(130);
 		lbSpieler2 = new Label("SpielerName");
-		vbSpieler2.getChildren().addAll(lbSpieler2, imgMakaDragon, hb7);
+		
+	
+		imageSpieler[2]= imageSpieler2;
+		
+	//	vbSpieler2.getChildren().addAll(lbSpieler2, imageSpieler[2], hb7);
 
 		// Spieler 4
 
 		vbSpieler3 = new VBox();
 		vbSpieler3.setMinWidth(150);
-		ImageView imgTheKing = new ImageView(
+		imageSpieler3 = new ImageView(
 				new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 120, 120,
 						true, true));
-		imgTheKing.setEffect(ds);
-		HBox hb8 = new HBox();
+		imageSpieler3.setEffect(ds);
+		hb8 = new HBox();
 		hb8.setPadding(new Insets(0, 0, 5, 0));
 		hb8.setSpacing(8);
 		ImageView image18 = new ImageView(new Image(
@@ -345,7 +374,12 @@ public class ClientView {
 		hb8.setMinWidth(130);
 		hb8.setMaxWidth(130);
 		lbSpieler3 = new Label("SpielerName");
-		vbSpieler3.getChildren().addAll(lbSpieler3, imgTheKing, hb8);
+		
+		
+		imageSpieler[3]= imageSpieler3;
+
+		
+	//	vbSpieler3.getChildren().addAll(lbSpieler3, imageSpieler[3], hb8);
 
 		hbAlleSpieler.getChildren().addAll(vbSpieler0, vbSpieler1, vbSpieler2, vbSpieler3);
 		hbAlleSpieler.setPadding(new Insets(0, 0, 0, 0));
@@ -387,6 +421,9 @@ public class ClientView {
 		root.setCenter(fpWurfel);
 		root.setBottom(vbAlleSpielerLayout);
 		root.setRight(hbChatLayout);
+		
+		
+		
 
 	}
 
@@ -732,5 +769,60 @@ public class ClientView {
 	public void setTaModeration(TextArea taModeration) {
 		this.taModeration = taModeration;
 	}
+
+	public ImageView getImageSpieler(int clientID) {
+		return imageSpieler[clientID];
+	}
+
+	public void setImageSpieler(int clientID, int monsterID) {
+		
+		if (monsterID == 0){
+			this.imageSpieler[clientID] = imageSpieler0;
+		}
+		else if (monsterID == 1){
+			this.imageSpieler[clientID] = imageSpieler1;
+		}
+		else if (monsterID == 2){
+			this.imageSpieler[clientID] = imageSpieler2;
+		}
+		else{
+			this.imageSpieler[clientID] = imageSpieler3;
+		}
+		
+	}
+
+	public HBox getHb5() {
+		return hb5;
+	}
+
+	public void setHb5(HBox hb5) {
+		this.hb5 = hb5;
+	}
+
+	public HBox getHb6() {
+		return hb6;
+	}
+
+	public void setHb6(HBox hb6) {
+		this.hb6 = hb6;
+	}
+
+	public HBox getHb7() {
+		return hb7;
+	}
+
+	public void setHb7(HBox hb7) {
+		this.hb7 = hb7;
+	}
+
+	public HBox getHb8() {
+		return hb8;
+	}
+
+	public void setHb8(HBox hb8) {
+		this.hb8 = hb8;
+	}
+	
+	
 
 }

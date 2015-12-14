@@ -16,12 +16,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-
 /**
- * @author arcsuta (Lobby), joel(Verbindung), renato(Spiellogik), barbara(Spiel GUI Contoller)
+ * @author arcsuta (Lobby), joel(Verbindung), renato(Spiellogik), barbara(Spiel
+ *         GUI Contoller)
  *
  */
-
 
 public class ClientController {
 
@@ -267,6 +266,16 @@ public class ClientController {
 
 		if (l.isSpielStart()) {
 
+			for (int i = 0; i < 4; i++) {
+				clientSpielView.setImageSpieler(i, getL().getMonsterList(i));
+			}
+					
+			clientSpielView.getVbSpieler0().getChildren().addAll(clientSpielView.getLbSpieler0(), clientSpielView.getImageSpieler(0), clientSpielView.getHb5());
+			clientSpielView.getVbSpieler1().getChildren().addAll(clientSpielView.getLbSpieler1(), clientSpielView.getImageSpieler(1), clientSpielView.getHb6());
+			clientSpielView.getVbSpieler2().getChildren().addAll(clientSpielView.getLbSpieler2(), clientSpielView.getImageSpieler(2), clientSpielView.getHb7());
+			clientSpielView.getVbSpieler3().getChildren().addAll(clientSpielView.getLbSpieler3(), clientSpielView.getImageSpieler(3), clientSpielView.getHb8());
+
+			
 			clientSpielView.show(stage);
 
 		}
@@ -773,6 +782,8 @@ public class ClientController {
 			getL().setMonsterID(0);
 			getL().setSpielerID(getClientID());
 
+			getL().setMonsterList(getClientID(), 0);
+
 			getL().setLobbyModeration(name + " hat Cyber Bunny augewählt");
 
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
@@ -794,6 +805,7 @@ public class ClientController {
 			getL().setSpielerID(getClientID());
 
 			getL().setLobbyModeration(name + " hat Giga Zaur augewählt");
+			getL().setMonsterList(getClientID(), 1);
 
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
@@ -815,6 +827,8 @@ public class ClientController {
 
 			getL().setLobbyModeration(name + " hat Meka Dragon augewählt");
 
+			getL().setMonsterList(getClientID(), 2);
+
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
 		}
@@ -834,6 +848,8 @@ public class ClientController {
 			getL().setSpielerID(getClientID());
 
 			getL().setLobbyModeration(name + " hat The King augewählt");
+
+			getL().setMonsterList(getClientID(), 3);
 
 			clientServerVerbindung.sendLobbyDatenToServer(getL());
 
