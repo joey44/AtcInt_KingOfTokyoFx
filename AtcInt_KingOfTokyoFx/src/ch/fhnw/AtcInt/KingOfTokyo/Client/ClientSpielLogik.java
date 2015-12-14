@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 
+
+/**
+ * @author renato
+ *
+ */
+
+
 public class ClientSpielLogik {
-
-
 
 	// ClientController controller;
 
@@ -36,7 +41,7 @@ public class ClientSpielLogik {
 
 		Spieler s = d2.getSpielerByID(clientID);
 
-		return  s.getSpielerName();
+		return s.getSpielerName();
 	}
 
 	public static String spielModerieren(DatenAustausch d) {
@@ -60,8 +65,7 @@ public class ClientSpielLogik {
 	public static DatenAustausch wurfelWurfeln(DatenAustausch d) {
 		Spieler s = d.getSpielerAmZug();
 		int a = s.getSpielerID();
-		
-		
+
 		int IDcounter = 1;
 		if (d.getwCounter() % 3 == 0) {
 			for (int x = 0; x < 6; x++) {
@@ -69,14 +73,19 @@ public class ClientSpielLogik {
 				d.getWurfel().setIsAusgewahlt(x, false);
 			}
 		}
-
 		d.wurfeln();
 
-		d.setModeration(s.getSpielerName() + " hat " + d.getwCounter() % 3 + " Mal gewürfelt");
+		if (s.isAufTokyo() && d.getwCounter() % 3 == 1) {
+			s.setAnzahlRuhmpunkte(s.getAnzahlRuhmpunkte() + 2);
+			d.setSpielerByID(s.getSpielerID(), s);
+			d.setModeration(s.getSpielerName() + " hat eine Runde auf Tokyo überlebt  und " + d.getwCounter() % 3
+					+ " Mal gewürfelt");
+		} else {
+			d.setModeration(s.getSpielerName() + " hat " + d.getwCounter() % 3 + " Mal gewürfelt");
+
+		}
 
 		if (d.getwCounter() % 3 == 0) {
-
-			
 
 			d.getSpielerAmZug().setAmZug(false);
 
@@ -89,8 +98,6 @@ public class ClientSpielLogik {
 			d.getSpielerByID((a + IDcounter) % 4).setAmZug(true);
 
 			d.setModeration(s.getSpielerName() + " hat den Zug beendet");
-			
-			
 
 		}
 

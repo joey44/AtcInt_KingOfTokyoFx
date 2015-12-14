@@ -11,6 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * @author joel 
+ *
+ */
+
 public class ClientServerVerbindung extends Thread {
 
 	private Socket clientSocket;
@@ -28,7 +33,7 @@ public class ClientServerVerbindung extends Thread {
 	private volatile boolean stopThread = false;
 
 	private int clientID;
-	
+
 	private String server;
 	private int port;
 	private String name;
@@ -37,11 +42,10 @@ public class ClientServerVerbindung extends Thread {
 
 		this.cview = cview;
 		this.controller = controller;
-		
+
 		this.server = server;
 		this.port = port;
 		this.name = name;
-
 
 		// this.datenAustausch = DatenAustausch.getInstanz();
 
@@ -58,32 +62,26 @@ public class ClientServerVerbindung extends Thread {
 			this.ois = new ObjectInputStream(clientSocket.getInputStream());
 
 			this.clientID = 9;
-			
-			
 
 			this.start();
-			
-		
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			Stage stage = (Stage) cview.getScene().getWindow();
 
-			
-
 			System.out.println("Login failed");
-			
+
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Login failed");
 			alert.setHeaderText("Server nicht gefunden");
 			alert.setContentText("Serveradresse oder Port falsch \n App wir geschlossen");
 
 			alert.showAndWait();
-			
+
 			// close the program
 			stage.close();
-			
+
 		}
 	}
 
@@ -123,7 +121,7 @@ public class ClientServerVerbindung extends Thread {
 		}
 
 	}
-	
+
 	public void sendLobbyDatenToServer(LobbyDaten l) {
 
 		try {
@@ -135,9 +133,8 @@ public class ClientServerVerbindung extends Thread {
 		}
 
 	}
-	
-	
-	//Spieler Name auf Server setzten
+
+	// Spieler Name auf Server setzten
 	public void sendStringToServer(String s) {
 
 		try {
@@ -161,7 +158,7 @@ public class ClientServerVerbindung extends Thread {
 			this.clientID = (int) ois.readObject();
 
 			setClientID(clientID);
-			
+
 			// UI updaten
 			Platform.runLater(new Runnable() {
 				@Override
@@ -171,7 +168,8 @@ public class ClientServerVerbindung extends Thread {
 					controller.setClientID(getClientID());
 					// cview.getLbModeration().setText(
 					// "client " + getClientID() + "verbunden");
-				//	cview.setModeration("client " + getClientID() + "verbunden");
+					// cview.setModeration("client " + getClientID() +
+					// "verbunden");
 				}
 			});
 
@@ -183,7 +181,6 @@ public class ClientServerVerbindung extends Thread {
 		System.out.println("clientID: " + getClientID());
 		// clientSpielLogik.updateClientGUIVerbindung(clientID);
 
-		
 		Chat c;
 		Object x;
 		LobbyDaten l;
@@ -199,7 +196,7 @@ public class ClientServerVerbindung extends Thread {
 					// setDatenAustausch(this.datenAustausch);
 
 					int a = this.datenAustausch.getSpielerListe().size();
-					//System.out.println(a);
+					// System.out.println(a);
 
 					// UI updaten
 					Platform.runLater(new Runnable() {
@@ -207,12 +204,11 @@ public class ClientServerVerbindung extends Thread {
 						public void run() {
 							// entsprechende UI Komponente updaten
 
-							//System.out.println("runlater" + getClientID());
+							// System.out.println("runlater" + getClientID());
 							controller.updateClientGUI(getDatenAustausch(), getClientID());
 						}
 					});
-					
-					
+
 					controller.objectFromServerSetDatenaustausch(this.datenAustausch);
 
 				}
@@ -231,19 +227,19 @@ public class ClientServerVerbindung extends Thread {
 						public void run() {
 							// entsprechende UI Komponente updaten
 
-							//System.out.println("runlater Chat");
+							// System.out.println("runlater Chat");
 							controller.updateChat(getC());
 						}
 					});
 
 				}
-				
+
 				else if (x instanceof LobbyDaten) {
 
 					l = (LobbyDaten) x;
-					
+
 					setL(l);
-					
+
 					System.out.println(getL());
 
 					// UI updaten
@@ -305,7 +301,5 @@ public class ClientServerVerbindung extends Thread {
 	public void setL(LobbyDaten l) {
 		this.l = l;
 	}
-	
-	
 
 }

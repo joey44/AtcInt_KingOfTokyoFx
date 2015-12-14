@@ -2,6 +2,11 @@ package ch.fhnw.AtcInt.KingOfTokyo.Server;
 
 import java.io.IOException;
 
+/**
+ * @author joel
+ *
+ */
+
 public class ServerStarter extends Thread {
 
 	private int port;

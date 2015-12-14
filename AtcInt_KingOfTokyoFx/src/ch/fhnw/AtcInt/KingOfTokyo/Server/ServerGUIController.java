@@ -11,6 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * @author arcsuta
+ *
+ */
+
 public class ServerGUIController {
 
 	ServerStarter serverStarter;

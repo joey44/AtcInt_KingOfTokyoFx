@@ -3,10 +3,12 @@ package ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-//import AtcIntServer.ServerSpielLogik;
-//import bsp_client_server_simple_object.Server;
 
-//import ServerSpielLogik;
+/**
+ * @author renato, joel
+ *
+ */
+
 
 public class DatenAustausch implements Serializable {
 

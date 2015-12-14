@@ -2,6 +2,12 @@ package ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch;
 
 import java.io.Serializable;
 
+
+/**
+ * @author joel, renato
+ *
+ */
+
 public class Spieler implements Serializable{
 
 	private static final int DEFAULT_ANZAHL_LEBEN = 10;

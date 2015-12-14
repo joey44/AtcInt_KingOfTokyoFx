@@ -17,8 +17,6 @@ public class TestMainClient extends Application {
 
 		ClientController c = new ClientController(view, stage, "127.0.0.1", 44444, "TestPlayer");
 
-		
-
 	}
 
 }

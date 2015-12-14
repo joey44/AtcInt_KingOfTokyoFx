@@ -7,6 +7,11 @@ import java.util.Map;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 
+/**
+ * @author renato
+ *
+ */
+
 public class ServerSpielLogik {
 
 	private static final int CONSTANT_TATZE = 5;
@@ -33,19 +38,20 @@ public class ServerSpielLogik {
 
 					ruhmpunkteBerechnen(1, spieler);
 					isErsteRundeTokyo = false;
-					// return; 
+					return;
 				}
 			}
 		}
 
-		if (angrSpieler.isAufTokyo() && !isErsteRundeTokyo) {
-
-			DatenAustausch.getInstanz().setModeration(
-					DatenAustausch.getInstanz().getModeration() + "\n" + ("eine Runde auf Tokyo überlebt"));
-
-			// Wenn mind. eine Runde auf Tokyo überlebt hat
-			ruhmpunkteBerechnen(2, angrSpieler);
-		}
+		// if (angrSpieler.isAufTokyo() && !isErsteRundeTokyo) {
+		//
+		// DatenAustausch.getInstanz().setModeration(
+		// DatenAustausch.getInstanz().getModeration() + "\n" + ("eine Runde auf
+		// Tokyo überlebt"));
+		//
+		// // Wenn mind. eine Runde auf Tokyo überlebt hat
+		// ruhmpunkteBerechnen(2, angrSpieler);
+		// }
 
 		for (Spieler spieler : spielerListe) {
 			if (spieler.isSpielerAktiv()) {
@@ -105,14 +111,12 @@ public class ServerSpielLogik {
 
 					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setSpielerAktiv(false);
 
-					
-
 					DatenAustausch.getInstanz().setModeration(DatenAustausch.getInstanz().getModeration() + "\n"
 							+ (spieler.getSpielerName() + " wurde getötet"));
 
 					// checken ob Spieler gewonnen hat
 					siegerKueren(angrSpieler);
-					
+
 					if (spieler.isAufTokyo()) {
 						DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(false);
 						DatenAustausch.getInstanz().getSpielerByID(angrSpieler.getSpielerID()).setAufTokyo(true);
@@ -135,7 +139,7 @@ public class ServerSpielLogik {
 			if (spieler.equals(spielerAufTokyo)) {
 
 				DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(true);
-				isErsteRundeTokyo = true;
+				// isErsteRundeTokyo = true;
 
 			}
 		}
@@ -144,6 +148,10 @@ public class ServerSpielLogik {
 
 	private static void lebenBerechnen(int punkte, Spieler spielerAmZug) {
 		// Addiert dem Spieler Leben
+
+		if (isErsteRundeTokyo || spielerAmZug.isAufTokyo()) {
+			return;
+		}
 		ArrayList<Spieler> spielerListe = DatenAustausch.getInstanz().getSpielerListe();
 
 		// Ein Monster kann nie mehr als 10 haben
@@ -211,6 +219,12 @@ public class ServerSpielLogik {
 
 	public static void werteListeEvaluieren(Spieler spieler) {
 
+		siegerKueren(spieler);
+
+		if (DatenAustausch.getInstanz().isSpielEnde()) {
+			return;
+		}
+
 		int punkte = 0;
 		int[] lokalWerte = DatenAustausch.getInstanz().getWurfel().getWerte();
 
@@ -228,16 +242,24 @@ public class ServerSpielLogik {
 
 			punkte = 0;
 
-			if (i == CONSTANT_HERZ && !spieler.isAufTokyo()) {
+			if (i == CONSTANT_TATZE) {
+				punkte = map.get(i);
+				angreifen(punkte, spieler);
+				continue;
+			}
+
+			if (DatenAustausch.getInstanz().isSpielEnde()) {
+				return;
+			}
+
+			if (i == CONSTANT_HERZ) {
 				punkte = map.get(i);
 				lebenBerechnen(punkte, spieler);
 				continue;
 			}
 
-			if (i == CONSTANT_TATZE) {
-				punkte = map.get(i);
-				angreifen(punkte, spieler);
-				continue;
+			if (DatenAustausch.getInstanz().isSpielEnde()) {
+				return;
 			}
 
 			if (map.get(i) >= 3) {

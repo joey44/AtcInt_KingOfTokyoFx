@@ -16,6 +16,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+
+/**
+ * @author arcsuta (Lobby), joel(Verbindung), renato(Spiellogik), barbara(Spiel GUI Contoller)
+ *
+ */
+
+
 public class ClientController {
 
 	private ClientView clientSpielView;
@@ -35,8 +42,7 @@ public class ClientController {
 
 	private boolean isMonsterAusgeahlt;
 
-	public ClientController(ClientView view, Stage stage, String server,
-			int port, String name) {
+	public ClientController(ClientView view, Stage stage, String server, int port, String name) {
 
 		this.l = new LobbyDaten();
 		this.isMonsterAusgeahlt = false;
@@ -53,8 +59,7 @@ public class ClientController {
 
 		lobbyView.show(stage);
 
-		lobbyView.getLbTitel().setText(
-				"King of Tokyo - Warten bis 4 Spieler angemeldet sind");
+		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind");
 
 		lobbyView.getBtnCyberBunny().setDisable(true);
 		lobbyView.getBtnGigaZaur().setDisable(true);
@@ -62,16 +67,11 @@ public class ClientController {
 		lobbyView.getBtnTheKing().setDisable(true);
 		lobbyView.getBtnSpielstarten().setDisable(true);
 
-		lobbyView.getBtnSpielstarten().setOnAction(
-				new LobbySpielstartenButtonClicked());
-		lobbyView.getBtnCyberBunny().setOnAction(
-				new MonsterAuswahlEventHandler0());
-		lobbyView.getBtnGigaZaur().setOnAction(
-				new MonsterAuswahlEventHandler1());
-		lobbyView.getBtnMekaDragon().setOnAction(
-				new MonsterAuswahlEventHandler2());
-		lobbyView.getBtnTheKing()
-				.setOnAction(new MonsterAuswahlEventHandler3());
+		lobbyView.getBtnSpielstarten().setOnAction(new LobbySpielstartenButtonClicked());
+		lobbyView.getBtnCyberBunny().setOnAction(new MonsterAuswahlEventHandler0());
+		lobbyView.getBtnGigaZaur().setOnAction(new MonsterAuswahlEventHandler1());
+		lobbyView.getBtnMekaDragon().setOnAction(new MonsterAuswahlEventHandler2());
+		lobbyView.getBtnTheKing().setOnAction(new MonsterAuswahlEventHandler3());
 
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -82,8 +82,7 @@ public class ClientController {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Spiel wird beendet");
 				alert.setHeaderText("Spiel wird beendet");
-				alert.setContentText("Spieler " + name
-						+ " wird inaktiv gesetzt");
+				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
 
 				// Spieler inaktiv setzten
 
@@ -92,8 +91,7 @@ public class ClientController {
 			}
 		});
 
-		clientServerVerbindung = new ClientServerVerbindung(this, view, server,
-				port, name);
+		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name);
 
 		// Maus Events für Buttons
 		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -108,8 +106,7 @@ public class ClientController {
 		view.getBtnWurfeln().setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass()
-						.remove("custom-button-enter");
+				view.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
 				view.getBtnWurfeln().getStyleClass().add("custom-button");
 			}
 		});
@@ -117,66 +114,51 @@ public class ClientController {
 		view.getBtnWurfeln().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass()
-						.remove("custom-button-enter");
-				view.getBtnWurfeln().getStyleClass()
-						.add("custom-button-pressed");
+				view.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
+				view.getBtnWurfeln().getStyleClass().add("custom-button-pressed");
 			}
 		});
 
 		view.getBtnWurfeln().setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass()
-						.remove("custom-button-pressed");
+				view.getBtnWurfeln().getStyleClass().remove("custom-button-pressed");
 				view.getBtnWurfeln().getStyleClass().add("custom-button-enter");
 			}
 		});
 		// Maus Events Button Tokyo verlassen
 
-		view.getBtnTokyoVerlassen().setOnMouseEntered(
-				new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent t) {
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.remove("custom-button");
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.add("custom-button-enter");
-					}
-				});
+		view.getBtnTokyoVerlassen().setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button");
+				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
+			}
+		});
 
-		view.getBtnTokyoVerlassen().setOnMouseExited(
-				new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent t) {
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.remove("custom-button-enter");
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.add("custom-button");
-					}
-				});
+		view.getBtnTokyoVerlassen().setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
+				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button");
+			}
+		});
 
-		view.getBtnTokyoVerlassen().setOnMousePressed(
-				new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent t) {
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.remove("custom-button-enter");
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.add("custom-button-pressed");
-					}
-				});
+		view.getBtnTokyoVerlassen().setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
+				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-pressed");
+			}
+		});
 
-		view.getBtnTokyoVerlassen().setOnMouseReleased(
-				new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent t) {
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.remove("custom-button-pressed");
-						view.getBtnTokyoVerlassen().getStyleClass()
-								.add("custom-button-enter");
-					}
-				});
+		view.getBtnTokyoVerlassen().setOnMouseReleased(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent t) {
+				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-pressed");
+				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
+			}
+		});
 
 		// Maus events button chat
 		view.getBtnSenden().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -190,8 +172,7 @@ public class ClientController {
 		view.getBtnSenden().setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass()
-						.remove("custom-button-enter");
+				view.getBtnSenden().getStyleClass().remove("custom-button-enter");
 				view.getBtnSenden().getStyleClass().add("custom-button");
 			}
 		});
@@ -199,18 +180,15 @@ public class ClientController {
 		view.getBtnSenden().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass()
-						.remove("custom-button-enter");
-				view.getBtnSenden().getStyleClass()
-						.add("custom-button-pressed");
+				view.getBtnSenden().getStyleClass().remove("custom-button-enter");
+				view.getBtnSenden().getStyleClass().add("custom-button-pressed");
 			}
 		});
 
 		view.getBtnSenden().setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass()
-						.remove("custom-button-pressed");
+				view.getBtnSenden().getStyleClass().remove("custom-button-pressed");
 				view.getBtnSenden().getStyleClass().add("custom-button-enter");
 			}
 		});
@@ -238,8 +216,7 @@ public class ClientController {
 
 		view.getBtnSenden().setOnAction(new nachrichtSendenEventHandler());
 
-		view.getBtnTokyoVerlassen().setOnAction(
-				new tokyoVerlassenEventHandler());
+		view.getBtnTokyoVerlassen().setOnAction(new tokyoVerlassenEventHandler());
 		view.getBtnVerbinden().setOnAction(new verbindenEventHandler());
 
 		view.getBtnWurfeln().setDisable(true);
@@ -279,14 +256,10 @@ public class ClientController {
 		lobbyView.getBtnMekaDragon().setDisable(false);
 		lobbyView.getBtnTheKing().setDisable(false);
 
-		lobbyView.getLbSpielerName1().setText(
-				getDatenAustausch().getSpielerByID(0).getSpielerName());
-		lobbyView.getLbSpielerName2().setText(
-				getDatenAustausch().getSpielerByID(1).getSpielerName());
-		lobbyView.getLbSpielerName3().setText(
-				getDatenAustausch().getSpielerByID(2).getSpielerName());
-		lobbyView.getLbSpielerName4().setText(
-				getDatenAustausch().getSpielerByID(3).getSpielerName());
+		lobbyView.getLbSpielerName1().setText(getDatenAustausch().getSpielerByID(0).getSpielerName());
+		lobbyView.getLbSpielerName2().setText(getDatenAustausch().getSpielerByID(1).getSpielerName());
+		lobbyView.getLbSpielerName3().setText(getDatenAustausch().getSpielerByID(2).getSpielerName());
+		lobbyView.getLbSpielerName4().setText(getDatenAustausch().getSpielerByID(3).getSpielerName());
 
 	}
 
@@ -300,8 +273,7 @@ public class ClientController {
 
 		setL(l);
 
-		if (l.getMonsterWahlCounter() == 4
-				&& getDatenAustausch().isSpielStart()) {
+		if (l.getMonsterWahlCounter() == 4 && getDatenAustausch().isSpielStart()) {
 
 			lobbyView.getBtnSpielstarten().setDisable(false);
 
@@ -329,8 +301,7 @@ public class ClientController {
 			lobbyView.getBtnTheKing().setDisable(true);
 		}
 
-		lobbyView.getTaMonsterAuswahl().appendText(
-				"\n" + l.getLobbyModeration());
+		lobbyView.getTaMonsterAuswahl().appendText("\n" + l.getLobbyModeration());
 
 	}
 
@@ -347,12 +318,9 @@ public class ClientController {
 
 		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
 
-		clientSpielView.getLbSpieler0().setText(
-				ClientSpielLogik.spielerName(d, 0));
-		clientSpielView.getLbLeben0().setText(
-				ClientSpielLogik.lebenAnzeigen(d, 0));
-		clientSpielView.getLbPunkte0().setText(
-				ClientSpielLogik.ruhmpunkteAnzeigen(d, 0));
+		clientSpielView.getLbSpieler0().setText(ClientSpielLogik.spielerName(d, 0));
+		clientSpielView.getLbLeben0().setText(ClientSpielLogik.lebenAnzeigen(d, 0));
+		clientSpielView.getLbPunkte0().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 0));
 
 		clientSpielView.setSpielerStandard(0);
 		clientSpielView.setSpielerStandard(1);
@@ -368,12 +336,9 @@ public class ClientController {
 		}
 
 		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
-		clientSpielView.getLbSpieler1().setText(
-				ClientSpielLogik.spielerName(d, 1));
-		clientSpielView.getLbLeben1().setText(
-				ClientSpielLogik.lebenAnzeigen(d, 1));
-		clientSpielView.getLbPunkte1().setText(
-				ClientSpielLogik.ruhmpunkteAnzeigen(d, 1));
+		clientSpielView.getLbSpieler1().setText(ClientSpielLogik.spielerName(d, 1));
+		clientSpielView.getLbLeben1().setText(ClientSpielLogik.lebenAnzeigen(d, 1));
+		clientSpielView.getLbPunkte1().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 1));
 
 		if (!(d.getSpielerByID(1).isSpielerAktiv())) {
 			clientSpielView.setSpielerInaktiv(1);
@@ -382,12 +347,9 @@ public class ClientController {
 		}
 
 		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
-		clientSpielView.getLbSpieler2().setText(
-				ClientSpielLogik.spielerName(d, 2));
-		clientSpielView.getLbLeben2().setText(
-				ClientSpielLogik.lebenAnzeigen(d, 2));
-		clientSpielView.getLbPunkte2().setText(
-				ClientSpielLogik.ruhmpunkteAnzeigen(d, 2));
+		clientSpielView.getLbSpieler2().setText(ClientSpielLogik.spielerName(d, 2));
+		clientSpielView.getLbLeben2().setText(ClientSpielLogik.lebenAnzeigen(d, 2));
+		clientSpielView.getLbPunkte2().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 2));
 
 		if (!(d.getSpielerByID(2).isSpielerAktiv())) {
 			clientSpielView.setSpielerInaktiv(2);
@@ -396,12 +358,9 @@ public class ClientController {
 		}
 
 		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
-		clientSpielView.getLbSpieler3().setText(
-				ClientSpielLogik.spielerName(d, 3));
-		clientSpielView.getLbLeben3().setText(
-				ClientSpielLogik.lebenAnzeigen(d, 3));
-		clientSpielView.getLbPunkte3().setText(
-				ClientSpielLogik.ruhmpunkteAnzeigen(d, 3));
+		clientSpielView.getLbSpieler3().setText(ClientSpielLogik.spielerName(d, 3));
+		clientSpielView.getLbLeben3().setText(ClientSpielLogik.lebenAnzeigen(d, 3));
+		clientSpielView.getLbPunkte3().setText(ClientSpielLogik.ruhmpunkteAnzeigen(d, 3));
 
 		if (!(d.getSpielerByID(3).isSpielerAktiv())) {
 			clientSpielView.setSpielerInaktiv(3);
@@ -411,8 +370,7 @@ public class ClientController {
 
 		// view.getLbModeration().setText(ClientSpielLogik.spielModerieren(d));
 		clientSpielView.setModeration(ClientSpielLogik.spielModerieren(d));
-		clientSpielView.getLbTokyo().setText(
-				ClientSpielLogik.standortAnzeigen(d));
+		clientSpielView.getLbTokyo().setText(ClientSpielLogik.standortAnzeigen(d));
 
 		clientSpielView.getBtnWurfeln().setDisable(true);
 		clientSpielView.getBtnTokyoVerlassen().setDisable(true);
@@ -424,37 +382,25 @@ public class ClientController {
 		clientSpielView.getBtnWuerfel5().setDisable(true);
 		clientSpielView.getBtnWuerfel6().setDisable(true);
 
-		clientSpielView.getBtnWuerfel1()
-				.setSelected(d.getWurfelIsAusgewahlt(0));
-		clientSpielView.getBtnWuerfel2()
-				.setSelected(d.getWurfelIsAusgewahlt(1));
-		clientSpielView.getBtnWuerfel3()
-				.setSelected(d.getWurfelIsAusgewahlt(2));
-		clientSpielView.getBtnWuerfel4()
-				.setSelected(d.getWurfelIsAusgewahlt(3));
-		clientSpielView.getBtnWuerfel5()
-				.setSelected(d.getWurfelIsAusgewahlt(4));
-		clientSpielView.getBtnWuerfel6()
-				.setSelected(d.getWurfelIsAusgewahlt(5));
+		clientSpielView.getBtnWuerfel1().setSelected(d.getWurfelIsAusgewahlt(0));
+		clientSpielView.getBtnWuerfel2().setSelected(d.getWurfelIsAusgewahlt(1));
+		clientSpielView.getBtnWuerfel3().setSelected(d.getWurfelIsAusgewahlt(2));
+		clientSpielView.getBtnWuerfel4().setSelected(d.getWurfelIsAusgewahlt(3));
+		clientSpielView.getBtnWuerfel5().setSelected(d.getWurfelIsAusgewahlt(4));
+		clientSpielView.getBtnWuerfel6().setSelected(d.getWurfelIsAusgewahlt(5));
 
-		clientSpielView.getBtnWuerfel1().setGraphic(
-				new ImageView(clientSpielView.getWurfelImage(d.getWurfel()
-						.getWert(0))));
-		clientSpielView.getBtnWuerfel2().setGraphic(
-				new ImageView(clientSpielView.getWurfelImage(d.getWurfel()
-						.getWert(1))));
-		clientSpielView.getBtnWuerfel3().setGraphic(
-				new ImageView(clientSpielView.getWurfelImage(d.getWurfel()
-						.getWert(2))));
-		clientSpielView.getBtnWuerfel4().setGraphic(
-				new ImageView(clientSpielView.getWurfelImage(d.getWurfel()
-						.getWert(3))));
-		clientSpielView.getBtnWuerfel5().setGraphic(
-				new ImageView(clientSpielView.getWurfelImage(d.getWurfel()
-						.getWert(4))));
-		clientSpielView.getBtnWuerfel6().setGraphic(
-				new ImageView(clientSpielView.getWurfelImage(d.getWurfel()
-						.getWert(5))));
+		clientSpielView.getBtnWuerfel1()
+				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(0))));
+		clientSpielView.getBtnWuerfel2()
+				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(1))));
+		clientSpielView.getBtnWuerfel3()
+				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(2))));
+		clientSpielView.getBtnWuerfel4()
+				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(3))));
+		clientSpielView.getBtnWuerfel5()
+				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(4))));
+		clientSpielView.getBtnWuerfel6()
+				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(5))));
 
 		// view.getBtnWuerfel2().setText(d.getWurfel().getWert(1) + "");
 		// view.getBtnWuerfel3().setText(d.getWurfel().getWert(2) + "");
@@ -465,8 +411,7 @@ public class ClientController {
 		if (getClientID() == d.getSpielerAmZug().getSpielerID()) {
 			clientSpielView.getBtnWurfeln().setDisable(false);
 
-			if (d.getWurfel().getwCounter() % 3 == 1
-					|| d.getWurfel().getwCounter() % 3 == 2) {
+			if (d.getWurfel().getwCounter() % 3 == 1 || d.getWurfel().getwCounter() % 3 == 2) {
 				clientSpielView.getBtnWuerfel1().setDisable(false);
 				clientSpielView.getBtnWuerfel2().setDisable(false);
 				clientSpielView.getBtnWuerfel3().setDisable(false);
@@ -479,11 +424,9 @@ public class ClientController {
 		}
 
 		// Möglichkeiten wenn Tokyo verlassen werden kan:
-		if (d.getSpielerAufTokyo() != null
-				&& getClientID() == d.getSpielerAufTokyo().getSpielerID()
-				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen()
-				&& d.getwCounter() % 3 == 0 && d.isSpielerAufTokyoAngegrifen()
-				&& !d.isSpielerAufTokyoGestroben()) {
+		if (d.getSpielerAufTokyo() != null && getClientID() == d.getSpielerAufTokyo().getSpielerID()
+				&& !d.isTokyoVerlassen() && d.wurdeIchAngegrifen() && d.getwCounter() % 3 == 0
+				&& d.isSpielerAufTokyoAngegrifen() && !d.isSpielerAufTokyoGestroben()) {
 
 			clientSpielView.getBtnTokyoVerlassen().setDisable(false);
 
@@ -520,6 +463,8 @@ public class ClientController {
 
 			stage.close();
 
+			System.exit(0);
+
 			// Ende
 
 		}
@@ -528,8 +473,7 @@ public class ClientController {
 
 	public void updateChat(Chat c) {
 
-		clientSpielView.getTaChat().appendText(
-				c.getAbsender() + ": " + c.getChatNachricht() + "\n");
+		clientSpielView.getTaChat().appendText(c.getAbsender() + ": " + c.getChatNachricht() + "\n");
 
 	}
 
@@ -542,23 +486,17 @@ public class ClientController {
 		if (d.getwCounter() % 3 == 0) {
 
 			clientSpielView.getBtnWuerfel1().getStyleClass().add("wurfel");// setStyle("wurfel");
-			clientSpielView.getBtnWuerfel1().getStyleClass()
-					.remove("wurfelFocused");// setStyle("wurfel");
+			clientSpielView.getBtnWuerfel1().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 			clientSpielView.getBtnWuerfel2().getStyleClass().add("wurfel");// setStyle("wurfel");
-			clientSpielView.getBtnWuerfel2().getStyleClass()
-					.remove("wurfelFocused");// setStyle("wurfel");
+			clientSpielView.getBtnWuerfel2().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 			clientSpielView.getBtnWuerfel3().getStyleClass().add("wurfel");// setStyle("wurfel");
-			clientSpielView.getBtnWuerfel3().getStyleClass()
-					.remove("wurfelFocused");// setStyle("wurfel");
+			clientSpielView.getBtnWuerfel3().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 			clientSpielView.getBtnWuerfel4().getStyleClass().add("wurfel");// setStyle("wurfel");
-			clientSpielView.getBtnWuerfel4().getStyleClass()
-					.remove("wurfelFocused");// setStyle("wurfel");
+			clientSpielView.getBtnWuerfel4().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 			clientSpielView.getBtnWuerfel5().getStyleClass().add("wurfel");// setStyle("wurfel");
-			clientSpielView.getBtnWuerfel5().getStyleClass()
-					.remove("wurfelFocused");// setStyle("wurfel");
+			clientSpielView.getBtnWuerfel5().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 			clientSpielView.getBtnWuerfel6().getStyleClass().add("wurfel");// setStyle("wurfel");
-			clientSpielView.getBtnWuerfel6().getStyleClass()
-					.remove("wurfelFocused");// setStyle("wurfel");
+			clientSpielView.getBtnWuerfel6().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 
 		}
 
@@ -594,20 +532,17 @@ public class ClientController {
 
 		getDatenAustausch().tokyoVerlassenById(getClientID());
 
-		getDatenAustausch().setModeration(
-				getDatenAustausch().getSpielerByID(getClientID())
-						.getSpielerName()
-						+ " hat Tokyo verlassen und Spieler: "
-						+ getDatenAustausch().getSpielerByID(
-								getDatenAustausch().getSpielerAngriffID())
-								.getSpielerName() + " rückt nach!");
+		getDatenAustausch()
+				.setModeration(
+						getDatenAustausch().getSpielerByID(getClientID()).getSpielerName()
+								+ " hat Tokyo verlassen und Spieler: " + getDatenAustausch()
+										.getSpielerByID(getDatenAustausch().getSpielerAngriffID()).getSpielerName()
+								+ " rückt nach!");
 
 		// Spieler der Angreift rückt nach auf Tokyo
-		getDatenAustausch().getSpielerByID(
-				getDatenAustausch().getSpielerAngriffID()).setAufTokyo(true);
+		getDatenAustausch().getSpielerByID(getDatenAustausch().getSpielerAngriffID()).setAufTokyo(true);
 
-		System.out.println(getDatenAustausch().getSpielerByID(getClientID())
-				.getSpielerName() + "Tokyo verlassen");
+		System.out.println(getDatenAustausch().getSpielerByID(getClientID()).getSpielerName() + "Tokyo verlassen");
 
 		getDatenAustausch().setTokyoVerlassen(true);
 
@@ -638,13 +573,10 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 
 			if (clientSpielView.getBtnWuerfel1().isSelected()) {
-				clientSpielView.getBtnWuerfel1().getStyleClass()
-						.remove("wurfel");// setStyle("wurfel");
-				clientSpielView.getBtnWuerfel1().getStyleClass()
-						.add("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel1().getStyleClass().remove("wurfel");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel1().getStyleClass().add("wurfelFocused");// setStyle("wurfel");
 			} else {
-				clientSpielView.getBtnWuerfel1().getStyleClass()
-						.remove("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel1().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 				clientSpielView.getBtnWuerfel1().getStyleClass().add("wurfel");// setStyle("wurfel");
 			}
 
@@ -663,13 +595,10 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 
 			if (clientSpielView.getBtnWuerfel2().isSelected()) {
-				clientSpielView.getBtnWuerfel2().getStyleClass()
-						.remove("wurfel");// setStyle("wurfel");
-				clientSpielView.getBtnWuerfel2().getStyleClass()
-						.add("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel2().getStyleClass().remove("wurfel");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel2().getStyleClass().add("wurfelFocused");// setStyle("wurfel");
 			} else {
-				clientSpielView.getBtnWuerfel2().getStyleClass()
-						.remove("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel2().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 				clientSpielView.getBtnWuerfel2().getStyleClass().add("wurfel");// setStyle("wurfel");
 			}
 			System.out.println("würflenAuswahl2");
@@ -688,13 +617,10 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 
 			if (clientSpielView.getBtnWuerfel3().isSelected()) {
-				clientSpielView.getBtnWuerfel3().getStyleClass()
-						.remove("wurfel");// setStyle("wurfel");
-				clientSpielView.getBtnWuerfel3().getStyleClass()
-						.add("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel3().getStyleClass().remove("wurfel");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel3().getStyleClass().add("wurfelFocused");// setStyle("wurfel");
 			} else {
-				clientSpielView.getBtnWuerfel3().getStyleClass()
-						.remove("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel3().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 				clientSpielView.getBtnWuerfel3().getStyleClass().add("wurfel");// setStyle("wurfel");
 			}
 			System.out.println("würflenAuswahl3");
@@ -713,13 +639,10 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 
 			if (clientSpielView.getBtnWuerfel4().isSelected()) {
-				clientSpielView.getBtnWuerfel4().getStyleClass()
-						.remove("wurfel");// setStyle("wurfel");
-				clientSpielView.getBtnWuerfel4().getStyleClass()
-						.add("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel4().getStyleClass().remove("wurfel");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel4().getStyleClass().add("wurfelFocused");// setStyle("wurfel");
 			} else {
-				clientSpielView.getBtnWuerfel4().getStyleClass()
-						.remove("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel4().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 				clientSpielView.getBtnWuerfel4().getStyleClass().add("wurfel");// setStyle("wurfel");
 			}
 			System.out.println("würflenAuswahl4");
@@ -738,13 +661,10 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 
 			if (clientSpielView.getBtnWuerfel5().isSelected()) {
-				clientSpielView.getBtnWuerfel5().getStyleClass()
-						.remove("wurfel");// setStyle("wurfel");
-				clientSpielView.getBtnWuerfel5().getStyleClass()
-						.add("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel5().getStyleClass().remove("wurfel");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel5().getStyleClass().add("wurfelFocused");// setStyle("wurfel");
 			} else {
-				clientSpielView.getBtnWuerfel5().getStyleClass()
-						.remove("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel5().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 				clientSpielView.getBtnWuerfel5().getStyleClass().add("wurfel");// setStyle("wurfel");
 			}
 			System.out.println("würflenAuswahl5");
@@ -763,13 +683,10 @@ public class ClientController {
 		public void handle(ActionEvent event) {
 
 			if (clientSpielView.getBtnWuerfel6().isSelected()) {
-				clientSpielView.getBtnWuerfel6().getStyleClass()
-						.remove("wurfel");// setStyle("wurfel");
-				clientSpielView.getBtnWuerfel6().getStyleClass()
-						.add("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel6().getStyleClass().remove("wurfel");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel6().getStyleClass().add("wurfelFocused");// setStyle("wurfel");
 			} else {
-				clientSpielView.getBtnWuerfel6().getStyleClass()
-						.remove("wurfelFocused");// setStyle("wurfel");
+				clientSpielView.getBtnWuerfel6().getStyleClass().remove("wurfelFocused");// setStyle("wurfel");
 				clientSpielView.getBtnWuerfel6().getStyleClass().add("wurfel");// setStyle("wurfel");
 			}
 

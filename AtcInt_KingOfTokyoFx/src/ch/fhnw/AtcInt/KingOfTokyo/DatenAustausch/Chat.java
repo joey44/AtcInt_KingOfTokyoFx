@@ -2,6 +2,7 @@ package ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch;
 
 import java.io.Serializable;
 
+
 public class Chat implements Serializable{
 	
 	private String absender;

@@ -11,6 +11,12 @@ import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 import ch.fhnw.AtcInt.KingOfTokyo.Server.AtcIntServerClientThread;
 
+
+/**
+ * @author joel, renato
+ *
+ */
+
 public class AtcIntServer {
 
 	private int port;
@@ -20,7 +26,7 @@ public class AtcIntServer {
 	private ServerSocket serverSocket;
 	private boolean stopServer = false;
 	private DatenAustausch datenAustausch;
-	
+
 	private int spielerCounter = 0;
 
 	public AtcIntServer(int port) {
@@ -41,8 +47,7 @@ public class AtcIntServer {
 		while (clientlist.size() <= 3) { // vier Threads sind möglich
 			Socket socket = serverSocket.accept();
 			this.Threadname = "Spieler " + Threadcounter;
-			AtcIntServerClientThread clientThread = new AtcIntServerClientThread(
-					this, socket, Threadname);
+			AtcIntServerClientThread clientThread = new AtcIntServerClientThread(this, socket, Threadname);
 			clientThread.start();
 			clientlist.add(clientThread);
 
@@ -57,7 +62,6 @@ public class AtcIntServer {
 
 		}
 
-	
 	}
 
 	public void stopListening() {
@@ -93,8 +97,7 @@ public class AtcIntServer {
 		DatenAustausch.setInstanz(w); // wird auf dem Server gespeichert
 
 		if (w.getwCounter() % 3 == 0 && !w.isTokyoVerlassen()) {
-			ServerSpielLogik.werteListeEvaluieren(w.getSpielerByID(w
-					.getClientID()));
+			ServerSpielLogik.werteListeEvaluieren(w.getSpielerByID(w.getClientID()));
 		}
 	}
 
@@ -145,9 +148,9 @@ public class AtcIntServer {
 		}
 
 	}
-	
+
 	public void broadcastLobbyDaten(LobbyDaten l) {
-		
+
 		for (AtcIntServerClientThread client : clientlist) {
 
 			try {
@@ -159,10 +162,10 @@ public class AtcIntServer {
 			}
 
 		}
-		
+
 	}
 
-	//Name des Spielers wird gesetzt
+	// Name des Spielers wird gesetzt
 	public void nameClientSpieler(String s, int clientID) {
 
 		Spieler p = this.datenAustausch.getSpielerByID(clientID);
@@ -170,15 +173,16 @@ public class AtcIntServer {
 		p.setSpielerName(s);
 
 		this.datenAustausch.setSpielerByID(clientID, p);
-		
+
 		spielerCounter++;
-		
-		if (spielerCounter == 4) { // Wenn 4 Clients verbunden sind und mit Namen registriert,
+
+		if (spielerCounter == 4) { // Wenn 4 Clients verbunden sind und mit
+									// Namen registriert,
 									// kann das Spiel gestartet werden
-				
-				this.datenAustausch.setSpielStart(true);
-				spielStarten(this.datenAustausch);
-}
+
+			this.datenAustausch.setSpielStart(true);
+			spielStarten(this.datenAustausch);
+		}
 	}
 
 	public int getPort() {
@@ -228,7 +232,5 @@ public class AtcIntServer {
 	public void setStopServer(boolean stopServer) {
 		this.stopServer = stopServer;
 	}
-
-	
 
 }

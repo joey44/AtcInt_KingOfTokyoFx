@@ -2,6 +2,12 @@ package ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch;
 
 import java.io.Serializable;
 
+
+/**
+ * @author arcsuta, joel
+ *
+ */
+
 public class LobbyDaten implements Serializable {
 
 	private boolean isSpielStart;

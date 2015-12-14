@@ -14,11 +14,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * @author arcsuta
+ *
+ */
+
+
 public class LobbyView {
 
 	private Scene scene;
 	private BorderPane root;
-	
+
 	private Hyperlink liRegeln;
 	private Label lbTitel;
 
@@ -48,24 +54,23 @@ public class LobbyView {
 	public LobbyView() {
 
 		root = new BorderPane();
-		root.setPadding(new Insets (5));
-		
-		//Menü-Leiste
+		root.setPadding(new Insets(5));
+
+		// Menü-Leiste
 		// linkRegeln.set // --> HyperLink noch zu ergänzen
 		liRegeln = new Hyperlink("Regeln");
 		lbTitel = new Label("King of Tokyo");
 		HBox menu = new HBox(lbTitel, liRegeln);
 		menu.setSpacing(10);
-		menu.setPadding(new Insets (10,0,50,0));
+		menu.setPadding(new Insets(10, 0, 50, 0));
 		lbTitel.getStyleClass().add("Titel");
-		
+
 		lbSpielerName1 = new Label("Spieler 1");
 		lbSpielerName2 = new Label("Spieler 2");
 		lbSpielerName3 = new Label("Spieler 3");
 		lbSpielerName4 = new Label("Spieler 4");
 		// Positionierung innerhalb Spielerliste
-		VBox links1 = new VBox(lbSpielerName1, lbSpielerName2, lbSpielerName3,
-				lbSpielerName4);
+		VBox links1 = new VBox(lbSpielerName1, lbSpielerName2, lbSpielerName3, lbSpielerName4);
 		links1.setAlignment(Pos.CENTER);
 		links1.setPadding(new Insets(20));
 		links1.setSpacing(20);
@@ -80,48 +85,48 @@ public class LobbyView {
 
 		// Spielerliste & Startknopf zusammen in einem VBox positionieren
 		VBox SpielerListe = new VBox(links1, links2);
-	//	VBox.setMargin(links1, new Insets(80));
+		// VBox.setMargin(links1, new Insets(80));
 		SpielerListe.setAlignment(Pos.CENTER_LEFT);
 		SpielerListe.setMaxSize(20, 20);
-		SpielerListe.setPadding(new Insets (5,0,0,0));
+		SpielerListe.setPadding(new Insets(5, 0, 0, 0));
 		SpielerListe.getStyleClass().add("VBox");
-		HBox links = new HBox (SpielerListe);
-		links.setPadding(new Insets (20));
+		HBox links = new HBox(SpielerListe);
+		links.setPadding(new Insets(20));
 
 		taMonsterAuswahl = new TextArea();
-		
+
 		taMonsterAuswahl.setEditable(false);
 		taMonsterAuswahl.setWrapText(true);
 
 		// Monster-Buttons inkl. Fotos
 		btnCyberBunny = new Button();
-		Image monster1 = new Image(getClass().getResourceAsStream(
-				"/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"), 150, 150, true, true);
+		Image monster1 = new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/CyberBunny.jpg"),
+				150, 150, true, true);
 		btnCyberBunny.setGraphic(new ImageView(monster1));
 		btnCyberBunny.setPadding(Insets.EMPTY);
 
 		btnGigaZaur = new Button();
-		Image monster2 = new Image(getClass().getResourceAsStream(
-				"/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"), 150, 150, true, true);
+		Image monster2 = new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/GigaZaur.jpg"),
+				150, 150, true, true);
 		btnGigaZaur.setGraphic(new ImageView(monster2));
 		btnGigaZaur.setPadding(Insets.EMPTY);
-		
+
 		btnMekaDragon = new Button();
-		Image monster3 = new Image(getClass().getResourceAsStream(
-				"/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"), 150, 150, true, true);
+		Image monster3 = new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/MekaDragon.jpg"),
+				150, 150, true, true);
 		btnMekaDragon.setGraphic(new ImageView(monster3));
 		btnMekaDragon.setPadding(Insets.EMPTY);
-		
+
 		btnTheKing = new Button();
-		Image monster4 = new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"), 150, 150, true, true);
+		Image monster4 = new Image(getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/TheKing.jpg"),
+				150, 150, true, true);
 		btnTheKing.setGraphic(new ImageView(monster4));
 		btnTheKing.setPadding(Insets.EMPTY);
 
 		VBox monster12 = new VBox(btnCyberBunny, btnGigaZaur);
 		monster12.setPadding(new Insets(5));
 		monster12.setSpacing(10);
-		
+
 		VBox monster34 = new VBox(btnMekaDragon, btnTheKing);
 		monster34.setPadding(new Insets(5));
 		monster34.setSpacing(10);
@@ -133,14 +138,14 @@ public class LobbyView {
 		monster.setAlignment(Pos.CENTER);
 		monster.setMaxSize(200, 100);
 		monster.getStyleClass().add("VBox");
-		HBox mitte = new HBox (monster);
-		mitte.setPadding(new Insets (50));
+		HBox mitte = new HBox(monster);
+		mitte.setPadding(new Insets(50));
 		mitte.setAlignment(Pos.TOP_CENTER);
 
 		// Logo King of Tokyo
 
-		ImageView Logo = new ImageView(new Image(getClass()
-				.getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"), 200, 200, true, true));
+		ImageView Logo = new ImageView(new Image(
+				getClass().getResourceAsStream("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"), 200, 200, true, true));
 
 		// HighScoreListe erstellen
 		HighScoreSpieler1 = new Label("HighScoreS1 Punkte");
@@ -154,30 +159,27 @@ public class LobbyView {
 		HighScoreSpieler9 = new Label("HighScoreS9 Punkte");
 		HighScoreSpieler10 = new Label("HighScoreS10 Punkte");
 
-
-		VBox HighScoreListe = new VBox(HighScoreSpieler1, HighScoreSpieler2, HighScoreSpieler3,
-				HighScoreSpieler4, HighScoreSpieler5, HighScoreSpieler6, HighScoreSpieler7,
-				HighScoreSpieler8, HighScoreSpieler9, HighScoreSpieler10);
-		VBox.setMargin(HighScoreListe, new Insets (50));
+		VBox HighScoreListe = new VBox(HighScoreSpieler1, HighScoreSpieler2, HighScoreSpieler3, HighScoreSpieler4,
+				HighScoreSpieler5, HighScoreSpieler6, HighScoreSpieler7, HighScoreSpieler8, HighScoreSpieler9,
+				HighScoreSpieler10);
+		VBox.setMargin(HighScoreListe, new Insets(50));
 		HighScoreListe.setPadding(new Insets(50));
 		HighScoreListe.setAlignment(Pos.CENTER);
 		HighScoreListe.setSpacing(5);
 		HighScoreListe.getStyleClass().add("VBox");
-		
+
 		HBox Bild = new HBox(Logo);
 		Bild.setAlignment(Pos.CENTER);
 		VBox rechts = new VBox(HighScoreListe, Bild);
-		rechts.setPadding(new Insets (10));
-		
+		rechts.setPadding(new Insets(10));
 
 		root.setTop(menu);
 		root.setLeft(links);
 		root.setCenter(mitte);
 		root.setRight(rechts);
 		scene = new Scene(root, 1200, 670);
-		
-		scene.getStylesheets().add(
-				"/ch/fhnw/AtcInt/KingOfTokyo/Styles/stylesheet.css");
+
+		scene.getStylesheets().add("/ch/fhnw/AtcInt/KingOfTokyo/Styles/stylesheet.css");
 
 	}
 
@@ -236,8 +238,6 @@ public class LobbyView {
 		this.btnSpielstarten = btnSpielstarten;
 	}
 
-	
-
 	public TextArea getTaMonsterAuswahl() {
 		return taMonsterAuswahl;
 	}
@@ -278,5 +278,4 @@ public class LobbyView {
 		this.btnTheKing = btnTheKing;
 	}
 
-	
 }

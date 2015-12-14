@@ -7,7 +7,12 @@ import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
 
-//import AtcIntDatenaustausch.Wurfel;
+
+/**
+ * @author joel
+ *
+ */
+
 
 public class AtcIntServerClientThread extends Thread {
 
@@ -18,8 +23,7 @@ public class AtcIntServerClientThread extends Thread {
 	private AtcIntServer server;
 	private int clientID;
 
-	public AtcIntServerClientThread(AtcIntServer server, Socket socket,
-			String Threadname) throws Exception {
+	public AtcIntServerClientThread(AtcIntServer server, Socket socket, String Threadname) throws Exception {
 		this.socket = socket;
 		this.Threadname = Threadname;
 		this.server = server;
@@ -85,7 +89,7 @@ public class AtcIntServerClientThread extends Thread {
 					l = (LobbyDaten) x;
 
 					server.broadcastLobbyDaten(l);
-					//System.out.println(l);
+					// System.out.println(l);
 
 				}
 
@@ -192,9 +196,8 @@ public class AtcIntServerClientThread extends Thread {
 	}
 
 	public String toString() {
-		return "AtcIntServerClientThread [socket=" + socket + ", Threadname="
-				+ Threadname + ", out=" + out + ", in=" + in + ", server="
-				+ server + "]";
+		return "AtcIntServerClientThread [socket=" + socket + ", Threadname=" + Threadname + ", out=" + out + ", in="
+				+ in + ", server=" + server + "]";
 	}
 
 }
