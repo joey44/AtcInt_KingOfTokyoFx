@@ -41,7 +41,7 @@ import javafx.stage.WindowEvent;
 
 
 /**
- * @author barbara
+ * @author barbara, renato (Styling), joel (wurfel und spielbild geter und seter)
  *
  */
 
@@ -115,18 +115,7 @@ public class ClientView {
 	
 	
 
-	public Image getWurfelImage(int i) {
-		if (i == 1)
-			return imgWurfel1;
-		else if (i == 2)
-			return imgWurfel2;
-		else if (i == 3)
-			return imgWurfel3;
-		else if (i == 4)
-			return imgWurfel4;
-		else
-			return imgWurfel5;
-	}
+	
 
 	public ClientView() {
 		
@@ -789,6 +778,19 @@ public class ClientView {
 			this.imageSpieler[clientID] = imageSpieler3;
 		}
 		
+	}
+	
+	public Image getWurfelImage(int i) {
+		if (i == 1)
+			return imgWurfel1;
+		else if (i == 2)
+			return imgWurfel2;
+		else if (i == 3)
+			return imgWurfel3;
+		else if (i == 4)
+			return imgWurfel4;
+		else
+			return imgWurfel5;
 	}
 
 	public HBox getHb5() {

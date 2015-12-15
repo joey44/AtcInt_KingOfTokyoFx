@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- * @author arcsuta (Lobby), joel(Verbindung), renato(Spiellogik), barbara(Spiel
- *         GUI Contoller)
+ * @author arcsuta (Lobby), joel(Chat, Verbindung, wurfel, GUI Steuerung),
+ *         renato(Spiellogik), barbara(Spiel GUI Contoller)
  *
  */
 
@@ -266,22 +266,21 @@ public class ClientController {
 
 		if (l.isSpielStart()) {
 
-			
-			//richtiges Monster wird richtigem Spieler zugewiesen
-			
-			
+			// richtiges Monster wird richtigem Spieler zugewiesen
+
 			for (int i = 0; i < 4; i++) {
 				clientSpielView.setImageSpieler(i, getL().getMonsterList(i));
 			}
-			
-			
-					
-			clientSpielView.getVbSpieler0().getChildren().addAll(clientSpielView.getLbSpieler0(), clientSpielView.getImageSpieler(0), clientSpielView.getHb5());
-			clientSpielView.getVbSpieler1().getChildren().addAll(clientSpielView.getLbSpieler1(), clientSpielView.getImageSpieler(1), clientSpielView.getHb6());
-			clientSpielView.getVbSpieler2().getChildren().addAll(clientSpielView.getLbSpieler2(), clientSpielView.getImageSpieler(2), clientSpielView.getHb7());
-			clientSpielView.getVbSpieler3().getChildren().addAll(clientSpielView.getLbSpieler3(), clientSpielView.getImageSpieler(3), clientSpielView.getHb8());
 
-			
+			clientSpielView.getVbSpieler0().getChildren().addAll(clientSpielView.getLbSpieler0(),
+					clientSpielView.getImageSpieler(0), clientSpielView.getHb5());
+			clientSpielView.getVbSpieler1().getChildren().addAll(clientSpielView.getLbSpieler1(),
+					clientSpielView.getImageSpieler(1), clientSpielView.getHb6());
+			clientSpielView.getVbSpieler2().getChildren().addAll(clientSpielView.getLbSpieler2(),
+					clientSpielView.getImageSpieler(2), clientSpielView.getHb7());
+			clientSpielView.getVbSpieler3().getChildren().addAll(clientSpielView.getLbSpieler3(),
+					clientSpielView.getImageSpieler(3), clientSpielView.getHb8());
+
 			clientSpielView.show(stage);
 
 		}
@@ -316,7 +315,7 @@ public class ClientController {
 			lobbyView.getBtnTheKing().setDisable(true);
 		}
 
-		lobbyView.getLbMonsterAuswahl().setText("\n" + l.getLobbyModeration());
+		lobbyView.getLbMonsterAuswahl().setText(l.getLobbyModeration());
 
 	}
 
@@ -470,7 +469,7 @@ public class ClientController {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Spiel fertig");
 			alert.setHeaderText(null);
-			alert.setContentText("King of Tokyo wird beendet");
+			alert.setContentText("King of Tokyo wird beendet \n" + getDatenAustausch().getModeration());
 
 			alert.showAndWait();
 
@@ -743,7 +742,7 @@ public class ClientController {
 
 	public void nachrichtSenden() {
 
-		if (clientSpielView.getTf2Chat().getText() != "") {
+		if (!clientSpielView.getTf2Chat().getText().isEmpty()) {
 
 			Chat c = new Chat("", "");
 
