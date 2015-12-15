@@ -316,7 +316,7 @@ public class ClientController {
 			lobbyView.getBtnTheKing().setDisable(true);
 		}
 
-		lobbyView.getTaMonsterAuswahl().appendText("\n" + l.getLobbyModeration());
+		lobbyView.getLbMonsterAuswahl().setText("\n" + l.getLobbyModeration());
 
 	}
 
