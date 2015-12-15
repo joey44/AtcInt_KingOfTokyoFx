@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -8,7 +9,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.fhnw.AtcInt.KingOfTokyo.Login.AtcInt_Login_Controller">
 	<children>
-		<AnchorPane layoutX="-44.0" layoutY="-47.0" prefHeight="300.0" prefWidth="550.0">
+		<AnchorPane layoutX="-44.0" layoutY="-47.0" prefHeight="300.0" prefWidth="550.0" style="-fx-background-color: WHITE;">
 			<children>
 				<ButtonBar layoutX="340.0" layoutY="256.0" prefHeight="30.0" prefWidth="185.0">
 					<buttons>
@@ -16,21 +17,51 @@
 						<Button fx:id="goOn" defaultButton="true" focusTraversable="false" mnemonicParsing="false" onAction="#goOn" text="Weiter" />
 					</buttons>
 				</ButtonBar>
-				<Label layoutX="73.0" layoutY="82.0" prefHeight="17.0" prefWidth="40.0" text="Server" />
-				<Label layoutX="320.0" layoutY="82.0" prefHeight="17.0" prefWidth="40.0" text="Port" />
-				<Label layoutX="73.0" layoutY="154.0" prefHeight="17.0" prefWidth="60.0" text="Spieler" />
-				<Label layoutX="73.0" layoutY="194.0" prefHeight="17.0" prefWidth="60.0" text="Passwort" />
-				<TextField fx:id="Spieler" layoutX="138.0" layoutY="150.0" prefHeight="25.0" prefWidth="185.0" />
-				<PasswordField fx:id="Passwort" layoutX="138.0" layoutY="190.0" prefHeight="25.0" prefWidth="185.0" />
-				<TextField fx:id="Server" focusTraversable="false" layoutX="138.0" layoutY="78.0" prefHeight="25.0" prefWidth="160.0" text="127.0.0.1" />
-				<TextField fx:id="Port" focusTraversable="false" layoutX="363.0" layoutY="78.0" prefHeight="25.0" prefWidth="160.0" text="44444" />
+				<Label layoutX="73.0" layoutY="82.0" prefHeight="17.0" prefWidth="40.0" text="Server">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></Label>
+				<Label layoutX="320.0" layoutY="82.0" prefHeight="17.0" prefWidth="40.0" text="Port">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></Label>
+				<Label layoutX="73.0" layoutY="154.0" prefHeight="17.0" prefWidth="60.0" text="Spieler">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></Label>
+				<Label layoutX="73.0" layoutY="194.0" prefHeight="17.0" prefWidth="60.0" text="Passwort">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></Label>
+				<TextField fx:id="Spieler" layoutX="138.0" layoutY="150.0" prefHeight="25.0" prefWidth="185.0">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></TextField>
+				<PasswordField fx:id="Passwort" layoutX="138.0" layoutY="190.0" prefHeight="25.0" prefWidth="185.0">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></PasswordField>
+				<TextField fx:id="Server" focusTraversable="false" layoutX="138.0" layoutY="78.0" prefHeight="25.0" prefWidth="160.0" text="127.0.0.1">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></TextField>
+				<TextField fx:id="Port" focusTraversable="false" layoutX="363.0" layoutY="78.0" prefHeight="25.0" prefWidth="160.0" text="44444">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></TextField>
 				<ImageView fitHeight="140.0" fitWidth="200.0" layoutX="343.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../Images/logo.png" />
 					</image>
 				</ImageView>
-				<Hyperlink fx:id="forgetPassword" focusTraversable="false" layoutX="138.0" layoutY="215.0" onAction="#forgetPasswort" prefHeight="23.0" prefWidth="121.0" text="Passwort vergessen?" />
-				<Hyperlink fx:id="newUser" focusTraversable="false" layoutX="138.0" layoutY="239.0" onAction="#newUser" text="neuen Spieler erstellen" />
+				<Hyperlink fx:id="forgetPassword" focusTraversable="false" layoutX="138.0" layoutY="215.0" onAction="#forgetPasswort" prefHeight="25.0" prefWidth="143.0" text="Passwort vergessen?">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></Hyperlink>
+				<Hyperlink fx:id="newUser" focusTraversable="false" layoutX="138.0" layoutY="239.0" onAction="#newUser" text="neuen Spieler erstellen">
+               <font>
+                  <Font name="Impact" size="14.0" />
+               </font></Hyperlink>
 			</children>
 		</AnchorPane>
 	</children>
