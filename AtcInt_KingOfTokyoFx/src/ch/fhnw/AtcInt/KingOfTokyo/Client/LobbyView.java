@@ -185,6 +185,7 @@ public class LobbyView {
 
 	public void show(Stage stage) {
 		stage.setTitle("King of Tokyo");
+		stage.getIcons().add(new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
 		stage.setScene(scene);
 		stage.show();
 
