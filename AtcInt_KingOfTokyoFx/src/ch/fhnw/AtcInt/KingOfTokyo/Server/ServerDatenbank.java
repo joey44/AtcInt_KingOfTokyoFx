@@ -24,17 +24,16 @@ public class ServerDatenbank {
 			+ DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password="
 			+ DB_PASSWORD;
 
-	private static int i_spielID = 9;
 	private static int i_runde = 15;
-	private static String s_spielername = "Marc";
-	private static int i_wuerfel1 = 5;
+	private static String s_spielername = "Phillip";
+	private static int i_wuerfel1 = 4;
 	private static int i_wuerfel2 = 2;
 	private static int i_wuerfel3 = 1;
-	private static int i_wuerfel4 = 2;
-	private static int i_wuerfel5 = 3;
+	private static int i_wuerfel4 = 1;
+	private static int i_wuerfel5 = 1;
 	private static int i_wuerfel6 = 2;
-	private static int i_anzahlLeben = 8;
-	private static int i_anzahlRuhmpunkte = 15;
+	private static int i_anzahlLeben = 10;
+	private static int i_anzahlRuhmpunkte = 20;
 	private static boolean b_standort;
 
 	public static void SpielStartZeit() throws Exception {
@@ -43,7 +42,7 @@ public class ServerDatenbank {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
 			Statement stm = c.createStatement();
-			stm.execute("INSERT INTO atcint_spiel(Spielbeginn) VALUES(CURRENT_TIMESTAMP());");
+			stm.execute("INSERT INTO atcint.atcint_spiel(Spielbeginn) VALUES(CURRENT_TIMESTAMP());");
 			stm.close();
 		}
 
@@ -53,19 +52,32 @@ public class ServerDatenbank {
 
 	}
 
-	public static void SpielIDfinden() throws Exception {
+	public static int SpielIDfinden() throws Exception {
+
+		int SpielIDfinden = 0;
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
 			Statement stm = c.createStatement();
-			stm.execute("SELECT	SpielID FROM atcint.atcint_spiel WHERE Spielende = '0000-00-00 00:00:00';");
+
+			ResultSet result = stm
+					.executeQuery("SELECT SpielID FROM atcint.atcint_spiel WHERE Spielende = Spielbeginn;");
+
+			while (result.next()) {
+				int SpielID = result.getInt("SpielID");
+
+				//System.out.println(SpielID);
+
+				SpielIDfinden = SpielID;
+			}
 			stm.close();
 		}
 
 		catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 		}
+		return SpielIDfinden;
 
 	}
 
@@ -75,7 +87,8 @@ public class ServerDatenbank {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
 			Statement stm = c.createStatement();
-			stm.execute("UPDATE atcint.atcint_spiel SET Spielende = current_timestamp()WHERE  spielID  = 2;");
+			stm.execute("UPDATE atcint.atcint_spiel SET Spielende = NOW()WHERE spielID = '"
+					+ SpielIDfinden() + "' ");
 			stm.close();
 		}
 
@@ -85,42 +98,29 @@ public class ServerDatenbank {
 
 	}
 
-	public static void TabelleRunde() throws Exception {
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
-			Statement stm = c.createStatement();
-
-			stm.execute("INSERT INTO atcint.atcint_runde(RundeID, FK_SpielID, FK_SpielerName, FK_WuerfelID_1, FK_WuerfelID_2, FK_WuerfelID_3, FK_WuerfelID_4, FK_WuerfelID_5, FK_WuerfelID_6) "
-					+ "VALUES( '"
-					+ getI_runde()
-					+ "' , '"
-					+ getI_spielID()
-					+ "' , '"
-					+ getS_spielername()
-					+ "', '"
-					+ getI_wuerfel1()
-					+ "' , '"
-					+ getI_wuerfel2()
-					+ "' , '"
-					+ getI_wuerfel3()
-					+ "' , '"
-					+ getI_wuerfel4()
-					+ "' , '"
-					+ getI_wuerfel5()
-					+ "' , '" + getI_wuerfel6() + "' );");
-
-			stm.close();
-
-		}
-
-		catch (Exception e) {
-			System.out.println("Exception: " + e.getMessage());
-		}
-
-	}
-
+	/*
+	 * public static void TabelleRunde() throws Exception {
+	 * 
+	 * try { Class.forName("com.mysql.jdbc.Driver").newInstance();
+	 * java.sql.Connection c = DriverManager.getConnection(DBSTRING); Statement
+	 * stm = c.createStatement();
+	 * 
+	 * stm.execute(
+	 * "INSERT INTO atcint.atcint_runde(RundeID, FK_SpielID, FK_SpielerName, FK_WuerfelID_1, FK_WuerfelID_2, FK_WuerfelID_3, FK_WuerfelID_4, FK_WuerfelID_5, FK_WuerfelID_6) "
+	 * + "VALUES( '" + getI_runde() + "' , '" + getI_spielID() + "' , '" +
+	 * getS_spielername() + "', '" + getI_wuerfel1() + "' , '" + getI_wuerfel2()
+	 * + "' , '" + getI_wuerfel3() + "' , '" + getI_wuerfel4() + "' , '" +
+	 * getI_wuerfel5() + "' , '" + getI_wuerfel6() + "' );");
+	 * 
+	 * stm.close();
+	 * 
+	 * }
+	 * 
+	 * catch (Exception e) { System.out.println("Exception: " + e.getMessage());
+	 * }
+	 * 
+	 * }
+	 */
 	public static void TabelleErgebnis() throws Exception {
 
 		try {
@@ -130,7 +130,7 @@ public class ServerDatenbank {
 
 			stm.execute("INSERT INTO atcint.atcint_ergebnis(FK_SpielID, FK_Runde, FK_SpielerName, Leben, Ruhmpunkte, Standort) "
 					+ "VALUES( '"
-					+ getI_spielID()
+					+ SpielIDfinden()
 					+ "' , '"
 					+ getI_runde()
 					+ "' , '"
@@ -183,7 +183,7 @@ public class ServerDatenbank {
 
 	public static void main(String[] args) {
 		try {
-			ListeHighScore();
+			SpielEndZeit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -196,14 +196,6 @@ public class ServerDatenbank {
 
 	public void setI_runde(int i_runde) {
 		ServerDatenbank.i_runde = i_runde;
-	}
-
-	public static int getI_spielID() {
-		return i_spielID;
-	}
-
-	public void setI_spielID(int i_spielID) {
-		ServerDatenbank.i_spielID = i_spielID;
 	}
 
 	public static String getS_spielername() {
