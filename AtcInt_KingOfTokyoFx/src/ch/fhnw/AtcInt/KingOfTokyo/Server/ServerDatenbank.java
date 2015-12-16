@@ -25,15 +25,15 @@ public class ServerDatenbank {
 			+ DB_PASSWORD;
 
 	private static int i_runde = 15;
-	private static String s_spielername = "Phillip";
-	private static int i_wuerfel1 = 4;
-	private static int i_wuerfel2 = 2;
-	private static int i_wuerfel3 = 1;
-	private static int i_wuerfel4 = 1;
-	private static int i_wuerfel5 = 1;
-	private static int i_wuerfel6 = 2;
-	private static int i_anzahlLeben = 10;
-	private static int i_anzahlRuhmpunkte = 20;
+	private static String s_spielername = "Linda";
+	private static int i_wuerfel1 = 5;
+	private static int i_wuerfel2 = 5;
+	private static int i_wuerfel3 = 5;
+	private static int i_wuerfel4 = 5;
+	private static int i_wuerfel5 = 5;
+	private static int i_wuerfel6 = 5;
+	private static int i_anzahlLeben = 0;
+	private static int i_anzahlRuhmpunkte = 0;
 	private static boolean b_standort;
 
 	public static void SpielStartZeit() throws Exception {
@@ -124,6 +124,7 @@ public class ServerDatenbank {
 	public static void TabelleErgebnis() throws Exception {
 
 		try {
+			for(int i=0; i<4; i++){
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
 			Statement stm = c.createStatement();
@@ -143,7 +144,7 @@ public class ServerDatenbank {
 
 			stm.close();
 
-		}
+		}}
 
 		catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
@@ -183,7 +184,7 @@ public class ServerDatenbank {
 
 	public static void main(String[] args) {
 		try {
-			SpielEndZeit();
+			TabelleErgebnis();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
