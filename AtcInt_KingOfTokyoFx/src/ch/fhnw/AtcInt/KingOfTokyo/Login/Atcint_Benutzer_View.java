@@ -1,9 +1,11 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import java.io.IOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -21,6 +23,7 @@ public class Atcint_Benutzer_View {
 			Stage stage = new Stage();
 			stage.setTitle("AtcInt Benutzer erstellen");
 			stage.setScene(new Scene(root));
+			stage.getIcons().add(new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
 			stage.show();
 			
 		} catch (IOException e) {

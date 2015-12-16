@@ -3,6 +3,7 @@ package ch.fhnw.AtcInt.KingOfTokyo.Login;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -19,6 +20,8 @@ public class AtcInt_Fehler_Passwort_View {
 			Stage stage = new Stage();
 			stage.setTitle("AtcInt Fehler");
 			stage.setScene(new Scene(root));
+			stage.getIcons().add(new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
+
 			stage.show();
 			
 		}

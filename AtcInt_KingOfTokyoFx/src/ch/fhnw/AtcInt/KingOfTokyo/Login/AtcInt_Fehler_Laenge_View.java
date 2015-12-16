@@ -1,9 +1,11 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Login;
 
 import java.io.IOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +22,7 @@ public class AtcInt_Fehler_Laenge_View {
 			Stage stage = new Stage();
 			stage.setTitle("AtcInt Fehler Länge");
 			stage.setScene(new Scene(root));
+			stage.getIcons().add(new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
 			stage.show();
 			
 		} catch (IOException e) {

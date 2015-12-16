@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 /**
  * @code Main method in which the program runs
@@ -23,6 +24,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader.load(getClass().getResource("AtcInt_Login_Model.fxml"));
 			primaryStage.setTitle("AtcInt Login");
 			primaryStage.setScene(new Scene(root));
+			primaryStage.getIcons().add(new Image("/ch/fhnw/AtcInt/KingOfTokyo/Images/logo.png"));
 			primaryStage.show();
 			
 		} catch(Exception e) {
