@@ -121,7 +121,7 @@ public class ServerSpielLogik {
 						DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(false);
 						DatenAustausch.getInstanz().getSpielerByID(angrSpieler.getSpielerID()).setAufTokyo(true);
 						DatenAustausch.getInstanz().setSpielerAufTokyoGestroben(true);
-						isErsteRundeTokyo = true;
+						//isErsteRundeTokyo = true;
 						break;
 
 					}
