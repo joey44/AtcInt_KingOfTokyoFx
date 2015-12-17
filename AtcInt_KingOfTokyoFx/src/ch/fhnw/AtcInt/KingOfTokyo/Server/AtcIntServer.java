@@ -128,6 +128,11 @@ public class AtcIntServer {
 			}
 
 		}
+		
+		//Server beenden beim SpielEnde
+		if (w.isSpielEnde()) {
+			System.exit(0);
+		}
 
 	}
 

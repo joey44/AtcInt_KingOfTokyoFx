@@ -17,8 +17,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- * @author arcsuta (Lobby), joel(Chat, Verbindung, wurfel, GUI Steuerung),
- *         renato(Spiellogik), barbara(Spiel GUI Contoller)
+ * @author arcsuta (Lobby), joel(Chat, Verbindung, wurfel, GUI Steuerung,
+ *         Spieler Bilder zuweisen), renato(Spiellogik, GUI Styling),
+ *         barbara(Spiel GUI Actions)
  *
  */
 
@@ -76,16 +77,23 @@ public class ClientController {
 
 			@Override
 			public void handle(WindowEvent event) {
-				clientServerVerbindung.disconnect();
 
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Spiel wird beendet");
-				alert.setHeaderText("Spiel wird beendet");
-				alert.setContentText("Spieler " + name + " wird inaktiv gesetzt");
+				// Alert alert = new Alert(AlertType.ERROR);
+				// alert.setTitle("Spiel wird beendet");
+				// alert.setHeaderText("Spiel wird beendet");
+				// alert.setContentText("Tschüss " + name + " "
+				// + "\n Spiel wird beendet");
 
-				// Spieler inaktiv setzten
+				getDatenAustausch().setSpielEnde(true);
+				getDatenAustausch()
+						.setModeration("Spieler " + name + " hat das Spiel verlassen" + "\n Spiel wird beendet");
 
-				alert.showAndWait();
+				// Spiel wird beendet, funktioniert nur mit 4 Spieler
+				clientServerVerbindung.sendDatenAustauschToServer(getDatenAustausch());
+
+				// clientServerVerbindung.disconnect();
+
+				// alert.showAndWait();
 
 			}
 		});
@@ -289,6 +297,8 @@ public class ClientController {
 
 		if (l.getMonsterWahlCounter() == 4 && getDatenAustausch().isSpielStart()) {
 
+			lobbyView.getLbTitel().setText("King of Tokyo - Spiel starten");
+
 			lobbyView.getBtnSpielstarten().setDisable(false);
 
 		}
@@ -473,7 +483,7 @@ public class ClientController {
 
 			alert.showAndWait();
 
-			Stage stage = (Stage) clientSpielView.getScene().getWindow();
+			// Stage stage = (Stage) clientSpielView.getScene().getWindow();
 
 			stage.close();
 
