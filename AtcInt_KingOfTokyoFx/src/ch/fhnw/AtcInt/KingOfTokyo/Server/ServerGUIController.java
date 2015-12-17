@@ -52,9 +52,9 @@ public class ServerGUIController {
 
 	@FXML
 	void ServerStarten(ActionEvent event) {
-		System.out.println("Server wird gestartet...");
-
+		
 		serverStarter = new ServerStarter(Integer.parseInt(PortNr.getText()));
+		System.out.println("Server aktiv");
 
 		Status.setText("Server activ on Port: " + PortNr.getText());
 		Start.setDisable(true);
