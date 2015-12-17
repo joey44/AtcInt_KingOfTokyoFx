@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
+
 /**
  * @code responsible for the communication between the login and the database
  * @author Arcsuta
@@ -15,7 +17,7 @@ public class ServerDatenbank {
 	private static final String DB_NAME = "atcint";
 
 	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "1234";
+	private static final String DB_PASSWORD = "";
 
 	private static final String DB_SERVER = "127.0.0.1";
 	private static final String DB_PORT = "3306";
@@ -25,7 +27,7 @@ public class ServerDatenbank {
 			+ DB_PASSWORD;
 
 	private static int i_runde = 15;
-	private static String s_spielername = "Linda";
+	private static String s_spielername = "Joel";
 	private static int i_wuerfel1 = 5;
 	private static int i_wuerfel2 = 5;
 	private static int i_wuerfel3 = 5;
@@ -33,7 +35,7 @@ public class ServerDatenbank {
 	private static int i_wuerfel5 = 5;
 	private static int i_wuerfel6 = 5;
 	private static int i_anzahlLeben = 0;
-	private static int i_anzahlRuhmpunkte = 0;
+	private static int i_anzahlRuhmpunkte = 10;
 	private static boolean b_standort;
 
 	public static void SpielStartZeit() throws Exception {
@@ -67,7 +69,7 @@ public class ServerDatenbank {
 			while (result.next()) {
 				int SpielID = result.getInt("SpielID");
 
-				//System.out.println(SpielID);
+				// System.out.println(SpielID);
 
 				SpielIDfinden = SpielID;
 			}
@@ -121,56 +123,29 @@ public class ServerDatenbank {
 	 * 
 	 * }
 	 */
-	public static void TabelleErgebnis() throws Exception {
+	public static void TabelleErgebnis(DatenAustausch d) throws Exception {
 
+		int spielID = SpielIDfinden();
 		try {
-			for(int i=0; i<4; i++){
+
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
 			Statement stm = c.createStatement();
-
-			stm.execute("INSERT INTO atcint.atcint_ergebnis(FK_SpielID, FK_Runde, FK_SpielerName, Leben, Ruhmpunkte, Standort) "
-					+ "VALUES( '"
-					+ SpielIDfinden()
-					+ "' , '"
-					+ getI_runde()
-					+ "' , '"
-					+ getS_spielername()
-					+ "' , '"
-					+ getI_anzahlLeben()
-					+ "' , '"
-					+ getI_anzahlRuhmpunkte()
-					+ "' , '" + isB_standort() + "' );");
-
-			stm.close();
-
-		}}
-
-		catch (Exception e) {
-			System.out.println("Exception: " + e.getMessage());
-		}
-
-	}
-
-	public static void ListeHighScore() throws Exception {
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
-			Statement stm = c.createStatement();
-
-			ResultSet result = stm
-					.executeQuery("SELECT e.FK_SpielerName, SUM(e.Ruhmpunkte) AS Punktestand FROM atcint.atcint_ergebnis e "
-							+ "GROUP BY e.FK_SpielerName "
-							+ "ORDER BY Punktestand DESC LIMIT 10;");
-			// result.next();
-
-			while (result.next()) {
-				String SpielerName = result.getString("e.FK_SpielerName");
-				int Punktestand = result.getInt("Punktestand");
-				String name = SpielerName + " " + Punktestand;
-				System.out.println(name);
-
+			for (int i = 0; i < 4; i++) {
+				stm.execute("INSERT INTO atcint.atcint_ergebnis(FK_SpielID, FK_Runde, FK_SpielerName, Leben, Ruhmpunkte, Standort) "
+						+ "VALUES( '"
+						+ spielID
+						+ "' , '"
+						+ d.getwCounter()/3
+						+ "' , '"
+						+ d.getSpielerByID(i).getSpielerName()
+						+ "' , '"
+						+ d.getSpielerByID(i).getAnzahlLeben()
+						+ "' , '"
+						+ d.getSpielerByID(i).getAnzahlRuhmpunkte()
+						+ "' , '"
+						+ d.getSpielerByID(i).isAufTokyo()
+						+ "' );");
 			}
 			stm.close();
 
@@ -182,14 +157,19 @@ public class ServerDatenbank {
 
 	}
 
-	public static void main(String[] args) {
-		try {
-			TabelleErgebnis();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
+	// testMain
+//	public static void main(String[] args) {
+//		try {
+//			SpielStartZeit();
+//			SpielEndZeit();
+//			TabelleErgebnis();
+//			System.out.println(ListeHighScore());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	public static int getI_runde() {
 		return i_runde;

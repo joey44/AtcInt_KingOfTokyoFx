@@ -80,6 +80,14 @@ public class AtcIntServer {
 	public void spielStarten(DatenAustausch w) {
 
 		System.out.println("spielStarten");
+		
+		//Zeit des Spielstart in DB erfassen
+		try {
+			ServerDatenbank.SpielStartZeit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.broadcast(w);
 
@@ -115,6 +123,9 @@ public class AtcIntServer {
 	public void broadcast(DatenAustausch w) { // alle Objekte, welche vom Client
 												// kommen, werden an alle
 												// verbundenen Client verteilt
+		
+	
+		
 		for (AtcIntServerClientThread client : clientlist) {
 
 			try {
@@ -129,8 +140,19 @@ public class AtcIntServer {
 
 		}
 		
-		//Server beenden beim SpielEnde
+		
 		if (w.isSpielEnde()) {
+			
+		//Daten in DB Speichern
+			try {
+				ServerDatenbank.SpielEndZeit();
+				ServerDatenbank.TabelleErgebnis(w);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			//Server beenden beim SpielEnde
 			System.exit(0);
 		}
 

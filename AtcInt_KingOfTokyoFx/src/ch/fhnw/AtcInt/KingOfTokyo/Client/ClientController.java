@@ -1,10 +1,9 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
-import java.security.Key;
-
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Chat;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
+import ch.fhnw.AtcInt.KingOfTokyo.Login.DBZugriff;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -56,16 +55,28 @@ public class ClientController {
 		this.name = name;
 
 		this.lobbyView = lobbyView;
+		
+		
+		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name, stage);
+
 
 		lobbyView.show(stage);
 
 		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind");
 
+		try {
+			lobbyView.getLbHighScoreWerte().setText(DBZugriff.ListeHighScore());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		lobbyView.getBtnCyberBunny().setDisable(true);
 		lobbyView.getBtnGigaZaur().setDisable(true);
 		lobbyView.getBtnMekaDragon().setDisable(true);
 		lobbyView.getBtnTheKing().setDisable(true);
 		lobbyView.getBtnSpielstarten().setDisable(true);
+		
 
 		lobbyView.getBtnSpielstarten().setOnAction(new LobbySpielstartenButtonClicked());
 		lobbyView.getBtnCyberBunny().setOnAction(new MonsterAuswahlEventHandler0());
@@ -84,13 +95,23 @@ public class ClientController {
 				// alert.setContentText("Tschüss " + name + " "
 				// + "\n Spiel wird beendet");
 
+				if (getDatenAustausch() != null){
+					
 				getDatenAustausch().setSpielEnde(true);
 				getDatenAustausch()
 						.setModeration("Spieler " + name + " hat das Spiel verlassen" + "\n Spiel wird beendet");
 
 				// Spiel wird beendet, funktioniert nur mit 4 Spieler
-				clientServerVerbindung.sendDatenAustauschToServer(getDatenAustausch());
+				
+				
+					clientServerVerbindung.sendDatenAustauschToServer(getDatenAustausch());
 
+				}
+				else{
+					stage.close();
+					System.exit(0);
+				}
+			
 				// clientServerVerbindung.disconnect();
 
 				// alert.showAndWait();
@@ -98,8 +119,7 @@ public class ClientController {
 			}
 		});
 
-		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name);
-
+		
 		// Maus Events für Buttons
 		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -271,7 +291,7 @@ public class ClientController {
 	}
 
 	public void updateLobbyGUI(LobbyDaten l) {
-
+		
 		if (l.isSpielStart()) {
 
 			// richtiges Monster wird richtigem Spieler zugewiesen

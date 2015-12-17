@@ -37,8 +37,9 @@ public class ClientServerVerbindung extends Thread {
 	private String server;
 	private int port;
 	private String name;
+	private Stage stage;
 
-	public ClientServerVerbindung(ClientController controller, ClientView cview, String server, int port, String name) {
+	public ClientServerVerbindung(ClientController controller, ClientView cview, String server, int port, String name, Stage stage) {
 
 		this.cview = cview;
 		this.controller = controller;
@@ -68,7 +69,7 @@ public class ClientServerVerbindung extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			Stage stage = (Stage) cview.getScene().getWindow();
+		//	Stage stage = (Stage) cview.getScene().getWindow();
 
 			System.out.println("Login failed");
 
@@ -81,6 +82,8 @@ public class ClientServerVerbindung extends Thread {
 
 			// close the program
 			stage.close();
+			
+			
 
 		}
 	}

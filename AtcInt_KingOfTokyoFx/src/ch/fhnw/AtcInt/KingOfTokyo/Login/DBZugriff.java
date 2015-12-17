@@ -108,4 +108,39 @@ public class DBZugriff {
 		   
 		   return null;
 		   }
+	
+	
+	public static String ListeHighScore() throws Exception {
+
+		String listeHighScore = "";
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			java.sql.Connection c = DriverManager.getConnection(DBSTRING);
+			Statement stm = c.createStatement();
+
+			ResultSet result = stm
+					.executeQuery("SELECT e.FK_SpielerName, SUM(e.Ruhmpunkte) AS Punktestand FROM atcint.atcint_ergebnis e "
+							+ "GROUP BY e.FK_SpielerName "
+							+ "ORDER BY Punktestand DESC LIMIT 10;");
+			// result.next();
+
+			while (result.next()) {
+				String SpielerName = result.getString("e.FK_SpielerName");
+				int Punktestand = result.getInt("Punktestand");
+				listeHighScore = listeHighScore + SpielerName + " "
+						+ Punktestand + "\n";
+
+			}
+			stm.close();
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+
+		return listeHighScore;
+
+	}
+
 	}
