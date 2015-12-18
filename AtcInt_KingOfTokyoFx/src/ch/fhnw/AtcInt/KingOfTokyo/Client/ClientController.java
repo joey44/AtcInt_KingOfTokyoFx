@@ -36,6 +36,7 @@ public class ClientController {
 	private LobbyDaten l;
 
 	private LobbyView lobbyView;
+	private RegelView regleView;
 
 	private int clientID;
 	private Stage stage;
@@ -53,6 +54,7 @@ public class ClientController {
 		this.isMonsterAusgeahlt = false;
 
 		LobbyView lobbyView = new LobbyView();
+		RegelView regleView = new RegelView();
 
 		this.clientSpielView = clientSpielView;
 		this.stage = stage;
@@ -61,6 +63,7 @@ public class ClientController {
 		this.name = name;
 
 		this.lobbyView = lobbyView;
+		this.regleView = regleView;
 
 		clientServerVerbindung = new ClientServerVerbindung(this, clientSpielView, server, port, name, stage);
 
@@ -961,6 +964,9 @@ public class ClientController {
 		@Override
 		public void handle(ActionEvent event) {
 			System.out.println("Regeln");
+			Stage regelStage = new Stage ();
+			regleView.show(regelStage);
+			
 
 			
 
