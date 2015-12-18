@@ -1,24 +1,16 @@
 package ch.fhnw.AtcInt.KingOfTokyo.Client;
 
-import java.util.ArrayList;
-
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.DatenAustausch;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 
-
 /**
- * @author renato
+ * @author renato, joel
  *
  */
 
-
 public class ClientSpielLogik {
 
-	// ClientController controller;
-
 	public static String lebenAnzeigen(DatenAustausch d2, int clientID) {
-
-		// DatenAustausch d = DatenAustausch.getInstanz();
 
 		Spieler s = d2.getSpielerByID(clientID);
 
@@ -28,16 +20,12 @@ public class ClientSpielLogik {
 
 	public static String ruhmpunkteAnzeigen(DatenAustausch d2, int clientID) {
 
-		// DatenAustausch d = DatenAustausch.getInstanz();
-
 		Spieler s = d2.getSpielerByID(clientID);
 
 		return ": " + s.getAnzahlRuhmpunkte();
 	}
 
 	public static String spielerName(DatenAustausch d2, int clientID) {
-
-		// DatenAustausch d = DatenAustausch.getInstanz();
 
 		Spieler s = d2.getSpielerByID(clientID);
 
@@ -75,6 +63,7 @@ public class ClientSpielLogik {
 		}
 		d.wurfeln();
 
+		//Wenn Spieler eine Runde auf Tokyo überlebt, bekommt er zwei Punkte
 		if (s.isAufTokyo() && d.getwCounter() % 3 == 1) {
 			s.setAnzahlRuhmpunkte(s.getAnzahlRuhmpunkte() + 2);
 			d.setSpielerByID(s.getSpielerID(), s);
@@ -89,6 +78,7 @@ public class ClientSpielLogik {
 
 			d.getSpielerAmZug().setAmZug(false);
 
+			//Wenn nächster Spieler bereits tot ist, wird dieser übersprungen
 			while (!(d.getSpielerByID((a + IDcounter) % 4).isSpielerAktiv())) {
 				IDcounter++;
 				if (IDcounter == 3) {
