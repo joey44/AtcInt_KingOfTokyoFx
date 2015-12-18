@@ -9,11 +9,15 @@ import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 
 /**
  * @author renato
+ * 
+ * 
+ *      Diese Klasse berechnet die Spielstände
  *
  */
 
 public class ServerSpielLogik {
 
+	// Variablen deklaration
 	private static final int CONSTANT_TATZE = 5;
 	private static final int CONSTANT_HERZ = 4;
 	private static boolean isErsteRundeTokyo = true;
@@ -43,19 +47,12 @@ public class ServerSpielLogik {
 			}
 		}
 
-		// if (angrSpieler.isAufTokyo() && !isErsteRundeTokyo) {
-		//
-		// DatenAustausch.getInstanz().setModeration(
-		// DatenAustausch.getInstanz().getModeration() + "\n" + ("eine Runde auf
-		// Tokyo überlebt"));
-		//
-		// // Wenn mind. eine Runde auf Tokyo überlebt hat
-		// ruhmpunkteBerechnen(2, angrSpieler);
-		// }
+
 
 		for (Spieler spieler : spielerListe) {
 			if (spieler.isSpielerAktiv()) {
 
+				//Wenn Spieler von Tokyo aus angreift
 				if (angrSpieler.isAufTokyo() && !spieler.isAufTokyo()) {
 
 					DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID())
@@ -67,6 +64,8 @@ public class ServerSpielLogik {
 							+ (spieler.getSpielerName() + " wurden " + punkte + " Leben abgezogen"));
 
 				}
+				
+				//Wenn Spieler X den Spieler auf Tokyo angfeift
 				if (!angrSpieler.isAufTokyo() && spieler.isAufTokyo()) {
 
 					DatenAustausch.getInstanz().setSpielerAufTokyoAngegrifen(true);
@@ -91,13 +90,15 @@ public class ServerSpielLogik {
 					totCounter++;
 					// && spieler.isAufTokyo()) {
 
+					
+					//Wenn Spieler am Zug stirbt, kommt der nächste aktive an den Zug
 					if (spieler.isAmZug()) {
 						int IDcounter = 1;
 
 						int a = spieler.getSpielerID();
 
 						DatenAustausch.getInstanz().getSpielerAmZug().setAmZug(false);
-
+					
 						while (!(DatenAustausch.getInstanz().getSpielerByID((a + IDcounter) % 4).isSpielerAktiv())) {
 							IDcounter++;
 							if (IDcounter == 3) {
@@ -117,6 +118,7 @@ public class ServerSpielLogik {
 					// checken ob Spieler gewonnen hat
 					siegerKueren(angrSpieler);
 
+					//Wenn Spieler auf Tokyo stirbt
 					if (spieler.isAufTokyo()) {
 						DatenAustausch.getInstanz().getSpielerByID(spieler.getSpielerID()).setAufTokyo(false);
 						DatenAustausch.getInstanz().getSpielerByID(angrSpieler.getSpielerID()).setAufTokyo(true);
@@ -149,6 +151,7 @@ public class ServerSpielLogik {
 	private static void lebenBerechnen(int punkte, Spieler spielerAmZug) {
 		// Addiert dem Spieler Leben
 
+		//auf Tokyo gibt es keine Leben
 		if (isErsteRundeTokyo || spielerAmZug.isAufTokyo()) {
 			return;
 		}
@@ -228,6 +231,7 @@ public class ServerSpielLogik {
 		int punkte = 0;
 		int[] lokalWerte = DatenAustausch.getInstanz().getWurfel().getWerte();
 
+		//Prüfen, wie oft welche Wert gewürfelt wurde
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
 		for (int i = 0; i < lokalWerte.length; i++) {
@@ -242,6 +246,8 @@ public class ServerSpielLogik {
 
 			punkte = 0;
 
+			//Spielzüge ausführen
+			
 			if (i == CONSTANT_TATZE) {
 				punkte = map.get(i);
 				angreifen(punkte, spieler);

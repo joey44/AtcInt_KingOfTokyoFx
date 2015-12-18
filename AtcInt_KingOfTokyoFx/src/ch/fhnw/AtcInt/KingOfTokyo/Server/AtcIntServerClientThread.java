@@ -48,6 +48,8 @@ public class AtcIntServerClientThread extends Thread {
 		}
 	}
 
+	
+	//Methode nimmt Objekte der Clients in Empfang
 	public void listen() {
 		DatenAustausch w;
 		Chat c;
@@ -104,9 +106,6 @@ public class AtcIntServerClientThread extends Thread {
 	public void sendObjekctToClient(DatenAustausch w) {
 
 		try {
-
-			// int a = w.getSpielerListe().size();
-			// System.out.println(a);
 
 			this.out.writeObject(w);
 			out.flush();

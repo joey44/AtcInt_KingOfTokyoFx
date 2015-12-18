@@ -11,7 +11,6 @@ import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.LobbyDaten;
 import ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch.Spieler;
 import ch.fhnw.AtcInt.KingOfTokyo.Server.AtcIntServerClientThread;
 
-
 /**
  * @author joel, renato
  *
@@ -80,8 +79,8 @@ public class AtcIntServer {
 	public void spielStarten(DatenAustausch w) {
 
 		System.out.println("spielStarten");
-		
-		//Zeit des Spielstart in DB erfassen
+
+		// Zeit des Spielstart in DB erfassen
 		try {
 			ServerDatenbank.SpielStartZeit();
 		} catch (Exception e) {
@@ -115,7 +114,7 @@ public class AtcIntServer {
 		// this.datenAustausch = DatenAustausch.getInstanz();
 
 		clientThread.sendIDToClient(clientID);
-		// clientThread.sendObjekctToClient(w); // Wenn der Client verbunden
+		// Wenn der Client verbunden
 		// ist, bekommt er Infos vom Server
 
 	}
@@ -123,9 +122,7 @@ public class AtcIntServer {
 	public void broadcast(DatenAustausch w) { // alle Objekte, welche vom Client
 												// kommen, werden an alle
 												// verbundenen Client verteilt
-		
-	
-		
+
 		for (AtcIntServerClientThread client : clientlist) {
 
 			try {
@@ -139,11 +136,10 @@ public class AtcIntServer {
 			}
 
 		}
-		
-		
+
 		if (w.isSpielEnde()) {
-			
-		//Daten in DB Speichern
+
+			// Daten in DB Speichern
 			try {
 				ServerDatenbank.SpielEndZeit();
 				ServerDatenbank.TabelleErgebnis(w);
@@ -151,8 +147,8 @@ public class AtcIntServer {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			//Server beenden beim SpielEnde
+
+			// Server beenden beim SpielEnde
 			System.exit(0);
 		}
 
