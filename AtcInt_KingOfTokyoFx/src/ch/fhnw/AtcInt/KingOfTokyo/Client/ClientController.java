@@ -47,14 +47,14 @@ public class ClientController {
 	private boolean isMonsterAusgeahlt;
 
 	// Konstruktor
-	public ClientController(ClientView view, Stage stage, String server, int port, String name) {
+	public ClientController(ClientView clientSpielView, Stage stage, String server, int port, String name) {
 
 		this.l = new LobbyDaten();
 		this.isMonsterAusgeahlt = false;
 
 		LobbyView lobbyView = new LobbyView();
 
-		this.clientSpielView = view;
+		this.clientSpielView = clientSpielView;
 		this.stage = stage;
 		this.server = server;
 		this.port = port;
@@ -62,7 +62,7 @@ public class ClientController {
 
 		this.lobbyView = lobbyView;
 
-		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name, stage);
+		clientServerVerbindung = new ClientServerVerbindung(this, clientSpielView, server, port, name, stage);
 
 				
 		lobbyView.show(stage);
@@ -89,6 +89,9 @@ public class ClientController {
 		lobbyView.getBtnGigaZaur().setOnAction(new MonsterAuswahlEventHandler1());
 		lobbyView.getBtnMekaDragon().setOnAction(new MonsterAuswahlEventHandler2());
 		lobbyView.getBtnTheKing().setOnAction(new MonsterAuswahlEventHandler3());
+		
+		lobbyView.getBtnRegeln().setOnAction(new RegelnEventHandler());
+		
 
 		// Actions wenn GUI geschlossen wird
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -119,107 +122,145 @@ public class ClientController {
 			}
 		});
 
+		
+	
+		// Maus Events für Regel Button
+				clientSpielView.getBtnRegeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent t) {
+						clientSpielView.getBtnRegeln().getStyleClass().remove("custom-button");
+						clientSpielView.getBtnRegeln().getStyleClass().add("custom-button-enter");
+					}
+				});
+
+				clientSpielView.getBtnRegeln().setOnMouseExited(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent t) {
+						clientSpielView.getBtnRegeln().getStyleClass().remove("custom-button-enter");
+						clientSpielView.getBtnRegeln().getStyleClass().add("custom-button");
+					}
+				});
+
+				clientSpielView.getBtnRegeln().setOnMousePressed(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent t) {
+						clientSpielView.getBtnRegeln().getStyleClass().remove("custom-button-enter");
+						clientSpielView.getBtnRegeln().getStyleClass().add("custom-button-pressed");
+					}
+				});
+
+				clientSpielView.getBtnRegeln().setOnMouseReleased(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent t) {
+						clientSpielView.getBtnRegeln().getStyleClass().remove("custom-button-pressed");
+						clientSpielView.getBtnRegeln().getStyleClass().add("custom-button-enter");
+					}
+				});
+		
+		
+		
 		// Maus Events für Buttons
-		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass().remove("custom-button");
-				view.getBtnWurfeln().getStyleClass().add("custom-button-enter");
+				clientSpielView.getBtnWurfeln().getStyleClass().remove("custom-button");
+				clientSpielView.getBtnWurfeln().getStyleClass().add("custom-button-enter");
 			}
 		});
 
-		view.getBtnWurfeln().setOnMouseExited(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnWurfeln().setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
-				view.getBtnWurfeln().getStyleClass().add("custom-button");
+				clientSpielView.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
+				clientSpielView.getBtnWurfeln().getStyleClass().add("custom-button");
 			}
 		});
 
-		view.getBtnWurfeln().setOnMousePressed(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnWurfeln().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
-				view.getBtnWurfeln().getStyleClass().add("custom-button-pressed");
+				clientSpielView.getBtnWurfeln().getStyleClass().remove("custom-button-enter");
+				clientSpielView.getBtnWurfeln().getStyleClass().add("custom-button-pressed");
 			}
 		});
 
-		view.getBtnWurfeln().setOnMouseReleased(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnWurfeln().setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnWurfeln().getStyleClass().remove("custom-button-pressed");
-				view.getBtnWurfeln().getStyleClass().add("custom-button-enter");
+				clientSpielView.getBtnWurfeln().getStyleClass().remove("custom-button-pressed");
+				clientSpielView.getBtnWurfeln().getStyleClass().add("custom-button-enter");
 			}
 		});
 		// Maus Events Button Tokyo verlassen
 
-		view.getBtnTokyoVerlassen().setOnMouseEntered(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnTokyoVerlassen().setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button");
-				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().remove("custom-button");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
 			}
 		});
 
-		view.getBtnTokyoVerlassen().setOnMouseExited(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnTokyoVerlassen().setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
-				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().add("custom-button");
 			}
 		});
 
-		view.getBtnTokyoVerlassen().setOnMousePressed(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnTokyoVerlassen().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
-				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-pressed");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-enter");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().add("custom-button-pressed");
 			}
 		});
 
-		view.getBtnTokyoVerlassen().setOnMouseReleased(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnTokyoVerlassen().setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-pressed");
-				view.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().remove("custom-button-pressed");
+				clientSpielView.getBtnTokyoVerlassen().getStyleClass().add("custom-button-enter");
 			}
 		});
 
 		// Maus events button chat
-		view.getBtnSenden().setOnMouseEntered(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnSenden().setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass().remove("custom-button");
-				view.getBtnSenden().getStyleClass().add("custom-button-enter");
+				clientSpielView.getBtnSenden().getStyleClass().remove("custom-button");
+				clientSpielView.getBtnSenden().getStyleClass().add("custom-button-enter");
 			}
 		});
 
-		view.getBtnSenden().setOnMouseExited(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnSenden().setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass().remove("custom-button-enter");
-				view.getBtnSenden().getStyleClass().add("custom-button");
+				clientSpielView.getBtnSenden().getStyleClass().remove("custom-button-enter");
+				clientSpielView.getBtnSenden().getStyleClass().add("custom-button");
 			}
 		});
 
-		view.getBtnSenden().setOnMousePressed(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnSenden().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass().remove("custom-button-enter");
-				view.getBtnSenden().getStyleClass().add("custom-button-pressed");
+				clientSpielView.getBtnSenden().getStyleClass().remove("custom-button-enter");
+				clientSpielView.getBtnSenden().getStyleClass().add("custom-button-pressed");
 			}
 		});
 
-		view.getBtnSenden().setOnMouseReleased(new EventHandler<MouseEvent>() {
+		clientSpielView.getBtnSenden().setOnMouseReleased(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent t) {
-				view.getBtnSenden().getStyleClass().remove("custom-button-pressed");
-				view.getBtnSenden().getStyleClass().add("custom-button-enter");
+				clientSpielView.getBtnSenden().getStyleClass().remove("custom-button-pressed");
+				clientSpielView.getBtnSenden().getStyleClass().add("custom-button-enter");
 			}
 		});
 
-		view.getTf2Chat().setOnKeyPressed(new EventHandler<KeyEvent>() {
+		clientSpielView.getTf2Chat().setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
 			public void handle(KeyEvent event) {
@@ -233,35 +274,38 @@ public class ClientController {
 		});
 
 		// Client (Spielbrett) GUI ActionsHandler zuweisen
-		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
-		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
-		view.getBtnWuerfel2().setOnAction(new wurfeln2AuswahlEventHandler());
-		view.getBtnWuerfel3().setOnAction(new wurfeln3AuswahlEventHandler());
-		view.getBtnWuerfel4().setOnAction(new wurfeln4AuswahlEventHandler());
-		view.getBtnWuerfel5().setOnAction(new wurfeln5AuswahlEventHandler());
-		view.getBtnWuerfel6().setOnAction(new wurfeln6AuswahlEventHandler());
+		clientSpielView.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
+		clientSpielView.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
+		clientSpielView.getBtnWuerfel2().setOnAction(new wurfeln2AuswahlEventHandler());
+		clientSpielView.getBtnWuerfel3().setOnAction(new wurfeln3AuswahlEventHandler());
+		clientSpielView.getBtnWuerfel4().setOnAction(new wurfeln4AuswahlEventHandler());
+		clientSpielView.getBtnWuerfel5().setOnAction(new wurfeln5AuswahlEventHandler());
+		clientSpielView.getBtnWuerfel6().setOnAction(new wurfeln6AuswahlEventHandler());
 
-		view.getBtnSenden().setOnAction(new nachrichtSendenEventHandler());
+		clientSpielView.getBtnSenden().setOnAction(new nachrichtSendenEventHandler());
 
-		view.getBtnTokyoVerlassen().setOnAction(new tokyoVerlassenEventHandler());
-		view.getBtnVerbinden().setOnAction(new verbindenEventHandler());
+		clientSpielView.getBtnRegeln().setOnAction(new RegelnEventHandler());
+		
+		
+		clientSpielView.getBtnTokyoVerlassen().setOnAction(new tokyoVerlassenEventHandler());
+		clientSpielView.getBtnVerbinden().setOnAction(new verbindenEventHandler());
 
 		
 		// Default alle Buttons inaktiv setzen
-		view.getBtnWurfeln().setDisable(true);
+		clientSpielView.getBtnWurfeln().setDisable(true);
 
-		view.getBtnWuerfel1().setDisable(true);
-		view.getBtnWuerfel2().setDisable(true);
-		view.getBtnWuerfel3().setDisable(true);
-		view.getBtnWuerfel4().setDisable(true);
-		view.getBtnWuerfel5().setDisable(true);
-		view.getBtnWuerfel6().setDisable(true);
+		clientSpielView.getBtnWuerfel1().setDisable(true);
+		clientSpielView.getBtnWuerfel2().setDisable(true);
+		clientSpielView.getBtnWuerfel3().setDisable(true);
+		clientSpielView.getBtnWuerfel4().setDisable(true);
+		clientSpielView.getBtnWuerfel5().setDisable(true);
+		clientSpielView.getBtnWuerfel6().setDisable(true);
 
-		view.getBtnTokyoVerlassen().setDisable(true);
+		clientSpielView.getBtnTokyoVerlassen().setDisable(true);
 
-		view.getBtnVerbinden().setDefaultButton(true);
+		clientSpielView.getBtnVerbinden().setDefaultButton(true);
 
-		view.getBtnSenden().setDisable(true);
+		clientSpielView.getBtnSenden().setDisable(true);
 
 		verbindenMitServer();
 
@@ -910,6 +954,19 @@ public class ClientController {
 
 		}
 	}
+	
+	
+	class RegelnEventHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent event) {
+			System.out.println("Regeln");
+
+			
+
+		}
+	}
+	
 
 	public void setClientID(int clientID) {
 		this.clientID = clientID;

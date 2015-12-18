@@ -23,7 +23,7 @@ public class LobbyView {
 	private Scene scene;
 	private BorderPane root;
 
-	private Hyperlink liRegeln;
+	private Button btnRegeln;
 	private Label lbTitel;
 
 	private Label lbSpielerName1;
@@ -47,9 +47,11 @@ public class LobbyView {
 
 		// Menü-Leiste
 		// linkRegeln.set // --> HyperLink noch zu ergänzen
-		liRegeln = new Hyperlink("Regeln");
+		btnRegeln = new Button("Regeln");
 		lbTitel = new Label("King of Tokyo");
-		HBox menu = new HBox(lbTitel, liRegeln);
+		btnRegeln.getStyleClass().add("custom-button");
+		HBox menu = new HBox(btnRegeln, lbTitel);
+		
 		menu.setSpacing(10);
 		menu.setPadding(new Insets(10, 0, 50, 0));
 		lbTitel.getStyleClass().add("Titel");
@@ -286,5 +288,14 @@ public class LobbyView {
 	public void setLbHighScoreWerte(Label lbHighScoreWerte) {
 		this.lbHighScoreWerte = lbHighScoreWerte;
 	}
+
+	public Button getBtnRegeln() {
+		return btnRegeln;
+	}
+
+	public void setBtnRegeln(Button btnRegeln) {
+		this.btnRegeln = btnRegeln;
+	}
+	
 
 }

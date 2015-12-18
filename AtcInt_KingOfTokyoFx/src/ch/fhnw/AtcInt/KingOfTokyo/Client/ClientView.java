@@ -82,7 +82,7 @@ public class ClientView {
 	private Label lbTitel;
 	private Label lbTokyo;
 
-	private Hyperlink linkRegeln;
+	private Button btnRegeln;
 
 	private Button btnWurfeln;
 
@@ -140,16 +140,15 @@ public class ClientView {
 		HBox menuLayout = new HBox();
 
 		VBox menu = new VBox();
-		linkRegeln = new Hyperlink("Regeln"); // Button Regeln wird erstellt
-
+		btnRegeln = new Button("Regeln"); // Button Regeln wird erstellt
+		btnRegeln.getStyleClass().add("custom-button");
+		
 		// linkRegeln.set // --> HyperLink noch ergänzen
 		lbTitel = new Label("King of Tokyo");
 		lbTitel.getStyleClass().add("Titel");
 
-		linkRegeln.setMaxHeight(6);
-		linkRegeln.setMaxWidth(70);
-		linkRegeln.setBorder(Border.EMPTY);
-		menuLayout.getChildren().addAll(lbTitel, linkRegeln);
+		
+		menuLayout.getChildren().addAll(btnRegeln, lbTitel);
 		menuLayout.setAlignment(Pos.CENTER_LEFT);
 		menuLayout.setSpacing(10);
 
@@ -825,6 +824,14 @@ public class ClientView {
 
 	public void setHb8(HBox hb8) {
 		this.hb8 = hb8;
+	}
+
+	public Button getBtnRegeln() {
+		return btnRegeln;
+	}
+
+	public void setBtnRegeln(Button btnRegeln) {
+		this.btnRegeln = btnRegeln;
 	}
 	
 	
