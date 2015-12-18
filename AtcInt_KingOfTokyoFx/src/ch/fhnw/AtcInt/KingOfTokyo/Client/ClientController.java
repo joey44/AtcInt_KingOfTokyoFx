@@ -64,6 +64,7 @@ public class ClientController {
 
 		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name, stage);
 
+				
 		lobbyView.show(stage);
 
 		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind - Hallo " + name + " !");
@@ -105,8 +106,7 @@ public class ClientController {
 
 					clientServerVerbindung.sendDatenAustauschToServer(getDatenAustausch());
 
-					// Name Server mitteilen
-					clientServerVerbindung.sendStringToServer(name);
+					
 
 				} else {
 					stage.close();
@@ -265,6 +265,9 @@ public class ClientController {
 
 		verbindenMitServer();
 
+		// Name Server mitteilen
+		clientServerVerbindung.sendStringToServer(name);
+				
 
 	}
 

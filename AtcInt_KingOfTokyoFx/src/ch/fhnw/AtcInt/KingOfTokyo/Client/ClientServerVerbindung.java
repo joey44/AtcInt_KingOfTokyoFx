@@ -14,11 +14,14 @@ import javafx.stage.Stage;
 
 /**
  * @author joel 
+ * 
  *
  */
 
 public class ClientServerVerbindung extends Thread {
-
+	
+	// Variablen deklaration
+	
 	private Socket clientSocket;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
@@ -39,6 +42,7 @@ public class ClientServerVerbindung extends Thread {
 	private String name;
 	private Stage stage;
 
+	// Konstruktor
 	public ClientServerVerbindung(ClientController controller, ClientView cview, String server, int port, String name, Stage stage) {
 
 		this.cview = cview;
@@ -56,6 +60,7 @@ public class ClientServerVerbindung extends Thread {
 		return this;
 	}
 
+	//Verbindung zum Server
 	public void connect() {
 		try {
 			this.clientSocket = new Socket(server, port);
@@ -69,7 +74,7 @@ public class ClientServerVerbindung extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-		//	Stage stage = (Stage) cview.getScene().getWindow();
+	
 
 			System.out.println("Login failed");
 
@@ -88,6 +93,7 @@ public class ClientServerVerbindung extends Thread {
 		}
 	}
 
+	//Vebindung/Thread schliessen
 	public void disconnect() {
 		try {
 			if (clientSocket != null) {
@@ -100,6 +106,7 @@ public class ClientServerVerbindung extends Thread {
 		}
 	}
 
+	//DatenAustausch Objekt zum Server schicken
 	public void sendDatenAustauschToServer(DatenAustausch d) {
 
 		try {
@@ -112,7 +119,7 @@ public class ClientServerVerbindung extends Thread {
 		}
 
 	}
-
+	//Chat Objekt zum Server schicken
 	public void sendChatToServer(Chat c) {
 
 		try {
@@ -124,7 +131,7 @@ public class ClientServerVerbindung extends Thread {
 		}
 
 	}
-
+	//LobbyDaten Objekt zum Server schicken
 	public void sendLobbyDatenToServer(LobbyDaten l) {
 
 		try {
@@ -150,11 +157,13 @@ public class ClientServerVerbindung extends Thread {
 
 	}
 
+	
 	public void run() {
 		listen();
 
 	}
 
+	//Methode nimmt Objekte des Servers in Empfang
 	public void listen() {
 
 		try {
@@ -169,10 +178,7 @@ public class ClientServerVerbindung extends Thread {
 					// entsprechende UI Komponente updaten
 					cview.getLbTitel().setText("King of Tokyo - Spieler Name: " + name);
 					controller.setClientID(getClientID());
-					// cview.getLbModeration().setText(
-					// "client " + getClientID() + "verbunden");
-					// cview.setModeration("client " + getClientID() +
-					// "verbunden");
+					
 				}
 			});
 
