@@ -23,7 +23,6 @@ public class ClientServerVerbindung extends Thread {
 	private ObjectInputStream ois;
 
 	private ClientController controller;
-	private ClientSpielLogik clientSpielLogik;
 	private ClientView cview;
 	private Chat c;
 	private LobbyDaten l;

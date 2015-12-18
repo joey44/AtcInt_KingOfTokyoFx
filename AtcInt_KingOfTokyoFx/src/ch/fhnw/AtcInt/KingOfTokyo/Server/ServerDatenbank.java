@@ -26,18 +26,8 @@ public class ServerDatenbank {
 			+ DB_PORT + "/" + DB_NAME + "?user=" + DB_USER + "&password="
 			+ DB_PASSWORD;
 
-	private static int i_runde = 15;
-	private static String s_spielername = "Joel";
-	private static int i_wuerfel1 = 5;
-	private static int i_wuerfel2 = 5;
-	private static int i_wuerfel3 = 5;
-	private static int i_wuerfel4 = 5;
-	private static int i_wuerfel5 = 5;
-	private static int i_wuerfel6 = 5;
-	private static int i_anzahlLeben = 0;
-	private static int i_anzahlRuhmpunkte = 10;
-	private static boolean b_standort;
 
+	
 	public static void SpielStartZeit() throws Exception {
 
 		try {
@@ -171,92 +161,6 @@ public class ServerDatenbank {
 //		}
 //	}
 
-	public static int getI_runde() {
-		return i_runde;
-	}
 
-	public void setI_runde(int i_runde) {
-		ServerDatenbank.i_runde = i_runde;
-	}
-
-	public static String getS_spielername() {
-		return s_spielername;
-	}
-
-	public void setS_spielername(String s_spielername) {
-		ServerDatenbank.s_spielername = s_spielername;
-	}
-
-	public static int getI_wuerfel1() {
-		return i_wuerfel1;
-	}
-
-	public void setI_wuerfel1(int i_wuerfel1) {
-		ServerDatenbank.i_wuerfel1 = i_wuerfel1;
-	}
-
-	public static int getI_wuerfel2() {
-		return i_wuerfel2;
-	}
-
-	public void setI_wuerfel2(int i_wuerfel2) {
-		ServerDatenbank.i_wuerfel2 = i_wuerfel2;
-	}
-
-	public static int getI_wuerfel3() {
-		return i_wuerfel3;
-	}
-
-	public void setI_wuerfel3(int i_wuerfel3) {
-		ServerDatenbank.i_wuerfel3 = i_wuerfel3;
-	}
-
-	public static int getI_wuerfel4() {
-		return i_wuerfel4;
-	}
-
-	public void setI_wuerfel4(int i_wuerfel4) {
-		ServerDatenbank.i_wuerfel4 = i_wuerfel4;
-	}
-
-	public static int getI_wuerfel5() {
-		return i_wuerfel5;
-	}
-
-	public void setI_wuerfel5(int i_wuerfel5) {
-		ServerDatenbank.i_wuerfel5 = i_wuerfel5;
-	}
-
-	public static int getI_wuerfel6() {
-		return i_wuerfel6;
-	}
-
-	public void setI_wuerfel6(int i_wuerfel6) {
-		ServerDatenbank.i_wuerfel6 = i_wuerfel6;
-	}
-
-	public static int getI_anzahlLeben() {
-		return i_anzahlLeben;
-	}
-
-	public void setI_anzahlLeben(int i_anzahlLeben) {
-		ServerDatenbank.i_anzahlLeben = i_anzahlLeben;
-	}
-
-	public static int getI_anzahlRuhmpunkte() {
-		return i_anzahlRuhmpunkte;
-	}
-
-	public void setI_anzahlRuhmpunkte(int i_anzahlRuhmpunkte) {
-		ServerDatenbank.i_anzahlRuhmpunkte = i_anzahlRuhmpunkte;
-	}
-
-	public static boolean isB_standort() {
-		return b_standort;
-	}
-
-	public void setB_standort(boolean b_standort) {
-		ServerDatenbank.b_standort = b_standort;
-	}
 
 }
