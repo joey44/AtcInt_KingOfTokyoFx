@@ -62,7 +62,7 @@ public class ClientController {
 
 		lobbyView.show(stage);
 
-		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind");
+		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind - Hallo " +name +" !");
 
 		try {
 			lobbyView.getLbHighScoreWerte().setText(DBZugriff.ListeHighScore());
@@ -276,7 +276,7 @@ public class ClientController {
 
 	public void lobbyMonsterWahl() {
 
-		lobbyView.getLbTitel().setText("King of Tokyo - Monster auswählen");
+		lobbyView.getLbTitel().setText("King of Tokyo - Monster auswählen - Hallo " + this.name +" !");
 
 		lobbyView.getBtnCyberBunny().setDisable(false);
 		lobbyView.getBtnGigaZaur().setDisable(false);
@@ -317,7 +317,7 @@ public class ClientController {
 
 		if (l.getMonsterWahlCounter() == 4 && getDatenAustausch().isSpielStart()) {
 
-			lobbyView.getLbTitel().setText("King of Tokyo - Spiel starten");
+			lobbyView.getLbTitel().setText("King of Tokyo - Spiel starten - Hallo " +this.name +" !");
 
 			lobbyView.getBtnSpielstarten().setDisable(false);
 
