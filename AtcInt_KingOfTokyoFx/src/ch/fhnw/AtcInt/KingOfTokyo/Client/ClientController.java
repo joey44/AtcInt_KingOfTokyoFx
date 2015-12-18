@@ -19,10 +19,15 @@ import javafx.stage.WindowEvent;
  * @author arcsuta (Lobby), joel(Chat, Verbindung, wurfel, GUI Steuerung,
  *         Spieler Bilder zuweisen), renato(Spiellogik, GUI Styling),
  *         barbara(Spiel GUI Actions)
+ * 
+ * 
+ *         Diese Klasse steuert die beiden GUIs Lobby und Client(Spielbrett)
  *
  */
 
 public class ClientController {
+
+	// Variablen deklaration
 
 	private ClientView clientSpielView;
 	private ClientServerVerbindung clientServerVerbindung;
@@ -41,6 +46,7 @@ public class ClientController {
 
 	private boolean isMonsterAusgeahlt;
 
+	// Konstruktor
 	public ClientController(ClientView view, Stage stage, String server, int port, String name) {
 
 		this.l = new LobbyDaten();
@@ -55,14 +61,12 @@ public class ClientController {
 		this.name = name;
 
 		this.lobbyView = lobbyView;
-		
-		
-		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name, stage);
 
+		clientServerVerbindung = new ClientServerVerbindung(this, view, server, port, name, stage);
 
 		lobbyView.show(stage);
 
-		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind - Hallo " +name +" !");
+		lobbyView.getLbTitel().setText("King of Tokyo - Warten bis 4 Spieler angemeldet sind - Hallo " + name + " !");
 
 		try {
 			lobbyView.getLbHighScoreWerte().setText(DBZugriff.ListeHighScore());
@@ -70,56 +74,51 @@ public class ClientController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		// Lobby GUI default alles inaktiv setzen
 		lobbyView.getBtnCyberBunny().setDisable(true);
 		lobbyView.getBtnGigaZaur().setDisable(true);
 		lobbyView.getBtnMekaDragon().setDisable(true);
 		lobbyView.getBtnTheKing().setDisable(true);
 		lobbyView.getBtnSpielstarten().setDisable(true);
-		
 
+		// Lobby GUI ActionsHandler zuweisen
 		lobbyView.getBtnSpielstarten().setOnAction(new LobbySpielstartenButtonClicked());
 		lobbyView.getBtnCyberBunny().setOnAction(new MonsterAuswahlEventHandler0());
 		lobbyView.getBtnGigaZaur().setOnAction(new MonsterAuswahlEventHandler1());
 		lobbyView.getBtnMekaDragon().setOnAction(new MonsterAuswahlEventHandler2());
 		lobbyView.getBtnTheKing().setOnAction(new MonsterAuswahlEventHandler3());
 
+		// Actions wenn GUI geschlossen wird
 		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 			@Override
 			public void handle(WindowEvent event) {
 
-				// Alert alert = new Alert(AlertType.ERROR);
-				// alert.setTitle("Spiel wird beendet");
-				// alert.setHeaderText("Spiel wird beendet");
-				// alert.setContentText("Tschüss " + name + " "
-				// + "\n Spiel wird beendet");
+				if (getDatenAustausch() != null) {
 
-				if (getDatenAustausch() != null){
-					
-				getDatenAustausch().setSpielEnde(true);
-				getDatenAustausch()
-						.setModeration("Spieler " + name + " hat das Spiel verlassen" + "\n Spiel wird beendet");
+					getDatenAustausch().setSpielEnde(true);
+					getDatenAustausch()
+							.setModeration("Spieler " + name + " hat das Spiel verlassen" + "\n Spiel wird beendet");
 
-				// Spiel wird beendet, funktioniert nur mit 4 Spieler
-				
-				
+					// Spiel wird beendet, funktioniert nur mit 4 Spieler
+
 					clientServerVerbindung.sendDatenAustauschToServer(getDatenAustausch());
 
-				}
-				else{
+					// Name Server mitteilen
+					clientServerVerbindung.sendStringToServer(name);
+
+				} else {
 					stage.close();
 					System.exit(0);
 				}
-			
+
 				// clientServerVerbindung.disconnect();
 
-				// alert.showAndWait();
 
 			}
 		});
 
-		
 		// Maus Events für Buttons
 		view.getBtnWurfeln().setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -233,6 +232,7 @@ public class ClientController {
 
 		});
 
+		// Client (Spielbrett) GUI ActionsHandler zuweisen
 		view.getBtnWurfeln().setOnAction(new wurfelnEventHandler());
 		view.getBtnWuerfel1().setOnAction(new wurfeln1AuswahlEventHandler());
 		view.getBtnWuerfel2().setOnAction(new wurfeln2AuswahlEventHandler());
@@ -246,6 +246,8 @@ public class ClientController {
 		view.getBtnTokyoVerlassen().setOnAction(new tokyoVerlassenEventHandler());
 		view.getBtnVerbinden().setOnAction(new verbindenEventHandler());
 
+		
+		// Default alle Buttons inaktiv setzen
 		view.getBtnWurfeln().setDisable(true);
 
 		view.getBtnWuerfel1().setDisable(true);
@@ -263,11 +265,10 @@ public class ClientController {
 
 		verbindenMitServer();
 
-		// Name Server mitteilen
-		clientServerVerbindung.sendStringToServer(name);
 
 	}
 
+	
 	public void objectFromServerSetDatenaustausch(DatenAustausch d) {
 
 		this.datenAustausch = d;
@@ -276,7 +277,7 @@ public class ClientController {
 
 	public void lobbyMonsterWahl() {
 
-		lobbyView.getLbTitel().setText("King of Tokyo - Monster auswählen - Hallo " + this.name +" !");
+		lobbyView.getLbTitel().setText("King of Tokyo - Monster auswählen - Hallo " + this.name + " !");
 
 		lobbyView.getBtnCyberBunny().setDisable(false);
 		lobbyView.getBtnGigaZaur().setDisable(false);
@@ -291,7 +292,7 @@ public class ClientController {
 	}
 
 	public void updateLobbyGUI(LobbyDaten l) {
-		
+
 		if (l.isSpielStart()) {
 
 			// richtiges Monster wird richtigem Spieler zugewiesen
@@ -313,19 +314,20 @@ public class ClientController {
 
 		}
 
+		//Lobby Objekt setzen
 		setL(l);
 
+		//Wenn alle Monster gewählt sind, kann ein Spieler das Spiel starten
 		if (l.getMonsterWahlCounter() == 4 && getDatenAustausch().isSpielStart()) {
 
-			lobbyView.getLbTitel().setText("King of Tokyo - Spiel starten - Hallo " +this.name +" !");
+			lobbyView.getLbTitel().setText("King of Tokyo - Spiel starten - Hallo " + this.name + " !");
 
 			lobbyView.getBtnSpielstarten().setDisable(false);
 
 		}
 
-		// System.out.println(clientID);
-		// System.out.println(l.getSpielerID());
-
+	
+		//alle Monster sind deaktiviert, wenn du bereits ein Monster gewählt hast
 		if (clientID == l.getSpielerID() && !isMonsterAusgeahlt) {
 			lobbyView.getBtnCyberBunny().setDisable(true);
 			lobbyView.getBtnGigaZaur().setDisable(true);
@@ -335,6 +337,7 @@ public class ClientController {
 			isMonsterAusgeahlt = true;
 		}
 
+		//MOnster wird inaktiv gesetzt, welches die anderen Spieler gewählt haben
 		if (l.getMonsterID() == 0) {
 			lobbyView.getBtnCyberBunny().setDisable(true);
 		} else if (l.getMonsterID() == 1) {
@@ -345,6 +348,7 @@ public class ClientController {
 			lobbyView.getBtnTheKing().setDisable(true);
 		}
 
+		//Lobby Moderation setzten
 		lobbyView.getLbMonsterAuswahl().setText(l.getLobbyModeration());
 
 	}
@@ -354,11 +358,6 @@ public class ClientController {
 		// Wenn alle 4 Spieler angemldet sind, können die Monster ausgewählt
 		// werden
 		lobbyMonsterWahl();
-
-		// DatenAustausch d = this.datenAustausch;
-
-		// view.getLbModeration().setText("gewürfelt Client:" + clientID);
-		// view.setModeration("gewürfelt Client:" + clientID);
 
 		// Farben setzten inaktiv/tot, am Zug, warten auf Zug
 
@@ -412,13 +411,14 @@ public class ClientController {
 			clientSpielView.setSpielerAmZug(3);
 		}
 
-		// view.getLbModeration().setText(ClientSpielLogik.spielModerieren(d));
+		//Variablen aus DatenAustausch auf GUI anzeigen
 		clientSpielView.setModeration(ClientSpielLogik.spielModerieren(d));
 		clientSpielView.getLbTokyo().setText(ClientSpielLogik.standortAnzeigen(d));
 
 		clientSpielView.getBtnWurfeln().setDisable(true);
 		clientSpielView.getBtnTokyoVerlassen().setDisable(true);
 
+		//Würfel inaktiv setzen
 		clientSpielView.getBtnWuerfel1().setDisable(true);
 		clientSpielView.getBtnWuerfel2().setDisable(true);
 		clientSpielView.getBtnWuerfel3().setDisable(true);
@@ -426,6 +426,7 @@ public class ClientController {
 		clientSpielView.getBtnWuerfel5().setDisable(true);
 		clientSpielView.getBtnWuerfel6().setDisable(true);
 
+		//anzeigen, ob wurfel ausgewählt ist
 		clientSpielView.getBtnWuerfel1().setSelected(d.getWurfelIsAusgewahlt(0));
 		clientSpielView.getBtnWuerfel2().setSelected(d.getWurfelIsAusgewahlt(1));
 		clientSpielView.getBtnWuerfel3().setSelected(d.getWurfelIsAusgewahlt(2));
@@ -433,6 +434,8 @@ public class ClientController {
 		clientSpielView.getBtnWuerfel5().setSelected(d.getWurfelIsAusgewahlt(4));
 		clientSpielView.getBtnWuerfel6().setSelected(d.getWurfelIsAusgewahlt(5));
 
+		
+		//gewürfelte Werte anzeigen
 		clientSpielView.getBtnWuerfel1()
 				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(0))));
 		clientSpielView.getBtnWuerfel2()
@@ -446,12 +449,8 @@ public class ClientController {
 		clientSpielView.getBtnWuerfel6()
 				.setGraphic(new ImageView(clientSpielView.getWurfelImage(d.getWurfel().getWert(5))));
 
-		// view.getBtnWuerfel2().setText(d.getWurfel().getWert(1) + "");
-		// view.getBtnWuerfel3().setText(d.getWurfel().getWert(2) + "");
-		// view.getBtnWuerfel4().setText(d.getWurfel().getWert(3) + "");
-		// view.getBtnWuerfel5().setText(d.getWurfel().getWert(4) + "");
-		// view.getBtnWuerfel6().setText(d.getWurfel().getWert(5) + "");
 
+		//wurfeln zulassen, bei dem Spieler der am Zug ist
 		if (getClientID() == d.getSpielerAmZug().getSpielerID()) {
 			clientSpielView.getBtnWurfeln().setDisable(false);
 
@@ -515,6 +514,7 @@ public class ClientController {
 
 	}
 
+	//Chat Nachricht auf GUI anzeigen
 	public void updateChat(Chat c) {
 
 		clientSpielView.getTaChat().appendText(c.getAbsender() + ": " + c.getChatNachricht() + "\n");
@@ -552,7 +552,7 @@ public class ClientController {
 
 		clientServerVerbindung.sendDatenAustauschToServer(d);
 
-		// updateClientGUI(getDatenAustausch(), getClientID());
+		
 
 	}
 
@@ -561,7 +561,7 @@ public class ClientController {
 
 		clientSpielView.getBtnVerbinden().setDisable(true);
 
-		// view.getLbModeration().setText("warten auf Spiel start");
+		
 		clientSpielView.setModeration("warten auf Spiel start");
 		clientSpielView.getBtnSenden().setDisable(false);
 	}
@@ -769,7 +769,8 @@ public class ClientController {
 		}
 
 	}
-
+	
+	// Chat
 	public void nachrichtSenden() {
 
 		if (!clientSpielView.getTf2Chat().getText().isEmpty()) {
