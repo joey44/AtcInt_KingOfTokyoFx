@@ -3,9 +3,17 @@ package ch.fhnw.AtcInt.KingOfTokyo.DatenAustausch;
 import java.io.Serializable;
 
 
+/**
+ * @author joel
+ *
+ */
+
 public class Chat implements Serializable{
 	
+	//Absender einer Nachricht
 	private String absender;
+	
+	//Inhalt der Chat Nachricht
 	private String chatNachricht;
 	
 	

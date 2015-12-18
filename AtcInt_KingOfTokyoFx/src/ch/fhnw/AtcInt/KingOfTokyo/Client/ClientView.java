@@ -403,8 +403,10 @@ public class ClientView {
 		hbChatLayout.getChildren().addAll(vertSeparatorChat, vbChat);
 		scene = new Scene(root, 950, 650, Color.WHITE);
 
+		//add css
 		scene.getStylesheets().add("/ch/fhnw/AtcInt/KingOfTokyo/Styles/stylesheet.css");
 
+		//set root
 		root.setTop(menu);
 		root.setLeft(spiel);
 		root.setCenter(fpWurfel);
