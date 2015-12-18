@@ -16,7 +16,7 @@ public class DBZugriff {
 
 	private static final String DB_USER = "root";
 
-	private static final String DB_PASSWORD = "";
+	private static final String DB_PASSWORD = "1234";
 
 	private static final String DB_SERVER = "127.0.0.1";
 	private static final String DB_PORT = "3306";
