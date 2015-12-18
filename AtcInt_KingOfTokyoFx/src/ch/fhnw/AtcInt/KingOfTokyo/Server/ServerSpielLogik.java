@@ -205,7 +205,7 @@ public class ServerSpielLogik {
 		if (spieler.getAnzahlRuhmpunkte() >= 20 || DatenAustausch.getInstanz().getTotSpielerCounter() == 3) {
 
 			DatenAustausch.getInstanz().setModeration(
-					DatenAustausch.getInstanz().getModeration() + "\n" + spieler.getSpielerName() + " ist KING OF TOKYO");
+					DatenAustausch.getInstanz().getModeration() + "\n" + spieler.getSpielerName() + " ist der KING OF TOKYO");
 
 			DatenAustausch.getInstanz().setSpielEnde(true);
 			// spielBeenden( );
