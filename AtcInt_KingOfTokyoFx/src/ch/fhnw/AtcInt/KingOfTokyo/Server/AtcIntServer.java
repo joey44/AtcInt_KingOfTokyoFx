@@ -57,7 +57,7 @@ public class AtcIntServer {
 
 			this.firstContact(Threadcounter, clientThread);
 
-			System.out.println("client added: " + Threadname);
+			System.out.println("client added: " + Threadname + " - " + socket.getInetAddress().toString());
 			this.Threadcounter++;
 
 		}
